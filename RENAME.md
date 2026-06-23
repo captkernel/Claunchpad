@@ -21,8 +21,9 @@ renames. Nothing in the design depends on the name.
    `skills/launchpad/SKILL.md` (frontmatter `name:` + body), the four `references/*.md`,
    and `templates/CLAUDE.md` (the "invoke the <name> skill" pointer).
 
-3. **The dist zip**: rebuild after renaming ,
-   `Compress-Archive -Path skills/<final-name>/* -DestinationPath skills/dist/<final-name>.zip`
+3. **The dist zip**: rebuild after renaming, with forward-slash paths (build via Python's
+   `zipfile`, not PowerShell `Compress-Archive`, which writes backslash paths that break
+   extraction on Linux/macOS and claude.ai). The repo's existing build does this.
 
 ## Constraints on the final name (already enforced when shortlisting)
 

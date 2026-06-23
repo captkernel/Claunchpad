@@ -62,7 +62,8 @@ Cost tiers: **¢** no fan-out · **$** small team · **$$** parallel formation �
 - **Activate when:** the change spans several steps or files but is one coherent piece of work.
 - **Roles:** **Architect** (plan) → **Implementer(s)** → **Reviewer** → **Verifier**.
 - **Output lift:** structure and a verification gate on a real feature, still cheap.
-- **Note:** keep implementers off the same files concurrently, split by file/module.
+- **Note:** implementers run in parallel only when they touch different files; split by
+  file/module, and never put two agents on one file. If the steps are coupled, keep it serial.
 
 ### Debug Task Force
 - **For:** a stubborn bug with more than one plausible cause.
