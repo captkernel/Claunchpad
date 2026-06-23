@@ -1,0 +1,12 @@
+{
+    "displayName":  "Launchpad (working name)",
+    "category":  "Toolkits (Public)",
+    "status":  "Building",
+    "priority":  "High",
+    "summary":  "One importable skill that sets a project up for Claude (CLAUDE.md + self-learning memory + voice) and runs an efficiency-gated agent-team orchestration playbook with a 13-structure org catalog and a 5-advisor decision council. Name not yet locked.",
+    "nextSteps":  [
+                      "Lock final name (verify originality shortlist), find-replace working name 'launchpad'",
+                      "Run RED-GREEN-REFACTOR baseline test with a fresh subagent",
+                      "Publish: git remote + push; build claude.ai dist zip"
+                  ]
+}
