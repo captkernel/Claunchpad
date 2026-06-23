@@ -8,27 +8,27 @@ Cost tiers: **¢** no fan-out · **$** small team · **$$** parallel formation �
 (hand to a Workflow).
 
 ## Contents
-- Tier 0 — Solo
-- Tier 1 — Pair · Generator–Critic
-- Tier 2 — Scout-then-Build · Strike Team · Debug Task Force
-- Tier 3 — Research Pod · Review Board · Best-of-N · Red/Blue
-- Tier 4 — Council
-- Tier 5 — Assembly Line · Program
+- Tier 0, Solo
+- Tier 1, Pair · Generator–Critic
+- Tier 2, Scout-then-Build · Strike Team · Debug Task Force
+- Tier 3, Research Pod · Review Board · Best-of-N · Red/Blue
+- Tier 4, Council
+- Tier 5, Assembly Line · Program
 - Selection table
 
 ---
 
-## Tier 0 — no fan-out (¢)
+## Tier 0: no fan-out (¢)
 
 ### Solo
 - **For:** trivial work, or tightly-coupled / same-file edits where parallelism causes
   conflicts.
 - **Activate when:** the task is small, sequential, or all in one place.
 - **Roles:** main thread only.
-- **Output lift:** none needed — speed and simplicity are the win. Most tasks live here.
-- **De-escalate to:** —
+- **Output lift:** none needed; speed and simplicity are the win. Most tasks live here.
+- **De-escalate to:** n/a (this is the floor).
 
-## Tier 1 — sequential quality loops (¢, best quality per token)
+## Tier 1: sequential quality loops (¢, best quality per token)
 
 ### Pair  *(default for any real change)*
 - **For:** normal changes worth a second pair of eyes.
@@ -47,7 +47,7 @@ Cost tiers: **¢** no fan-out · **$** small team · **$$** parallel formation �
   rounds). Can be one agent switching lenses, or two.
 - **Output lift:** large quality gain on a single artifact for a small, sequential cost.
 
-## Tier 2 — small focused teams ($)
+## Tier 2: small focused teams ($)
 
 ### Scout-then-Build
 - **For:** work in an unfamiliar codebase or problem area.
@@ -62,7 +62,7 @@ Cost tiers: **¢** no fan-out · **$** small team · **$$** parallel formation �
 - **Activate when:** the change spans several steps or files but is one coherent piece of work.
 - **Roles:** **Architect** (plan) → **Implementer(s)** → **Reviewer** → **Verifier**.
 - **Output lift:** structure and a verification gate on a real feature, still cheap.
-- **Note:** keep implementers off the same files concurrently — split by file/module.
+- **Note:** keep implementers off the same files concurrently, split by file/module.
 
 ### Debug Task Force
 - **For:** a stubborn bug with more than one plausible cause.
@@ -71,7 +71,7 @@ Cost tiers: **¢** no fan-out · **$** small team · **$$** parallel formation �
   (each tries to disprove the others) → root-cause synthesis.
 - **Output lift:** converges on the real cause instead of fixing a symptom.
 
-## Tier 3 — parallel formations ($$, gated on triggers)
+## Tier 3: parallel formations ($$, gated on triggers)
 
 ### Research Pod
 - **For:** breadth-first investigation across independent angles.
@@ -79,7 +79,7 @@ Cost tiers: **¢** no fan-out · **$** small team · **$$** parallel formation �
 - **Roles:** **Lead** decomposes → **3–5 Researchers** (one explicit angle each, distinct
   objectives) → **Synthesizer** cross-checks and reconciles.
 - **Output lift:** wide, fast coverage; large time saving via parallel search.
-- **Cost note:** ~15× a single pass — justify it with the breadth.
+- **Cost note:** ~15× a single pass, justify it with the breadth.
 
 ### Review Board
 - **For:** a high-risk change that needs more than one lens.
@@ -103,10 +103,10 @@ Cost tiers: **¢** no fan-out · **$** small team · **$$** parallel formation �
   broken assumptions) → fixes → repeat until Red is out of attacks.
 - **Output lift:** hardened result; finds what friendly review won't.
 
-## Tier 4 — judgment ($$)
+## Tier 4: judgment ($$)
 
 ### Council
-- **For:** a consequential, hard-to-reverse **decision** (not a coding task) — launch, hire,
+- **For:** a consequential, hard-to-reverse **decision** (not a coding task), launch, hire,
   pivot, architecture, large spend, public commitment.
 - **Activate when:** the call is expensive to undo and you want real dissent, not validation.
 - **Roles:** five adversarial advisors (contrarian · first-principles · optimist · outsider ·
@@ -114,7 +114,7 @@ Cost tiers: **¢** no fan-out · **$** small team · **$$** parallel formation �
 - **Output lift:** counters Claude's agreeableness exactly when stakes are highest.
 - **Full play:** `council.md`.
 
-## Tier 5 — large programs → hand to a Workflow ($$$)
+## Tier 5: large programs → hand to a Workflow ($$$)
 
 ### Assembly Line
 - **For:** the same transformation across many items (migration, codemod, batch audit).
@@ -122,7 +122,7 @@ Cost tiers: **¢** no fan-out · **$** small team · **$$** parallel formation �
 - **Roles:** each item runs **stage 1 → stage 2 → …** (e.g. transform → verify) independently,
   with no barrier between items.
 - **Output lift:** scale with bounded wall-clock; deterministic coverage.
-- **How:** stop hand-spawning — express it as a **Workflow `pipeline()`**.
+- **How:** stop hand-spawning, express it as a **Workflow `pipeline()`**.
 
 ### Program / Division
 - **For:** a large build or migration spanning multiple modules.

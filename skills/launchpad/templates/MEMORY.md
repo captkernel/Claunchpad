@@ -1,6 +1,6 @@
-# MEMORY.md — Decision Log
+# MEMORY.md: Decision Log
 
-<!-- SELF-MAINTENANCE — read every session, then act:
+<!-- SELF-MAINTENANCE, read every session, then act:
 1. READ this file first thing each session. Verify any named file/path/flag still exists
    before trusting an entry.
 2. APPEND a new entry under "## Log" (NEWEST FIRST) whenever a durable decision is made: a
@@ -14,7 +14,7 @@
    as one line each. Delete entries proven wrong. If this file passes ~400 lines, compact now.
 
 Entry template:
-### YYYY-MM-DD — <decision in <=10 words>
+### YYYY-MM-DD: <decision in <=10 words>
 - Decision: <what was chosen>
 - Why: <the reasoning / tradeoff>
 - Alt rejected: <what you did NOT do, and why>   (omit if none)
@@ -24,4 +24,4 @@ Entry template:
 <!-- newest first -->
 
 ## Rolled-up summary
-<!-- compacted older decisions, one line each: YYYY-MM-DD — fact -->
+<!-- compacted older decisions, one line each: YYYY-MM-DD, fact -->
