@@ -47,6 +47,8 @@ check_refs() {
   done
   assert_contains references/provisioning.md "Starter" "provisioning.md has tier table (Starter)"
   assert_contains references/provisioning.md "Pro" "provisioning.md has tier table (Pro)"
+  assert_contains references/provisioning.md "upgrade" "provisioning.md documents re-provisioning"
+  assert_contains references/provisioning.md "settings.starter.json" "provisioning.md maps tier deploys"
   assert_contains references/delegation.md "Explore" "delegation.md covers Explore/Plan inheritance"
   assert_contains references/delegation.md "Return-learnings" "delegation.md has the 7-point contract"
   assert_contains references/orchestration.md "Solo" "orchestration.md has 4-tier ladder (Solo)"
