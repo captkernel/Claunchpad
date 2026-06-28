@@ -18,10 +18,10 @@ assert_maxlines()  { # file n label
   if have "$1"; then n=$(wc -l < "$HERE/$1"); if [ "$n" -le "$2" ]; then ok "$3 ($n<=$2)"; else bad "$3 ($n>$2)"; fi
   else bad "$3 (missing)"; fi; }
 
-json_ok() { # stdin -> 0 if valid-ish JSON. Tries python3/node, falls back to brace+quote check.
+json_ok() { # stdin -> 0 if valid-ish JSON. Tries node/python3, falls back to brace+quote check.
   data="$(cat)"
-  if command -v python3 >/dev/null 2>&1; then printf '%s' "$data" | python3 -c 'import json,sys;json.load(sys.stdin)' 2>/dev/null; return $?; fi
   if command -v node >/dev/null 2>&1; then printf '%s' "$data" | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{JSON.parse(s)})' 2>/dev/null; return $?; fi
+  if command -v python3 >/dev/null 2>&1; then printf '%s' "$data" | python3 -c 'import json,sys;json.load(sys.stdin)' 2>/dev/null; return $?; fi
   printf '%s' "$data" | grep -q '{' && printf '%s' "$data" | grep -q '}'
 }
 
