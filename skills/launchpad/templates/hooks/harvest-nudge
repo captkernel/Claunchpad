@@ -1,0 +1,20 @@
+#!/bin/sh
+# Stop hook: once per session, remind Claude to harvest durable learnings.
+# Never writes to memory itself (no surprise auto-writes).
+set -u
+
+ROOT="${CLAUDE_PROJECT_DIR:-.}"
+FLAG="$ROOT/.launchpad/.harvest-nudged"
+
+# Already nudged this session -> allow the stop silently.
+if [ -f "$FLAG" ]; then
+  exit 0
+fi
+
+mkdir -p "$ROOT/.launchpad" 2>/dev/null || true
+: > "$FLAG" 2>/dev/null || true
+
+cat <<'JSON'
+{"decision":"block","reason":"Before finishing: if this turn produced a durable decision, a resolved failure, or a reusable technique, append it to MEMORY.md (or a memory/ fact file). If nothing is worth keeping, say so briefly and stop. This reminder fires once per session."}
+JSON
+exit 0
