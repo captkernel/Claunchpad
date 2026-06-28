@@ -37,22 +37,21 @@
 Deletes/overwrites of files you didn't create, schema changes, migrations, deploys, spending
 money, sending anything to external services, or anything else irreversible.
 
-## Self-learning (read at session start, update before session end)
-This project keeps a shared, durable brain. Each session:
-- **Read** `MEMORY.md` (decisions & why), `ERRORS.md` (failures & their fixes), and
-  `LEARNINGS.md` (techniques & research findings) before starting. Verify any named file,
-  path, or flag still exists before trusting it.
-- **Append** to the right file the moment you make a non-obvious decision, hit a real
-  failure you resolved, or discover a durable technique. One fact per entry, newest first,
-  absolute dates. Each file carries its own maintenance protocol at the top, follow it.
-- Don't log what the code or git history already records.
+## Project memory (read at session start, update before session end)
+<!-- LAUNCHPAD-MEMORY-POINTER: this block is inherited by general-purpose subagents. Keep it. -->
+This project keeps a durable, shared memory. **Read `MEMORY.md` first thing each session**
+(and the `memory/` directory if it exists); verify any named file/path/flag still exists
+before trusting it. **Append** to the right place the moment you make a non-obvious decision,
+resolve a real failure, or find a durable technique — one fact, newest first, absolute dates.
 
-## Orchestration (work as a team when it pays off)
-For substantial multi-step, multi-file, or high-stakes work, invoke the **launchpad** skill
-and use its efficiency-gated playbook. Default to the smallest team that fits (often just
-you); escalate only on a real trigger. When you delegate to a subagent, paste the relevant
-MEMORY/ERRORS/LEARNINGS entries into its prompt, subagents can't read this project's memory
-on their own.
+**If you are a subagent:** your task prompt should carry the 1–3 memory facts that matter most.
+If you need more history, **read `MEMORY.md` (and `memory/`) yourself** before starting — you do
+not inherit the parent's conversation or memory, only this file. (Explore/Plan agents do not even
+get this file; they must be given everything in their prompt.)
 
-## Voice
-See `anti-style.md`. Lead with the answer; say "I'm not sure" when you aren't; no filler.
+## Orchestration (work as a team only when it pays off)
+For substantial multi-step, multi-file, or high-stakes work, invoke the **launchpad** skill and
+use its efficiency-gated ladder: Solo → Pair → parallel fan-out → Workflow. Default to the
+smallest structure that clears the bar; escalate only on a real trigger. When you delegate,
+inject the critical memory facts into the subagent's prompt (it can't read this project's
+memory on its own beyond this file) and require a return-learnings slot you harvest back.
