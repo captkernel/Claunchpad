@@ -48,6 +48,7 @@ check_refs() {
   assert_contains references/provisioning.md "Starter" "provisioning.md has tier table (Starter)"
   assert_contains references/provisioning.md "Pro" "provisioning.md has tier table (Pro)"
   assert_contains references/delegation.md "Explore" "delegation.md covers Explore/Plan inheritance"
+  assert_contains references/delegation.md "Return-learnings" "delegation.md has the 7-point contract"
   assert_contains references/orchestration.md "Solo" "orchestration.md has 4-tier ladder (Solo)"
   assert_contains references/orchestration.md "org-structures.md" "orchestration.md points to appendix"
   assert_contains references/org-structures.md "appendix" "org-structures.md marked as appendix"
