@@ -49,6 +49,8 @@ If you need more history, **read `MEMORY.md` (and `memory/`) yourself** before s
 not inherit the parent's conversation or memory, only this file. (Explore/Plan agents do not even
 get this file; they must be given everything in their prompt.)
 
+**Handoff buffer (Pro tier):** if `.launchpad/handoff.md` exists, keep it updated with current task state (what's in progress, next step) before long sessions or context compaction — `load-memory` reloads it on a `compact` source so context survives `/clear` and compaction.
+
 ## Orchestration (work as a team only when it pays off)
 For substantial multi-step, multi-file, or high-stakes work, invoke the **launchpad** skill and
 use its efficiency-gated ladder: Solo → Pair → parallel fan-out → Workflow. Default to the

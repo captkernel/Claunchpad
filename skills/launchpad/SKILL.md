@@ -37,7 +37,7 @@ tier, and deploys exactly that tier's artifacts — nothing more.
 |---|---|
 | **Starter** — beginner / tiny / throwaway | `CLAUDE.md`, sectioned `MEMORY.md`, load-only `SessionStart` hook |
 | **Standard** — real project / comfortable user | Everything Starter deploys, plus `harvest-nudge` `Stop` hook and full delegation contract |
-| **Pro** — advanced / large / high-stakes / team | Everything Standard deploys, plus per-fact `memory/` directory, handoff hook, and council presets |
+| **Pro** — advanced / large / high-stakes / team | Everything Standard deploys, plus per-fact `memory/` directory, Claude-maintained `.launchpad/handoff.md` buffer (reloaded by `load-memory` on compact), and council presets |
 
 Tier is a recommendation the user can override. Run `launchpad upgrade` to add the
 next tier's artifacts non-destructively when a project outgrows its current one.

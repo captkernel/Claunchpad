@@ -10,8 +10,7 @@ Pair. Pair it with `org-structures.md` (the Pro catalog of structures) and `self
 - The 4-tier front door
 - Escalation triggers (when to go up a tier)
 - De-escalation (when to come back down)
-- The delegation-prompt contract
-- The CLAUDE.md / subagent gotcha
+- Delegation &amp; subagent inheritance
 - Synthesis (combining results)
 - Degradation: orchestration without subagents
 
@@ -81,11 +80,7 @@ it. Common cases: a Research Pod's findings turn out narrow (finish Solo); a Rev
 finds nothing in two lenses (one reviewer would have sufficed next time). Record that as a
 learning.
 
-## The delegation-prompt contract
-
-See `references/delegation.md` for the 7-point contract, inheritance rules, and model routing.
-
-## The CLAUDE.md / subagent gotcha
+## Delegation &amp; subagent inheritance
 
 See `references/delegation.md` for the 7-point contract, inheritance rules, and model routing.
 

@@ -56,7 +56,7 @@ A cheap Explore-agent inspect followed by a short confirmation. Explore agents s
 |---|---|---|---|---|---|
 | **Starter** (beginner / tiny / throwaway) | single `MEMORY.md` (sectioned log) | `SessionStart` load only | Solo + a one-paragraph Pair note | Solo ↔ Pair | hidden (mention only if asked) |
 | **Standard** (real project / comfortable) | `MEMORY.md`, structured to graduate | load + harvest-nudge | full 7-point contract + model routing | 4-tier ladder | mentioned; loaded on request |
-| **Pro** (advanced / large / high-stakes / team) | per-fact `memory/` dir from day 1 | load + nudge + handoff | full contract + Explore/Plan context rules | 4-tier ladder + full 13-structure appendix | presets wired in |
+| **Pro** (advanced / large / high-stakes / team) | per-fact `memory/` dir from day 1 | load + harvest-nudge | full contract + Explore/Plan context rules | 4-tier ladder + full 13-structure appendix | presets wired in |
 
 ---
 
@@ -99,12 +99,18 @@ Everything Standard deploys, plus:
 | Artifact | Notes |
 |---|---|
 | `memory/` directory | Created from day one; `MEMORY.md` is the thin index, not the facts |
-| `.launchpad/handoff.md` | Session-handoff buffer; reloaded by `load-memory` on `compact` |
+| `.launchpad/handoff.md` | Claude-maintained session-handoff buffer (see below); reloaded by `load-memory` on `compact` |
 | Council presets | Launchpad council configurations wired into `CLAUDE.md` |
 
 Pro ships the graduated `memory/` shape immediately — no migration needed later.
 The `load-memory` hook reads both `MEMORY.md` and up to eight of the most-recently-
 modified `memory/*.md` files, so the hook works identically at all three tiers.
+
+**The `.launchpad/handoff.md` buffer** is a Claude-maintained file (not a separate hook script).
+`CLAUDE.md` instructs Claude to keep it updated with current task state before long sessions or
+context compaction. `load-memory` reloads it on a `compact` source so context survives
+compaction. There is no separate "handoff hook" — only `load-memory` and `harvest-nudge` are
+registered as hooks.
 
 ---
 

@@ -56,6 +56,12 @@ check_refs() {
   assert_contains references/org-structures.md "appendix" "org-structures.md marked as appendix"
   assert_contains references/memory.md "metadata" "memory.md documents fact frontmatter"
   assert_contains references/memory.md "additionalContext" "memory.md documents the load hook"
+  # guard: no reference file should name the deleted stores
+  if grep -lqE 'ERRORS\.md|LEARNINGS\.md' "$HERE"/references/*.md 2>/dev/null; then
+    bad "references name deleted stores (ERRORS/LEARNINGS)"
+  else
+    ok "no refs to deleted stores"
+  fi
 }
 
 check_memory() {

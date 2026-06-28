@@ -41,8 +41,10 @@ edits the orchestrator didn't authorize.
 ### 3. Context
 
 The relevant memory facts pasted in directly, plus file paths and any error text the
-agent needs. **The agent cannot read your project's memory stores on its own beyond
-what `CLAUDE.md` carries** — inject what matters.
+agent needs. **Memory is not injected automatically** — inject what matters. A
+general-purpose subagent can `Read` `MEMORY.md` or `memory/` fact files if you direct it
+to, but it will not do so unprompted. Explore/Plan agents skip `CLAUDE.md` entirely and
+cannot be relied on to read any memory files; give them everything in the spawn prompt.
 
 Pull the 1–3 most relevant entries from `MEMORY.md` / `memory/` and paste them under
 a heading like:
@@ -87,9 +89,10 @@ Finish your response with a NEW-KNOWLEDGE block (or "none"):
 - LEARNING: <durable technique or finding, as a reusable rule>
 ```
 
-This is the **Return-learnings** anchor: learnings from delegation feed `ERRORS.md`,
-`LEARNINGS.md`, or `memory/` fact files — never discarded. See `self-learning.md` for
-the full inject-and-harvest loop.
+This is the **Return-learnings** anchor: learnings from delegation are filed into
+`MEMORY.md` (or a `memory/` fact file) under the matching type — `error`, `learning`,
+`decision`, or `reference` — and never discarded. See `self-learning.md` for the full
+inject-and-harvest loop.
 
 ---
 
@@ -164,10 +167,11 @@ no quality gain.
 The Return-learnings slot is not courtesy — it closes the learning loop:
 
 1. **Agent returns** its result plus a NEW-KNOWLEDGE block.
-2. **Orchestrator harvests**: each item is filed into the right store —
-   - `FAILURE` / `CAUSE` / `FIX` → `ERRORS.md` (or an `error`-type fact file)
-   - `LEARNING` → `LEARNINGS.md` (or a `learning`-type fact file)
-   - Architectural choices → `MEMORY.md` (or a `decision`-type fact file)
+2. **Orchestrator harvests**: each item is filed into `MEMORY.md` (or a `memory/` fact
+   file) under the matching type —
+   - `FAILURE` / `CAUSE` / `FIX` → `error`-type entry
+   - `LEARNING` → `learning`-type entry
+   - Architectural choices → `decision`-type entry
 3. **Next delegation selects** those entries and injects them; see `self-learning.md`.
 
 The `harvest-nudge` Stop hook backstops a forgotten harvest: it blocks once per

@@ -163,8 +163,11 @@ sessions that begin after `/clear` and after compaction.
    each under `=== memory/<filename> ===`.
 5. On a `compact` source, if `.launchpad/handoff.md` exists, appends it under
    `=== Session handoff buffer (.launchpad/handoff.md) ===`. This reloads the
-   session-handoff buffer written by the `handoff` hook (Pro tier) so context
-   survives compaction.
+   `.launchpad/handoff.md` buffer — a Claude-maintained file (Pro tier) that Claude
+   keeps updated with current task state before long sessions or context compaction.
+   No separate handoff hook exists; only `load-memory` and `harvest-nudge` are
+   registered as hooks. Context survives compaction because `load-memory` reloads the
+   buffer on a `compact` source.
 6. Emits the assembled content via `hookSpecificOutput.additionalContext` as a JSON
    object. Claude Code injects this string as additional context at session start.
 
@@ -175,7 +178,7 @@ The `additionalContext` injection is the reliability win: memory loads every ses
 without depending on Claude remembering to read it, and it survives `/clear` and
 compaction because the `clear` and `compact` matchers are both registered.
 
-### harvest-nudge (Stop / SubagentStop)
+### harvest-nudge (Stop)
 
 Registered as a `Stop` hook (Standard and Pro tiers). Runs at the end of every turn.
 

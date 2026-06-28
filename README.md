@@ -4,9 +4,9 @@
 > while the final, originality-checked name is locked. See `RENAME.md`.
 
 One importable skill that makes Claude operate at its best on any project. Drop it in, and
-Claude sets the repo up for itself, keeps a memory that survives `/clear`, writes in a
-non-generic voice, and runs work as an **efficiency-gated team of agents**, scaling from a
-solo pass up to a full org only when the task earns it.
+Claude profiles the project, provisions the right tier of infrastructure, keeps a memory that
+survives `/clear` and context compaction, and runs work as an **efficiency-gated team of
+agents**, scaling from a solo pass up to a full org only when the task earns it.
 
 It's the portable, generalized version of a setup that otherwise takes weeks of trial and
 error to assemble: the context discipline of a good `CLAUDE.md`, a self-learning memory shared
@@ -14,28 +14,38 @@ across agents, and an orchestration playbook grounded in how Claude actually wor
 
 ## What you get
 
-When you invoke the skill in a fresh project, it offers to bootstrap five always-on files:
+Launchpad provisions three pillars — Memory, Delegation, Orchestration — in the depth
+the project actually needs. Tier is chosen via a short interview at first run:
 
-| File | Role |
-|---|---|
-| `CLAUDE.md` | Project context, locked tech stack, the four working rules, hard-stops, read every session |
-| `MEMORY.md` | Decision log (what was chosen and why) |
-| `ERRORS.md` | Failure log (what broke and the fix), so mistakes aren't repeated |
-| `LEARNINGS.md` | Techniques & research findings (how to do things well here) |
-| `anti-style.md` | Voice guide that kills generic-AI writing |
+| Tier | Who it's for | What it deploys |
+|---|---|---|
+| **Starter** | Beginner / tiny / throwaway | `CLAUDE.md`, sectioned `MEMORY.md`, `SessionStart` load-memory hook |
+| **Standard** | Real project / comfortable user | Everything Starter, plus `harvest-nudge` `Stop` hook and full delegation contract |
+| **Pro** | Advanced / large / high-stakes / team | Everything Standard, plus per-fact `memory/` directory, `.launchpad/handoff.md` buffer, and council presets |
 
-And it loads, on demand, the orchestration brain:
+**Memory** — hybrid model: Starter uses a single `MEMORY.md` (four sections: Decisions,
+Learnings, Errors, References). Pro uses a per-fact `memory/` directory with `MEMORY.md`
+as a thin index. Both shapes are read by the `load-memory` hook on every session start,
+including after `/clear` and compaction. Standard projects can graduate to the per-fact
+shape non-destructively when the file grows too large to scan.
 
-- **Efficiency governor**, the rule that keeps agent teams cheap: start with the smallest
-  structure, escalate only on a real trigger, never fan out coupled work, route models by role.
-- **A 13-structure org catalog**, Solo, Pair, Generator–Critic, Scout-then-Build, Strike
-  Team, Debug Task Force, Research Pod, Review Board, Best-of-N, Red/Blue, Council, Assembly
-  Line, and Program, each with when-to-activate and a cost/quality profile.
-- **A self-learning protocol**, agents read the project's accumulated knowledge, get the
-  relevant slice injected into their task, and return new failures/fixes/learnings that get
-  harvested back. The project gets smarter every session.
-- **A decision council**, five adversarial advisors + a chair for consequential,
-  hard-to-reverse calls.
+**Hooks** — two POSIX sh hooks automate the memory lifecycle:
+- `load-memory` (SessionStart, all tiers) — injects memory into context via `additionalContext`.
+- `harvest-nudge` (Stop, Standard+) — blocks once per session to remind Claude to file any
+  new decision/learning/error before stopping. Never writes to memory itself.
+
+**Orchestration** — the 4-tier efficiency-gated ladder (Solo → Pair → Parallel fan-out →
+Workflow) plus the full 13-structure org catalog (Pro appendix). The first rule is
+restraint: most tasks never leave Solo or Pair. Bigger structures activate only on observable
+triggers and de-escalate the moment a cheaper structure would do.
+
+**Delegation** — the 7-point contract (objective, scope, context, output format, tool
+guidance, stop criteria, return-learnings slot) plus grounded inheritance rules covering what
+general-purpose and Explore/Plan subagents actually receive, and model routing (Haiku /
+Sonnet / Opus) as the single biggest cost lever in a multi-agent run.
+
+**Councils** — one application built on the OS: a 5-advisor Decision Council for
+consequential choices, and a 4-lens Feasibility Council for project-viability reviews.
 
 ## Install
 
