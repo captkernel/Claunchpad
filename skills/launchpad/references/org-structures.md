@@ -1,5 +1,9 @@
 # Org-structure catalog
 
+> **appendix (Pro tier):** This is the full 13-structure catalog. The everyday front door is
+> the 4-tier ladder in `references/orchestration.md`; reach here only when a structure beyond
+> Pair, fan-out, or Workflow is genuinely warranted.
+
 Thirteen team structures, smallest to largest. Pick the **cheapest one that clears the
 quality bar** (see `orchestration.md` for the governor and triggers). Each entry: what it's
 for, when to activate, the roles, its cost tier, and the output lift it buys.
