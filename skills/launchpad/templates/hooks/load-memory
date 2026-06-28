@@ -1,0 +1,54 @@
+#!/bin/sh
+# SessionStart hook: load project memory and emit it as additionalContext.
+# Pure POSIX sh; no python/node dependency.
+set -u
+
+ROOT="${CLAUDE_PROJECT_DIR:-.}"
+MEM="$ROOT/MEMORY.md"
+MEMDIR="$ROOT/memory"
+HANDOFF="$ROOT/.launchpad/handoff.md"
+NUDGE_FLAG="$ROOT/.launchpad/.harvest-nudged"
+
+input="$(cat 2>/dev/null || true)"
+source="$(printf '%s' "$input" | sed -n 's/.*"source"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p')"
+
+# New session: reset the per-session harvest-nudge flag.
+case "$source" in
+  startup|clear|resume|"") rm -f "$NUDGE_FLAG" 2>/dev/null || true ;;
+esac
+
+content=""
+if [ -f "$MEM" ]; then
+  content="$content
+=== Project memory index (MEMORY.md) ===
+$(cat "$MEM")"
+fi
+
+if [ -d "$MEMDIR" ]; then
+  for f in $(ls -1t "$MEMDIR"/*.md 2>/dev/null | head -n 8); do
+    content="$content
+
+=== memory/$(basename "$f") ===
+$(cat "$f")"
+  done
+fi
+
+if [ "$source" = "compact" ] && [ -f "$HANDOFF" ]; then
+  content="$content
+
+=== Session handoff buffer (.launchpad/handoff.md) ===
+$(cat "$HANDOFF")"
+fi
+
+# Nothing to load.
+if [ -z "$(printf '%s' "$content" | tr -d '[:space:]')" ]; then
+  exit 0
+fi
+
+# Pure-sh JSON string encoder: escape \ and ", strip CR, join lines with \n, wrap in quotes.
+escaped="$(printf '%s' "$content" | tr -d '\r' \
+  | sed -e 's/\\/\\\\/g' -e 's/"/\\"/g' -e 's/	/\\t/g' \
+  | awk 'BEGIN{ORS="";print "\""} {print sep $0; sep="\\n"} END{print "\""}')"
+
+printf '{"hookSpecificOutput":{"hookEventName":"SessionStart","additionalContext":%s}}\n' "$escaped"
+exit 0
