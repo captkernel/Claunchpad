@@ -1,0 +1,356 @@
+{
+  "summary": "Deep research harness — fan-out web searches, fetch sources, adversarially verify claims, synthesize a cited report.",
+  "agentCount": 107,
+  "logs": [
+    "Q: Find the best-established frameworks for evaluating the feasibility and viabilit…",
+    "Decomposed into 5 angles: broad/canonical frameworks, VC due-diligence dimensions, classic feasibility study + TELOS, de-biasing process (pre-mortem/red-team), empirical predictors of success/failure",
+    "classic feasibility study + TELOS: 6 results",
+    "VC due-diligence dimensions: 6 results",
+    "de-biasing process (pre-mortem/red-team): 6 results",
+    "de-biasing process (pre-mortem/red-team): 5 novel (1 filtered)",
+    "empirical predictors of success/failure: 6 results",
+    "empirical predictors of success/failure: 5 novel (1 filtered)",
+    "broad/canonical frameworks: 6 results",
+    "broad/canonical frameworks: 3 novel (3 filtered)",
+    "Fetched 25 sources → 107 claims → verifying top 25",
+    "\"Marty Cagan's SVPG canonical product risk taxonomy…\": 3-0 ✓",
+    "\"Marty Cagan / SVPG defines exactly four big produc…\": 3-0 ✓",
+    "\"The three-risk model failed in practice because te…\": 3-0 ✓",
+    "\"The purpose of product discovery is to address (ki…\": 3-0 ✓",
+    "\"Strategyzer (Osterwalder) frames new-idea evaluati…\": 3-0 ✓",
+    "\"The IDEO/design-thinking desirability-viability-fe…\": 3-0 ✓",
+    "\"The framework defines the primary task of an innov…\": 3-0 ✓",
+    "\"Sequoia Capital's canonical venture-evaluation fra…\": 3-0 ✓",
+    "\"Sequoia treats 'Why Now?' (timing) as a distinct a…\": 3-0 ✓",
+    "\"In a survey of 470 early-stage startup CEOs, start…\": 2-1 ✓",
+    "\"Pivoting too rarely sharply raised failure risk: n…\": 3-0 ✓",
+    "\"A machine learning study of startup success identi…\": 2-1 ✓",
+    "\"The TELOS feasibility framework comprises five dim…\": 3-0 ✓",
+    "\"Founder/CEO attributes commonly assumed to predict…\": 2-1 ✓",
+    "\"The classic TELOS feasibility framework comprises …\": 3-0 ✓",
+    "[v1:The premortem is a de-biasing technique ] failed: You've hit your session limit · resets 6:40pm (Asia/Calcutta)",
+    "[v1:A primary cause of project failure is th] failed: You've hit your session limit · resets 6:40pm (Asia/Calcutta)",
+    "[v2:TELOS dimensions are interdependent rath] failed: You've hit your session limit · resets 6:40pm (Asia/Calcutta)",
+    "[v0:The de-biasing problem a challenge mecha] failed: You've hit your session limit · resets 6:40pm (Asia/Calcutta)",
+    "\"Prior startup-success prediction work was incomple…\": 2-1 ✓",
+    "[v2:The premortem is a de-biasing technique ] failed: You've hit your session limit · resets 6:40pm (Asia/Calcutta)",
+    "[v1:The de-biasing problem a challenge mecha] failed: You've hit your session limit · resets 6:40pm (Asia/Calcutta)",
+    "[v2:A primary cause of project failure is th] failed: You've hit your session limit · resets 6:40pm (Asia/Calcutta)",
+    "[v2:The de-biasing problem a challenge mecha] failed: You've hit your session limit · resets 6:40pm (Asia/Calcutta)",
+    "\"The de-biasing problem a challenge mechanism targe…\": 0-0 (3 abstain) ✗",
+    "[v1:Effective devil's advocacy depends on in] failed: You've hit your session limit · resets 6:40pm (Asia/Calcutta)",
+    "[v0:Practitioners converged on triaging when] failed: You've hit your session limit · resets 6:40pm (Asia/Calcutta)",
+    "[v2:The premortem improves a project's chanc] failed: You've hit your session limit · resets 6:40pm (Asia/Calcutta)",
+    "[v1:Practitioners converged on triaging when] failed: You've hit your session limit · resets 6:40pm (Asia/Calcutta)",
+    "[v2:Effective devil's advocacy depends on in] failed: You've hit your session limit · resets 6:40pm (Asia/Calcutta)",
+    "[v0:A primary cause of project failure is th] failed: You've hit your session limit · resets 6:40pm (Asia/Calcutta)",
+    "\"A primary cause of project failure is that people …\": 0-0 (3 abstain) ✗",
+    "[v2:Practitioners converged on triaging when] failed: You've hit your session limit · resets 6:40pm (Asia/Calcutta)",
+    "\"Practitioners converged on triaging when to apply …\": 0-0 (3 abstain) ✗",
+    "[v0:Effective devil's advocacy depends on in] failed: You've hit your session limit · resets 6:40pm (Asia/Calcutta)",
+    "\"Effective devil's advocacy depends on independence…\": 0-0 (3 abstain) ✗",
+    "[v1:The premortem improves a project's chanc] failed: You've hit your session limit · resets 6:40pm (Asia/Calcutta)",
+    "[v0:The premortem is a de-biasing technique ] failed: You've hit your session limit · resets 6:40pm (Asia/Calcutta)",
+    "\"The premortem is a de-biasing technique in which t…\": 0-0 (3 abstain) ✗",
+    "[v0:The premortem improves a project's chanc] failed: You've hit your session limit · resets 6:40pm (Asia/Calcutta)",
+    "\"The premortem improves a project's chances of succ…\": 0-0 (3 abstain) ✗",
+    "[v0:TELOS dimensions are interdependent rath] failed: You've hit your session limit · resets 6:40pm (Asia/Calcutta)",
+    "[v0:Feasibility dimensions are interrelated/] failed: You've hit your session limit · resets 6:40pm (Asia/Calcutta)",
+    "[v2:Feasibility dimensions are interrelated/] failed: You've hit your session limit · resets 6:40pm (Asia/Calcutta)",
+    "[v1:High founder confidence in financial met] failed: You've hit your session limit · resets 6:40pm (Asia/Calcutta)",
+    "\"High founder confidence in financial metrics — uni…\": 2-0 (1 abstain) ✓",
+    "[v1:TELOS dimensions are interdependent rath] failed: You've hit your session limit · resets 6:40pm (Asia/Calcutta)",
+    "\"TELOS dimensions are interdependent rather than in…\": 0-0 (3 abstain) ✗",
+    "[v1:Feasibility dimensions are interrelated/] failed: You've hit your session limit · resets 6:40pm (Asia/Calcutta)",
+    "\"Feasibility dimensions are interrelated/interdepen…\": 0-0 (3 abstain) ✗",
+    "Verify done: 25 claims → 17 confirmed, 8 killed",
+    "[synthesize] failed: You've hit your session limit · resets 6:40pm (Asia/Calcutta)"
+  ],
+  "result": {
+    "question": "Find the best-established frameworks for evaluating the feasibility and viability of a new product, project, or venture across multiple perspectives, and determine which COMBINATION of lenses gives the most complete, non-overlapping coverage.\n\nSpecifically research and compare:\n- Marty Cagan / SVPG \"four big risks\" (value, usability, feasibility, business viability)\n- IDEO / design-thinking \"desirability–feasibility–viability\" triad\n- Strategyzer \"Testing Business Ideas\" (desirability, feasibility, viability, adaptability)\n- VC / startup due-diligence dimensions (team, market, product, traction, moat, economics) — YC, Sequoia, a16z\n- Classic feasibility-study dimensions (technical, economic, legal, operational, schedule — \"TELOS\")\n- Pre-mortem (Gary Klein) and red-team / devil's-advocate methods for de-biasing group evaluation\n- What empirical evidence says actually predicts startup/project success vs failure (e.g. CB Insights \"top reasons startups fail\", market vs team vs product)\n\nDeliver: (1) the canonical set of evaluation dimensions that, combined, cover the space with minimal overlap and minimal blind spots; (2) where the popular frameworks disagree or leave gaps; (3) the best PROCESS for running a multi-perspective evaluation to counter groupthink and optimism bias (independent assessment, dependency/clash analysis, weakest-link synthesis); (4) what the strongest practitioners actually do differently. Cite sources.",
+    "summary": "Synthesis step was skipped or failed — returning 17 verified claims unmerged.",
+    "findings": [],
+    "confirmed": [
+      {
+        "claim": "Marty Cagan / SVPG defines exactly four big product risks that must be evaluated: value, usability, feasibility, and business viability.",
+        "source": "https://www.svpg.com/four-big-risks/",
+        "quote": "Value — will customers buy it or users choose to use it; Usability — can users figure out how to use it; Feasibility — can engineers build it with the available time, skills, and tech; and Business Viability — does it work for legal, finance, sales, marketing, and brand.",
+        "vote": "3-0"
+      },
+      {
+        "claim": "The purpose of product discovery is to address (kill) all four risks before delivery/development begins, making the four risks an evaluation gate rather than a post-build checklist.",
+        "source": "https://www.svpg.com/four-big-risks/",
+        "quote": "Discovery exists to kill all four before delivery starts.",
+        "vote": "3-0"
+      },
+      {
+        "claim": "Marty Cagan's SVPG canonical product risk taxonomy is the four risks: value, usability, feasibility, and business viability, which evolved from his original three-risk model (value, usability, feasibility) in the first edition of INSPIRED (2008) by splitting 'value' into customer value and business viability in the second edition (2018).",
+        "source": "https://www.svpg.com/product-risk-taxonomies/",
+        "quote": "in the second edition of INSPIRED (2018), I separated out those two risks into customer value and business viability... I still believe this is the case, that it's worth the extra cognitive load to have the four risk taxonomy: value, usability, feasibility and viability... At SVPG, we evangelize the four-risk taxonomy of value, usability, feasibility and viability.",
+        "vote": "3-0"
+      },
+      {
+        "claim": "The three-risk model failed in practice because teams conflated customer value and business value under a single 'value' risk and consistently glossed over business value — the explicit reason Cagan split out business viability as a fourth distinct lens.",
+        "source": "https://www.svpg.com/product-risk-taxonomies/",
+        "quote": "\"Value\" was supposed to cover both customer value and business value. But I kept encountering the problem where the product team would focus on customer value, but would gloss over business value.",
+        "vote": "3-0"
+      },
+      {
+        "claim": "The IDEO/design-thinking desirability-viability-feasibility triad maps onto Cagan's model by combining customer value and usability into 'desirability', and Cagan finds it a better fit for consumer products than business products because in business contexts the user and buyer differ, making usability and value separate concerns rather than intertwined.",
+        "source": "https://www.svpg.com/product-risk-taxonomies/",
+        "quote": "In this taxonomy, there are three risks: desirability, viability and feasibility. While viability and feasibility are the same as above, desirability combines customer value and usability... I have found it to be a much better fit for consumer products, than it is for business products.",
+        "vote": "3-0"
+      },
+      {
+        "claim": "Strategyzer (Osterwalder) frames new-idea evaluation around three risk dimensions — desirability, viability, and feasibility — that map onto the Business Model Canvas, with desirability = 'do customers want it', viability = 'can we earn more money with it than we spend', and feasibility = 'can we build & implement it'.",
+        "source": "https://www.strategyzer.com/library/how-to-systematically-reduce-the-risk-uncertainty-of-new-ideas",
+        "quote": "Desirability ('Do customers want it')... Viability ('Can we earn more money with it than we spend')... Feasibility ('Can we build & implement it')",
+        "vote": "3-0"
+      },
+      {
+        "claim": "The framework defines the primary task of an innovator/entrepreneur as reducing risk and uncertainty of an idea BEFORE large investment or scaling, positioning evaluation as a de-risking activity rather than a one-time judgment.",
+        "source": "https://www.strategyzer.com/library/how-to-systematically-reduce-the-risk-uncertainty-of-new-ideas",
+        "quote": "As an innovator & entrepreneur your #1 task is to reduce the risk and uncertainty of new business ideas before you invest big and scale.",
+        "vote": "3-0"
+      },
+      {
+        "claim": "Sequoia Capital's canonical venture-evaluation framework consists of ~10 dimensions: company purpose, problem, solution, why now, market potential, competition/alternatives, business model, team, financials, and vision.",
+        "source": "https://www.sequoiacap.com/article/writing-a-business-plan/",
+        "quote": "Define your company in a single declarative sentence... Describe the pain of your customer... Explain your eureka moment... The best companies almost always have a clear why now?... Identify your customer and your market... Who are your direct and indirect competitors... How do you intend to thrive?... Tell the story of your founders and key team members... If all goes well, what will you have built in five years?",
+        "vote": "3-0"
+      },
+      {
+        "claim": "Sequoia treats 'Why Now?' (timing) as a distinct and critical evaluation dimension that most other startup-evaluation frameworks omit.",
+        "source": "https://www.sequoiacap.com/article/writing-a-business-plan/",
+        "quote": "The best companies almost always have a clear why now? Nature hates a vacuum—so why hasn't your solution been built before now?",
+        "vote": "3-0"
+      },
+      {
+        "claim": "In a survey of 470 early-stage startup CEOs, startups employing lean startup practices (upfront customer research, MVP tests, and especially an optimal rate of pivoting) had statistically stronger seed-equity valuation growth.",
+        "source": "https://www.hbs.edu/ris/Publication%20Files/21-057_0c4f5410-3dcb-4c2f-8c4e-6fcbc358b92f.pdf",
+        "quote": "Multivariate regression analysis shows that startups that employed lean startup management practices--in particular, an optimal rate of pivoting--had stronger seed equity valuation growth",
+        "vote": "2-1"
+      },
+      {
+        "claim": "Pivoting too rarely sharply raised failure risk: not pivoting often enough raised the predicted probability of a low valuation to 22%, versus 6% for startups pivoting at optimal frequency.",
+        "source": "https://www.hbs.edu/ris/Publication%20Files/21-057_0c4f5410-3dcb-4c2f-8c4e-6fcbc358b92f.pdf",
+        "quote": "Not pivoting often enough increased the predicted probability of a low valuation to a statistically significant 22%, compared to 6% for optimal frequency.",
+        "vote": "3-0"
+      },
+      {
+        "claim": "High founder confidence in financial metrics — unit economics, the LTV/CAC ratio, and total addressable market size — predicted stronger growth in seed equity value.",
+        "source": "https://www.hbs.edu/ris/Publication%20Files/21-057_0c4f5410-3dcb-4c2f-8c4e-6fcbc358b92f.pdf",
+        "quote": "High levels of confidence in financial metrics--including estimates of unit economics, the ratio of customer lifetime value to customer acquisition cost, and total addressable market size-- were also associated with strong growth in seed equity value.",
+        "vote": "2-0"
+      },
+      {
+        "claim": "Founder/CEO attributes commonly assumed to predict success — age, educational background, personality traits, and motivations — were NOT related to valuation outcomes.",
+        "source": "https://www.hbs.edu/ris/Publication%20Files/21-057_0c4f5410-3dcb-4c2f-8c4e-6fcbc358b92f.pdf",
+        "quote": "Valuation outcomes were not related to several founder/CEO attributes, including age, educational background, personality traits, and motivations for becoming an entrepreneur.",
+        "vote": "2-1"
+      },
+      {
+        "claim": "A machine learning study of startup success identified four primary predictive factors: media exposure, monetary funding, industry convergence level, and industry association level — meaning external-environment signals (media, industry context) rank alongside internal funding as top predictors.",
+        "source": "https://www.sciencedirect.com/science/article/abs/pii/S0040162523002998",
+        "quote": "Four primary factors emerged as significant for determining startup success: Media exposure, Monetary funding, Industry convergence level, Industry association level",
+        "vote": "2-1"
+      },
+      {
+        "claim": "Prior startup-success prediction work was incomplete because it considered only internal startup conditions; this study argues a complete evaluation must combine internal conditions with external environmental factors.",
+        "source": "https://www.sciencedirect.com/science/article/abs/pii/S0040162523002998",
+        "quote": "The research addressed a research gap by incorporating external environmental factors alongside internal startup conditions, moving beyond previous studies that \"focused only on the internal conditions of startups.\"",
+        "vote": "2-1"
+      },
+      {
+        "claim": "The TELOS feasibility framework comprises five dimensions: Technical, Economic, Legal, Operational, and Schedule feasibility, intended to give a holistic view of a project.",
+        "source": "https://www.researchgate.net/publication/352862502_Interrelated_Attributes_of_Project_Feasibility_Visualizing_the_TELOS_Framework",
+        "quote": "The TELOS framework encompasses five generic areas: technical, economic, legal, operational, and schedule. Project feasibility based on TELOS criteria offers a holistic view of a project by linking technical, economic, legal, operational, and scheduling elements.",
+        "vote": "3-0"
+      },
+      {
+        "claim": "The classic TELOS feasibility framework comprises exactly five dimensions for evaluating a project: Technical, Economic, Legal, Operational, and Scheduling (Schedule).",
+        "source": "https://www.researchgate.net/publication/396978584_TELOS_Feasibility_Analysis_for_Application_Development_Project_using_System_Dynamics_Approach",
+        "quote": "The study designs a dynamic feasibility model using a System Dynamics (SD) approach grounded in the TELOS criteria—Technical, Economic, Legal, Operational, and Scheduling.",
+        "vote": "3-0"
+      }
+    ],
+    "refuted": [
+      {
+        "claim": "Feasibility dimensions are interrelated/interdependent rather than independent silos, and frameworks like TELOS exist specifically to encourage holistic (rather than narrow) feasibility appraisal across professions and disciplines.",
+        "vote": "0-0",
+        "source": "https://www.researchgate.net/publication/352862502_Interrelated_Attributes_of_Project_Feasibility_Visualizing_the_TELOS_Framework"
+      },
+      {
+        "claim": "TELOS dimensions are interdependent rather than independent silos; a system-dynamics model is needed to capture the feedback loops and interdependencies between project variables that static feasibility methods miss.",
+        "vote": "0-0",
+        "source": "https://www.researchgate.net/publication/396978584_TELOS_Feasibility_Analysis_for_Application_Development_Project_using_System_Dynamics_Approach"
+      },
+      {
+        "claim": "The premortem is a de-biasing technique in which team members assume, at the planning stage, that the project has already failed, and then generate plausible reasons for that failure.",
+        "vote": "0-0",
+        "source": "https://hbr.org/2007/09/performing-a-project-premortem"
+      },
+      {
+        "claim": "The premortem improves a project's chances of success by making it psychologically safe for knowledgeable dissenters worried about weaknesses to speak up.",
+        "vote": "0-0",
+        "source": "https://hbr.org/2007/09/performing-a-project-premortem"
+      },
+      {
+        "claim": "A primary cause of project failure is that people are reluctant to voice reservations during the critical planning phase, which the premortem is designed to counteract.",
+        "vote": "0-0",
+        "source": "https://hbr.org/2007/09/performing-a-project-premortem"
+      },
+      {
+        "claim": "The de-biasing problem a challenge mechanism targets is specific and recurring: analysts' three 'occupational hazards' are preconceptions, reinforcing consensus, and the current-intelligence syndrome — and these were identified via formal post-mortems of analytic failure, not theory.",
+        "vote": "0-0",
+        "source": "https://www.cia.gov/resources/csi/static/610d592f509c5ad03f5a999827dd9bdb/Article-Instituting-Devils-Advocacy-in-IC-Analysis-after-October-1973-War.pdf"
+      },
+      {
+        "claim": "Effective devil's advocacy depends on independence of perspective rather than expertise: the challenger must NOT share the team's preconceptions, NOT be burdened by the group's consensus, and NOT be steeped in the same daily information flow.",
+        "vote": "0-0",
+        "source": "https://www.cia.gov/resources/csi/static/610d592f509c5ad03f5a999827dd9bdb/Article-Instituting-Devils-Advocacy-in-IC-Analysis-after-October-1973-War.pdf"
+      },
+      {
+        "claim": "Practitioners converged on triaging when to apply formal contrarian analysis: it should be reserved for high-stakes, high-uncertainty judgments where being wrong would be very damaging — not applied uniformly to all evaluations.",
+        "vote": "0-0",
+        "source": "https://www.cia.gov/resources/csi/static/610d592f509c5ad03f5a999827dd9bdb/Article-Instituting-Devils-Advocacy-in-IC-Analysis-after-October-1973-War.pdf"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://www.svpg.com/four-big-risks/",
+        "quality": "primary",
+        "claimCount": 4
+      },
+      {
+        "url": "https://www.svpg.com/product-risk-taxonomies/",
+        "quality": "primary",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.strategyzer.com/library/how-to-systematically-reduce-the-risk-uncertainty-of-new-ideas",
+        "quality": "primary",
+        "claimCount": 4
+      },
+      {
+        "url": "https://www.sequoiacap.com/article/writing-a-business-plan/",
+        "quality": "primary",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.hbs.edu/ris/Publication%20Files/21-057_0c4f5410-3dcb-4c2f-8c4e-6fcbc358b92f.pdf",
+        "quality": "primary",
+        "claimCount": 5
+      },
+      {
+        "url": "https://a16z.com/12-things-about-product-market-fit/",
+        "quality": "secondary",
+        "claimCount": 5
+      },
+      {
+        "url": "https://kruzeconsulting.com/blog/due-diligence-checklist/",
+        "quality": "blog",
+        "claimCount": 4
+      },
+      {
+        "url": "https://www.4degrees.ai/blog/2025-venture-capital-due-diligence-checklist",
+        "quality": "blog",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.sciencedirect.com/science/article/abs/pii/S0040162523002998",
+        "quality": "primary",
+        "claimCount": 4
+      },
+      {
+        "url": "https://galorath.com/project/feasibility/",
+        "quality": "secondary",
+        "claimCount": 4
+      },
+      {
+        "url": "https://www.geeksforgeeks.org/software-engineering/types-of-feasibility-study-in-software-project-development/",
+        "quality": "secondary",
+        "claimCount": 5
+      },
+      {
+        "url": "https://asana.com/resources/feasibility-study",
+        "quality": "secondary",
+        "claimCount": 4
+      },
+      {
+        "url": "https://www.researchgate.net/publication/352862502_Interrelated_Attributes_of_Project_Feasibility_Visualizing_the_TELOS_Framework",
+        "quality": "primary",
+        "claimCount": 4
+      },
+      {
+        "url": "https://www.researchgate.net/publication/396978584_TELOS_Feasibility_Analysis_for_Application_Development_Project_using_System_Dynamics_Approach",
+        "quality": "primary",
+        "claimCount": 4
+      },
+      {
+        "url": "https://business.tutsplus.com/articles/can-we-really-do-it-how-to-conduct-a-telos-feasibility-study--cms-21442",
+        "quality": "unreliable",
+        "claimCount": 0
+      },
+      {
+        "url": "https://hbr.org/2007/09/performing-a-project-premortem",
+        "quality": "primary",
+        "claimCount": 3
+      },
+      {
+        "url": "https://ecommons.cornell.edu/bitstreams/6f50583c-fc17-4b6d-982c-a2d217e9027c/download",
+        "quality": "secondary",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.pmi.org/learning/library/nobel-project-management-reference-class-forecasting-8068",
+        "quality": "secondary",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.cia.gov/resources/csi/static/610d592f509c5ad03f5a999827dd9bdb/Article-Instituting-Devils-Advocacy-in-IC-Analysis-after-October-1973-War.pdf",
+        "quality": "primary",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.stat.berkeley.edu/~aldous/157/Papers/Tradecraft%20Primer-apr09.pdf",
+        "quality": "primary",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.cbinsights.com/research/report/startup-failure-reasons-top/",
+        "quality": "primary",
+        "claimCount": 5
+      },
+      {
+        "url": "https://pmarchive.com/guide_to_startups_part4.html",
+        "quality": "primary",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.idealab.com/videos/bill_gross_ted_2015.php",
+        "quality": "primary",
+        "claimCount": 2
+      },
+      {
+        "url": "https://www.nature.com/articles/s41598-023-41980-y",
+        "quality": "primary",
+        "claimCount": 5
+      },
+      {
+        "url": "https://bhide.net/index.php/articles/origin-and-evolution-of-new-businesses",
+        "quality": "primary",
+        "claimCount": 5
+      }
+    ],
+    "stats": {
+      "angles": 5,
+      "sources": 25,
+      "claims": 107,
+      "verified": 25,
+      "confirmed": 17,
+      "killed": 8,
+      "afterSynthesis": 0
+    }
+  }
+}

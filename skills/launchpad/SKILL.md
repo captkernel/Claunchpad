@@ -6,7 +6,8 @@ description: >-
   substantial multi-step or multi-file work, or before a consequential, hard-to-reverse
   decision. Trigger phrases include "set up this project", "initialize launchpad", "run this
   as a team", "orchestrate this", "spin up agents", "review board", "debug task force",
-  "council this", and "pressure-test this decision".
+  "council this", "feasibility council", "is this project viable", and "pressure-test this
+  decision".
 ---
 
 # Launchpad
@@ -24,7 +25,10 @@ power you spend on purpose, never by default.
 - **Substantial work** (multi-step, multi-file, research-heavy, or high-risk). Load
   `references/orchestration.md` + `references/org-structures.md` and pick a structure.
 - **A consequential, hard-to-reverse decision** (launch, hire, pivot, architecture, big
-  spend). Load `references/council.md` and convene.
+  spend). Load `references/council.md` and convene the decision council.
+- **Evaluating whether a whole project can work** before committing resources (greenlight,
+  go/no-go, viability check). Load `references/feasibility-council.md` and convene the four
+  lenses (tech, finance, GTM, marketing).
 
 **When NOT to use:** a one-line fix, a quick question, or tightly-coupled edits to a single
 file. Stay solo. Spinning up a team there wastes tokens and slows you down.
@@ -59,7 +63,8 @@ result. **Harvest** those back into the right store. Next time, that knowledge i
 Default to the smallest structure. Escalate one tier only on an observable trigger;
 de-escalate the moment a cheaper structure would do. Quick routing:
 
-1. A consequential, hard-to-reverse decision? Convene the **Council**.
+1. Evaluating a whole project's viability before committing? Convene the **Feasibility Council**.
+   A consequential, hard-to-reverse decision? Convene the **Decision Council**.
 2. Trivial, or tightly coupled / same-file? Stay **Solo**.
 3. A normal change worth reviewing? **Pair** (build, independent review, verify). The default.
 4. A focused multi-step feature, or a bug with rival theories? **Strike Team** or
@@ -99,3 +104,4 @@ Violating the letter of the efficiency rules is violating their spirit. Common f
 | `references/org-structures.md` | The 13-structure catalog with cost/quality profiles | Choosing or escalating a structure |
 | `references/self-learning.md` | The inject-and-harvest protocol + file conventions | Delegating, or wiring up memory |
 | `references/council.md` | The 5-advisor decision pressure-test | Before a consequential, hard-to-reverse decision |
+| `references/feasibility-council.md` | The 4-lens project-viability review (tech, finance, GTM, marketing) | Evaluating whether a whole project/product can work before committing resources |
