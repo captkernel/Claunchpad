@@ -51,6 +51,8 @@ check_refs() {
   assert_contains references/orchestration.md "Solo" "orchestration.md has 4-tier ladder (Solo)"
   assert_contains references/orchestration.md "org-structures.md" "orchestration.md points to appendix"
   assert_contains references/org-structures.md "appendix" "org-structures.md marked as appendix"
+  assert_contains references/memory.md "metadata" "memory.md documents fact frontmatter"
+  assert_contains references/memory.md "additionalContext" "memory.md documents the load hook"
 }
 
 check_memory() {
