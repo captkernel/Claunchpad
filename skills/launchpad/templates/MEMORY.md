@@ -1,27 +1,19 @@
-# MEMORY.md: Decision Log
+# MEMORY.md — project memory (Starter)
 
-<!-- SELF-MAINTENANCE, read every session, then act:
-1. READ this file first thing each session. Verify any named file/path/flag still exists
-   before trusting an entry.
-2. APPEND a new entry under "## Log" (NEWEST FIRST) whenever a durable decision is made: a
-   non-obvious choice, a constraint, a rejected alternative, or a confirmed-good approach.
-3. ONE decision per entry. Terse. Absolute dates (YYYY-MM-DD). No prose paragraphs.
-4. Log the DECISION and the WHY (the why is the load-bearing part). Record verified
-   outcomes, not intentions.
-5. Do NOT log what the code or git history already records, or what only matters to one
-   conversation.
-6. CURATE: keep the newest ~20 entries detailed. Fold older ones into "## Rolled-up summary"
-   as one line each. Delete entries proven wrong. If this file passes ~400 lines, compact now.
+<!-- READ this at session start. APPEND the moment you make a non-obvious decision, resolve a
+real failure, or find a durable technique. One fact per bullet, newest first, absolute dates
+(YYYY-MM-DD). Log the fact AND the why. Don't record what code or git history already shows.
+GRADUATE: when this file gets hard to scan (~a screenful per section, or ~400 lines total),
+migrate to a `memory/` directory of one-fact files — see references/memory.md. -->
 
-Entry template:
-### YYYY-MM-DD: <decision in <=10 words>
-- Decision: <what was chosen>
-- Why: <the reasoning / tradeoff>
-- Alt rejected: <what you did NOT do, and why>   (omit if none)
--->
+## Decisions
+<!-- a choice + why (+ rejected alternative). e.g. "2026-06-28 chose SQLite over Postgres: single-writer, zero ops." -->
 
-## Log
-<!-- newest first -->
+## Learnings
+<!-- a durable technique that works here. e.g. "2026-06-28 this API rate-limits at 50/s; batch in 40s windows." -->
 
-## Rolled-up summary
-<!-- compacted older decisions, one line each: YYYY-MM-DD, fact -->
+## Errors
+<!-- a failure + its fix, so it isn't retried. e.g. "2026-06-28 vitest hung on ESM; fix: pool:'forks'." -->
+
+## References
+<!-- external resources, commands, ports, gotchas. e.g. "2026-06-28 staging deploy: `make deploy-staging`." -->
