@@ -1,107 +1,119 @@
 ---
 name: launchpad
 description: >-
-  Sets a project up so Claude performs at its best and coordinates multi-agent work. Use when
-  starting or initializing a project, configuring a repo for Claude, planning or executing
-  substantial multi-step or multi-file work, or before a consequential, hard-to-reverse
-  decision. Trigger phrases include "set up this project", "initialize launchpad", "run this
-  as a team", "orchestrate this", "spin up agents", "review board", "debug task force",
-  "council this", "feasibility council", "is this project viable", and "pressure-test this
-  decision".
+  Sets a project up so Claude works at its best: profiles the user and project,
+  provisions tiered infrastructure (memory that survives /clear and compaction,
+  delegation contracts, orchestration structures, and hooks), and repositions
+  councils as an application on that foundation. Use when starting or
+  initializing a project, configuring a repo for Claude, planning or executing
+  substantial multi-step or multi-file work, or before a consequential,
+  hard-to-reverse decision. Trigger phrases include "set up this project",
+  "initialize launchpad", "run this as a team", "orchestrate this",
+  "spin up agents", "review board", "debug task force", "council this",
+  "feasibility council", "is this project viable", and
+  "pressure-test this decision".
 ---
 
-# Launchpad
+# Launchpad — project operating system for Claude Code
 
-Make Claude operate at its best on a project: disciplined context, a memory that survives
-`/clear` and is shared across agents, a non-generic voice, and an agent-team playbook that
-scales only as far as the task earns.
+Launchpad is the cheapest structure that clears the quality bar — deployed once at
+project start so you never rebuild it from scratch. It provisions three pillars
+(Memory, Delegation, Orchestration) in the tier the project actually needs, wires
+hooks so memory loads automatically and harvesting is nudged but never forced, and
+positions councils as one application on top. Power is spent on purpose; nothing is
+added that the work hasn't earned.
 
-The guiding rule: **the cheapest structure that clears the quality bar wins.** Agents are
-power you spend on purpose, never by default.
+---
 
-## When to use
+## First-run bootstrap
 
-- **Setting up** a new or unconfigured project for Claude. Run the bootstrap (below).
-- **Substantial work** (multi-step, multi-file, research-heavy, or high-risk). Load
-  `references/orchestration.md` + `references/org-structures.md` and pick a structure.
-- **A consequential, hard-to-reverse decision** (launch, hire, pivot, architecture, big
-  spend). Load `references/council.md` and convene the decision council.
-- **Evaluating whether a whole project can work** before committing resources (greenlight,
-  go/no-go, viability check). Load `references/feasibility-council.md` and convene the four
-  lenses (tech, finance, GTM, marketing).
+When the project has no `CLAUDE.md`, run the provisioning interview (full procedure:
+`references/provisioning.md`). It gathers expertise and project-shape signals, picks a
+tier, and deploys exactly that tier's artifacts — nothing more.
 
-**When NOT to use:** a one-line fix, a quick question, or tightly-coupled edits to a single
-file. Stay solo. Spinning up a team there wastes tokens and slows you down.
+**Three tiers, decided at install time:**
 
-## First-run bootstrap (Claude Code)
-
-When the project has no `CLAUDE.md`, offer to set it up:
-
-1. **Inspect** the repo: language, framework, package manager, test/build/lint commands,
-   existing conventions.
-2. **Plan.** Tell the user which files you'll create. Don't write yet.
-3. **Write** these from `templates/`, filling `CLAUDE.md` from what you found: `CLAUDE.md`
-   (context, locked stack, working rules, hard-stops), `MEMORY.md` (decision log), `ERRORS.md`
-   (failure + fix log), `LEARNINGS.md` (techniques + research), and `anti-style.md` (voice
-   guide). **Skip any file that already exists**; never clobber the user's work unless they
-   say so.
-4. **Report** what was created and what placeholders the user should fill.
-
-On claude.ai or the API (no filesystem): skip the writes, apply the behaviors in-session, and
-offer the templates as copy-paste blocks.
-
-## The self-learning loop (one paragraph; full detail in `references/self-learning.md`)
-
-The project keeps three durable stores: `MEMORY.md` (decisions), `ERRORS.md` (failures +
-fixes), `LEARNINGS.md` (techniques + research). Read the relevant entries at the start of any
-task. Subagents can't read these files, so when you delegate, **paste the relevant entries
-into the subagent's prompt**, and require it to return any new failure/fix or learning in its
-result. **Harvest** those back into the right store. Next time, that knowledge is free.
-
-## Orchestration overview
-
-Default to the smallest structure. Escalate one tier only on an observable trigger;
-de-escalate the moment a cheaper structure would do. Quick routing:
-
-1. Evaluating a whole project's viability before committing? Convene the **Feasibility Council**.
-   A consequential, hard-to-reverse decision? Convene the **Decision Council**.
-2. Trivial, or tightly coupled / same-file? Stay **Solo**.
-3. A normal change worth reviewing? **Pair** (build, independent review, verify). The default.
-4. A focused multi-step feature, or a bug with rival theories? **Strike Team** or
-   **Debug Task Force**.
-5. 3+ independent angles? A parallel formation: **Research Pod**, **Review Board**,
-   **Best-of-N**, or **Red / Blue**.
-6. 10+ uniform targets, or a multi-module program? **Assembly Line** or **Program**, handed
-   to a Workflow.
-
-The efficiency governor, escalation triggers, delegation-prompt contract, model routing, the
-full decision tree, and the claude.ai degradation path live in `references/orchestration.md`.
-The full catalog of 13 structures (purpose, activate-when, roles, cost, output lift) lives in
-`references/org-structures.md`. Load them when you escalate beyond Pair.
-
-## Hold the line
-
-Violating the letter of the efficiency rules is violating their spirit. Common failure modes:
-
-| Rationalization | Reality |
+| Tier | Deploys |
 |---|---|
-| "More agents = better quality, so fan out." | Multi-agent multiplies token cost (Anthropic's research system measured ~15x vs. a single chat) and *hurts* on coupled work. Quality comes from the right structure, not the biggest one. |
-| "This is fine, I'll skip the review/verify step." | Unverified work isn't done. The Pair's reviewer + verify gate is the cheapest quality you'll ever buy. Keep it. |
-| "I'll spawn a subagent and it'll figure out the context." | Subagents inherit no memory and no history, only `CLAUDE.md` + your prompt. Vague delegation means duplicate work and gaps. |
-| "Logging a learning is overhead, skip it." | The self-learning loop is the whole point. Five seconds now saves the next session an hour. |
+| **Starter** — beginner / tiny / throwaway | `CLAUDE.md`, sectioned `MEMORY.md`, load-only `SessionStart` hook |
+| **Standard** — real project / comfortable user | Everything Starter deploys, plus `harvest-nudge` `Stop` hook and full delegation contract |
+| **Pro** — advanced / large / high-stakes / team | Everything Standard deploys, plus per-fact `memory/` directory, handoff hook, and council presets |
 
-### Red flags, STOP
-- About to spawn 3+ agents on work that touches the same files? Don't; go Solo or Pair.
-- Delegating without pasting in the relevant MEMORY/ERRORS/LEARNINGS? Stop, inject first.
-- About to claim "done" without running the test/build/verify commands? Not done yet.
-- A structure bigger than Pair with no observable trigger justifying it? Drop a tier.
+Tier is a recommendation the user can override. Run `launchpad upgrade` to add the
+next tier's artifacts non-destructively when a project outgrows its current one.
+
+On claude.ai or the API (no filesystem): skip file writes, apply behaviors in-session,
+offer templates as copy-paste blocks.
+
+---
+
+## The three pillars
+
+**Memory** (`references/memory.md`) — durable project knowledge across sessions,
+compaction, and subagents; hybrid single-file log (Starter) or per-fact `memory/`
+directory (Standard→Pro), with `MEMORY.md` as the thin index.
+
+**Delegation** (`references/delegation.md`) — the 7-point contract (objective, scope,
+context, output format, tool guidance, stop criteria, return-learnings slot) plus
+grounded inheritance rules: general-purpose subagents inherit `CLAUDE.md`; Explore/Plan
+agents are context-blind and require full inline injection; model routing (Haiku for
+mechanical, Sonnet for most work, Opus for hard reasoning).
+
+**Orchestration** (`references/orchestration.md`) — the 4-tier front door: Solo
+(default), Pair (build + independent review + verify), Parallel fan-out (3+ genuinely
+independent angles), Workflow (10+ uniform targets). Escalate one tier only on a fired
+trigger; de-escalate the moment a cheaper structure would finish correctly.
+
+---
+
+## Hooks
+
+Two hooks automate the memory lifecycle (full wiring detail: `references/memory.md`):
+
+- **`load-memory` (SessionStart, all tiers)** — reads `MEMORY.md` and recent `memory/`
+  facts, emits them via `additionalContext`. Memory loads every session, including after
+  `/clear` and compaction, without depending on Claude remembering to read it.
+- **`harvest-nudge` (Stop, Standard+)** — blocks once per session to remind Claude to
+  file any new decision/learning/error before stopping. Never writes to memory itself.
+
+The "load auto, harvest nudge" contract: automation loads reliably; writing is always
+under deliberate control.
+
+---
+
+## Councils (application)
+
+Councils are one application built on the OS — they use the memory pillar for framing
+and findings, and the orchestration pillar for parallel lenses.
+
+- **Decision Council** (`references/council.md`) — adversarial 5-advisor pressure-test
+  for a consequential, hard-to-reverse choice (launch, hire, pivot, architecture,
+  large spend). Convene before you act, not after.
+- **Feasibility Council** (`references/feasibility-council.md`) — 4-lens project-viability
+  review (tech, finance, GTM, marketing) gated by the weakest link. Convene when evaluating
+  whether a whole project or product can actually work before committing resources.
+
+Pro tier wires council presets into `CLAUDE.md`. Standard mentions councils on request.
+Starter hides them unless asked.
+
+---
+
+## When NOT to use
+
+A one-line fix, a quick question, or tightly-coupled edits to a single file: stay solo.
+Spinning up the OS there wastes tokens and slows you down.
+
+---
 
 ## Reference map
 
 | File | What it contains | Load when |
 |---|---|---|
-| `references/orchestration.md` | Efficiency governor, escalation triggers, delegation contract, model routing, degradation | Any work beyond Solo/Pair |
-| `references/org-structures.md` | The 13-structure catalog with cost/quality profiles | Choosing or escalating a structure |
-| `references/self-learning.md` | The inject-and-harvest protocol + file conventions | Delegating, or wiring up memory |
-| `references/council.md` | The 5-advisor decision pressure-test | Before a consequential, hard-to-reverse decision |
-| `references/feasibility-council.md` | The 4-lens project-viability review (tech, finance, GTM, marketing) | Evaluating whether a whole project/product can work before committing resources |
+| `references/provisioning.md` | Provisioning interview, signals, tier table, deploy steps, re-provision/graduation | Starting or upgrading a project |
+| `references/memory.md` | Hybrid memory model, per-fact format, graduation procedure, hook wiring, subagent access | Setting up memory or delegating |
+| `references/delegation.md` | 7-point contract, inheritance rules, model routing, harvest loop | Writing any non-trivial delegation prompt |
+| `references/orchestration.md` | 4-tier front door, efficiency governor, escalation triggers, de-escalation, degradation | Any work beyond Solo/Pair |
+| `references/org-structures.md` | Full 13-structure catalog with cost/quality profiles (Pro appendix) | Choosing or escalating a structure beyond Pair |
+| `references/self-learning.md` | Inject-and-harvest loop detail — routing knowledge through delegations | Delegating, or wiring up agent memory |
+| `references/council.md` | 5-advisor decision pressure-test | Before a consequential, hard-to-reverse decision |
+| `references/feasibility-council.md` | 4-lens project-viability review (tech, finance, GTM, marketing) | Evaluating whether a whole project can work |
