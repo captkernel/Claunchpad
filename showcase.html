@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Launchpad — Project OS for Claude Code</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0f1117; --surface: #181c26; --border: #252a38;
+      --accent: #5b8dee; --text: #e2e8f0; --muted: #8892a4;
+      --starter: #22c55e; --standard: #5b8dee; --pro: #8b5cf6;
+      --radius: 10px; --font: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 15px; line-height: 1.65; }
+    a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+    nav { border-bottom: 1px solid var(--border); padding: 14px 0; }
+    nav .wrap { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+    .nav-brand { font-size: 15px; font-weight: 600; letter-spacing: .02em; color: var(--text); }
+    .nav-brand span { color: var(--accent); }
+    nav ul { list-style: none; display: flex; gap: 20px; flex-wrap: wrap; }
+    nav ul a { color: var(--muted); font-size: 13px; }
+    nav ul a:hover { color: var(--text); text-decoration: none; }
+
+    .hero { padding: 72px 0 60px; text-align: center; }
+    .hero-badge {
+      display: inline-block; background: rgba(91,141,238,.12); border: 1px solid rgba(91,141,238,.3);
+      color: var(--accent); font-size: 12px; font-weight: 600; letter-spacing: .08em;
+      text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 24px;
+    }
+    .hero h1 { font-size: clamp(28px,5vw,46px); font-weight: 700; line-height: 1.15; letter-spacing: -.02em; margin-bottom: 20px; }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero p { max-width: 600px; margin: 0 auto 28px; color: var(--muted); font-size: 16px; line-height: 1.7; }
+    .rule-box {
+      display: inline-block; background: var(--surface); border: 1px solid var(--border);
+      border-left: 3px solid var(--accent); border-radius: var(--radius);
+      padding: 14px 20px; font-size: 14px; color: var(--text); font-style: italic; max-width: 520px;
+    }
+
+    section { padding: 56px 0; border-top: 1px solid var(--border); }
+    .section-label { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    h2 { font-size: clamp(20px,3vw,28px); font-weight: 700; letter-spacing: -.01em; margin-bottom: 12px; }
+    .section-intro { color: var(--muted); max-width: 660px; margin-bottom: 36px; }
+
+    .tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 28px; }
+    .tier-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+    .tier-card.starter { border-top: 3px solid var(--starter); }
+    .tier-card.standard { border-top: 3px solid var(--standard); }
+    .tier-card.pro { border-top: 3px solid var(--pro); }
+    .tier-name { font-size: 16px; font-weight: 700; margin-bottom: 2px; }
+    .tier-name.starter { color: var(--starter); } .tier-name.standard { color: var(--standard); } .tier-name.pro { color: var(--pro); }
+    .tier-when { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
+    .tier-list { list-style: none; font-size: 13px; line-height: 1.7; }
+    .tier-list li::before { content: "— "; color: var(--muted); }
+    .upgrade-note { background: rgba(91,141,238,.07); border: 1px solid rgba(91,141,238,.2); border-radius: var(--radius); padding: 14px 18px; font-size: 13px; color: var(--muted); }
+    .upgrade-note code { background: rgba(91,141,238,.15); color: var(--accent); border-radius: 4px; padding: 1px 6px; font-size: 12px; font-family: "SFMono-Regular", Consolas, monospace; }
+
+    .pillar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .pillar { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+    .pillar-icon { width: 36px; height: 36px; border-radius: 8px; margin-bottom: 14px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .pillar-icon.memory { background: rgba(34,197,94,.12); }
+    .pillar-icon.delegate { background: rgba(91,141,238,.12); }
+    .pillar-icon.orch { background: rgba(139,92,246,.12); }
+    .pillar h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; }
+    .pillar p { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+    .pillar ul { list-style: none; font-size: 13px; }
+    .pillar ul li { padding: 3px 0; color: var(--muted); }
+    .pillar ul li::before { content: "· "; color: var(--accent); }
+
+    .hook-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .hook-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+    .hook-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .hook-tag { font-size: 11px; font-weight: 700; letter-spacing: .06em; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; }
+    .hook-tag.start { background: rgba(34,197,94,.15); color: var(--starter); }
+    .hook-tag.stop { background: rgba(139,92,246,.15); color: var(--pro); }
+    .hook-name { font-size: 14px; font-weight: 700; font-family: "SFMono-Regular", Consolas, monospace; }
+    .hook-card p { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+    .hook-card ul { list-style: none; font-size: 13px; }
+    .hook-card ul li { color: var(--muted); padding: 2px 0; }
+    .hook-card ul li::before { content: "→ "; color: var(--accent); }
+    .hook-contract { margin-top: 20px; background: rgba(91,141,238,.07); border: 1px solid rgba(91,141,238,.18); border-radius: var(--radius); padding: 14px 18px; font-size: 13px; color: var(--muted); text-align: center; font-style: italic; }
+
+    .council-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .council-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px; }
+    .council-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .council-card .council-sub { font-size: 12px; color: var(--muted); margin-bottom: 14px; }
+    .council-card p { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+    .advisor-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .advisor-chip { font-size: 11px; font-weight: 600; letter-spacing: .04em; padding: 3px 9px; border-radius: 20px; border: 1px solid var(--border); color: var(--muted); background: rgba(255,255,255,.03); }
+
+    .ladder { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 20px; }
+    .ladder-row { display: grid; grid-template-columns: 140px 1fr; border-bottom: 1px solid var(--border); }
+    .ladder-row:last-child { border-bottom: none; }
+    .ladder-tier { padding: 14px 18px; font-size: 13px; font-weight: 700; background: rgba(255,255,255,.02); display: flex; align-items: center; border-right: 1px solid var(--border); }
+    .ladder-body { padding: 14px 18px; font-size: 13px; color: var(--muted); }
+    .ladder-body strong { color: var(--text); }
+    .cost-note { background: rgba(139,92,246,.07); border: 1px solid rgba(139,92,246,.2); border-radius: var(--radius); padding: 14px 18px; font-size: 13px; color: var(--muted); }
+    .cost-note strong { color: var(--pro); }
+
+    .contract-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+    .contract-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; font-size: 13px; }
+    .contract-num { font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: .06em; margin-bottom: 4px; }
+    .contract-title { font-weight: 700; margin-bottom: 4px; font-size: 13px; }
+    .contract-desc { color: var(--muted); font-size: 12px; line-height: 1.5; }
+
+    .route-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 20px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    .route-table th { background: rgba(255,255,255,.03); padding: 10px 16px; text-align: left; font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border); }
+    .route-table td { padding: 10px 16px; border-bottom: 1px solid var(--border); color: var(--muted); }
+    .route-table tr:last-child td { border-bottom: none; }
+    .route-table td strong { color: var(--text); }
+
+    footer { border-top: 1px solid var(--border); padding: 28px 0; text-align: center; font-size: 12px; color: var(--muted); line-height: 1.8; }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <div class="wrap">
+    <span class="nav-brand"><span>Launchpad</span> — Claude Code Skill</span>
+    <ul>
+      <li><a href="#provisioning">Tiers</a></li>
+      <li><a href="#pillars">Pillars</a></li>
+      <li><a href="#hooks">Hooks</a></li>
+      <li><a href="#orchestration">Orchestration</a></li>
+      <li><a href="#councils">Councils</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-badge">Project OS for Claude Code</div>
+    <h1>The cheapest structure<br>that <em>clears the quality bar</em></h1>
+    <p>
+      Launchpad provisions three pillars — durable Memory, disciplined Delegation,
+      and right-sized Orchestration — once at project start, so you never rebuild
+      them from scratch. Power is spent on purpose; nothing is added that the work
+      hasn't earned.
+    </p>
+    <div class="rule-box">
+      "Pick the cheapest structure that clears the quality bar. Start small. Escalate
+      one tier only when a concrete trigger fires."
+    </div>
+  </div>
+</div>
+
+<!-- Provisioning & Tiers -->
+<section id="provisioning">
+  <div class="wrap">
+    <div class="section-label">Provisioning</div>
+    <h2>Interview once, deploy the right tier</h2>
+    <p class="section-intro">
+      Before writing a single file, Launchpad runs a short interview: it auto-detects
+      expertise signals from the repo (existing <code style="font-size:12px;color:var(--accent)">.claude/</code>
+      directory, git depth, CI config), asks one confirming question
+      (<em>New / Comfortable / Advanced</em>), then probes project shape — size, nature,
+      stakes, collaboration, and agent need. The result is a tier recommendation
+      the user can override.
+    </p>
+
+    <div class="tier-grid">
+      <div class="tier-card starter">
+        <div class="tier-name starter">Starter</div>
+        <div class="tier-when">beginner · tiny · throwaway</div>
+        <ul class="tier-list">
+          <li>CLAUDE.md</li>
+          <li>4-section MEMORY.md (log)</li>
+          <li>SessionStart load-memory hook</li>
+          <li>Solo + one-paragraph Pair note</li>
+          <li>Councils hidden (mention only if asked)</li>
+        </ul>
+      </div>
+
+      <div class="tier-card standard">
+        <div class="tier-name standard">Standard</div>
+        <div class="tier-when">real project · comfortable user</div>
+        <ul class="tier-list">
+          <li>Everything Starter deploys</li>
+          <li>harvest-nudge Stop hook</li>
+          <li>Full 7-point delegation contract</li>
+          <li>Model routing (Haiku / Sonnet / Opus)</li>
+          <li>4-tier orchestration ladder</li>
+          <li>Councils mentioned; loaded on request</li>
+        </ul>
+      </div>
+
+      <div class="tier-card pro">
+        <div class="tier-name pro">Pro</div>
+        <div class="tier-when">advanced · large · high-stakes · team</div>
+        <ul class="tier-list">
+          <li>Everything Standard deploys</li>
+          <li>Per-fact memory/ directory from day 1</li>
+          <li>.launchpad/handoff.md buffer</li>
+          <li>Handoff hook (compact-safe)</li>
+          <li>Full 13-structure org catalog</li>
+          <li>Council presets wired into CLAUDE.md</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="upgrade-note">
+      <strong>Growing out of a tier?</strong> Run <code>launchpad upgrade</code>. It
+      re-profiles the project, identifies which next-tier artifacts are missing, and adds
+      them <strong>additively and non-destructively</strong> — existing memory, CLAUDE.md
+      edits, and hooks are never clobbered. Execution always requires your explicit go-ahead.
+    </div>
+  </div>
+</section>
+
+<!-- Three Pillars -->
+<section id="pillars">
+  <div class="wrap">
+    <div class="section-label">The Three Pillars</div>
+    <h2>Memory · Delegation · Orchestration</h2>
+    <p class="section-intro">
+      Every tier provisions these three pillars in the depth the project actually needs.
+    </p>
+
+    <div class="pillar-grid">
+
+      <!-- Memory -->
+      <div class="pillar">
+        <div class="pillar-icon memory">&#128190;</div>
+        <h3>Memory</h3>
+        <p>Durable project knowledge that survives <code style="font-size:12px">/clear</code>, compaction, and subagent handoffs.</p>
+        <ul>
+          <li><strong>Starter:</strong> single MEMORY.md — Decisions / Learnings / Errors / References sections</li>
+          <li><strong>Graduated:</strong> per-fact memory/ directory; MEMORY.md becomes a thin index</li>
+          <li>Fact files carry frontmatter (name, description, type, date) and wikilinks</li>
+          <li>load-memory hook injects both shapes via additionalContext each session</li>
+          <li>General-purpose subagents inherit via CLAUDE.md; Explore/Plan need explicit injection</li>
+        </ul>
+      </div>
+
+      <!-- Delegation -->
+      <div class="pillar">
+        <div class="pillar-icon delegate">&#128203;</div>
+        <h3>Delegation</h3>
+        <p>Vague delegation is the top cause of duplicated work and gaps. The 7-point contract removes ambiguity.</p>
+        <ul>
+          <li>All seven points must appear in every non-trivial delegation prompt</li>
+          <li>General-purpose subagents inherit CLAUDE.md — don't re-explain conventions</li>
+          <li>Explore/Plan agents skip CLAUDE.md — inject all constraints explicitly</li>
+          <li>No subagent inherits parent conversation or memory stores</li>
+          <li>Nesting bounded: ~5 levels deep loses the Agent tool</li>
+          <li>Return-learnings slot feeds findings back into project memory</li>
+        </ul>
+      </div>
+
+      <!-- Orchestration -->
+      <div class="pillar">
+        <div class="pillar-icon orch">&#128200;</div>
+        <h3>Orchestration</h3>
+        <p>Solo → Pair → Parallel fan-out → Workflow. Escalate one tier only on a concrete trigger.</p>
+        <ul>
+          <li>~15x token cost for large multi-agent systems (Anthropic research)</li>
+          <li>Helps on breadth-first, independent, parallelizable work</li>
+          <li>Hurts on tightly-coupled work with shared state or same-file edits</li>
+          <li>Efficiency governor: no fired trigger = no escalation</li>
+          <li>Synthesis: cross-check results, attribute sources, take a position</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Delegation Contract Detail -->
+    <div style="margin-top:32px">
+      <div class="section-label" style="margin-bottom:14px">7-Point Delegation Contract</div>
+      <div class="contract-grid">
+        <div class="contract-item"><div class="contract-num">01</div><div class="contract-title">Objective</div><div class="contract-desc">One concrete outcome in one sentence — the thing that must be true when the agent stops.</div></div>
+        <div class="contract-item"><div class="contract-num">02</div><div class="contract-title">Scope</div><div class="contract-desc">What's in, what's out, what not to touch. Prevents scope creep and unauthorized file edits.</div></div>
+        <div class="contract-item"><div class="contract-num">03</div><div class="contract-title">Context</div><div class="contract-desc">Relevant memory facts pasted directly, plus file paths and error text. The agent cannot read memory on its own.</div></div>
+        <div class="contract-item"><div class="contract-num">04</div><div class="contract-title">Output Format</div><div class="contract-desc">Exactly what to return — JSON, bullet list, diff, verdict — so the result composes without rework.</div></div>
+        <div class="contract-item"><div class="contract-num">05</div><div class="contract-title">Tool Guidance</div><div class="contract-desc">Which tools to prefer or avoid; fire independent calls in parallel when sub-tasks don't share state.</div></div>
+        <div class="contract-item"><div class="contract-num">06</div><div class="contract-title">Stop Criteria</div><div class="contract-desc">When the task is done. Prevents runaway work and unnecessary continuation past the objective.</div></div>
+        <div class="contract-item"><div class="contract-num">07</div><div class="contract-title">Return-Learnings Slot</div><div class="contract-desc">Required block: FAILURE / CAUSE / FIX and LEARNING items that feed back into memory after the run.</div></div>
+      </div>
+    </div>
+
+    <!-- Model routing -->
+    <table class="route-table">
+      <thead>
+        <tr>
+          <th>Role</th>
+          <th>Model</th>
+          <th>Characteristic work</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Mechanical / high-volume</td>
+          <td><strong>Haiku</strong></td>
+          <td>Formatting, log triage, simple lookups, classification</td>
+        </tr>
+        <tr>
+          <td>Implementation / search / review</td>
+          <td><strong>Sonnet</strong></td>
+          <td>Writing code, searching a codebase, reviewing a change</td>
+        </tr>
+        <tr>
+          <td>Hard reasoning / synthesis / judging</td>
+          <td><strong>Opus</strong></td>
+          <td>Architecture decisions, combining many results, adversarial review, hardest bugs</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</section>
+
+<!-- Hooks -->
+<section id="hooks">
+  <div class="wrap">
+    <div class="section-label">Hook Layer</div>
+    <h2>Automate loading; nudge harvesting</h2>
+    <p class="section-intro">
+      Two POSIX sh hooks wire the memory lifecycle. They live in
+      <code style="font-size:12px">.claude/hooks/</code> and are registered in
+      <code style="font-size:12px">.claude/settings.json</code> at provisioning time.
+    </p>
+
+    <div class="hook-grid">
+      <div class="hook-card">
+        <div class="hook-header">
+          <span class="hook-tag start">SessionStart</span>
+          <span class="hook-name">load-memory</span>
+        </div>
+        <p>
+          Runs at the start of every session — including after <code style="font-size:12px">/clear</code>
+          and after compaction (matched via <code style="font-size:12px">startup|resume|clear|compact</code>).
+        </p>
+        <ul>
+          <li>Reads MEMORY.md if it exists; emits it as additionalContext</li>
+          <li>Reads up to 8 most-recently-modified memory/*.md files (graduated projects)</li>
+          <li>On compact source: reloads .launchpad/handoff.md buffer (Pro tier)</li>
+          <li>Clears the per-session harvest-nudge flag so nudge fires again</li>
+          <li>Exits silently if nothing to load — no noise on empty projects</li>
+        </ul>
+        <p style="margin-top:10px">
+          Deployed at all three tiers. Memory loads without depending on Claude
+          remembering to read it.
+        </p>
+      </div>
+
+      <div class="hook-card">
+        <div class="hook-header">
+          <span class="hook-tag stop">Stop</span>
+          <span class="hook-name">harvest-nudge</span>
+        </div>
+        <p>
+          Runs at the end of every turn (Standard and Pro tiers). Fires once per
+          session, then steps aside.
+        </p>
+        <ul>
+          <li>Checks for .launchpad/.harvest-nudged flag; if present, exits silently</li>
+          <li>If absent: creates the flag, then blocks the stop with a reminder</li>
+          <li>Reminder: "file any durable decision, resolved failure, or technique — or say there's nothing worth keeping"</li>
+          <li><strong>Never writes to memory itself</strong> — always a deliberate human choice</li>
+          <li>Flag is cleared by load-memory at the next session start</li>
+        </ul>
+        <p style="margin-top:10px">
+          Backs up any forgotten harvest at session end. Writing is never automated.
+        </p>
+      </div>
+    </div>
+
+    <div class="hook-contract">
+      "Load auto, harvest nudge" — automation loads memory reliably; writing is always
+      under deliberate control.
+    </div>
+  </div>
+</section>
+
+<!-- Orchestration Ladder -->
+<section id="orchestration">
+  <div class="wrap">
+    <div class="section-label">Orchestration</div>
+    <h2>The 4-tier front door</h2>
+    <p class="section-intro">
+      Start here every time. Escalate one tier only when a concrete trigger fires.
+      De-escalate the moment a cheaper structure would finish correctly.
+    </p>
+
+    <div class="ladder">
+      <div class="ladder-row">
+        <div class="ladder-tier">Tier 1 — Solo</div>
+        <div class="ladder-body">
+          <strong>Default.</strong> Task is trivial, sequential, or tightly-coupled to the same file.
+          Parallelism would cause conflicts or add no speed. Most tasks live here.
+        </div>
+      </div>
+      <div class="ladder-row">
+        <div class="ladder-tier">Tier 2 — Pair</div>
+        <div class="ladder-body">
+          <strong>Default for real changes.</strong> One agent builds; a separate fresh-context agent
+          reviews; orchestrator verifies and merges. Trigger: the change touches shared logic or
+          warrants a second pair of eyes.
+        </div>
+      </div>
+      <div class="ladder-row">
+        <div class="ladder-tier">Tier 3 — Parallel fan-out</div>
+        <div class="ladder-body">
+          <strong>3+ genuinely independent angles</strong> — subtasks that don't share state and
+          won't edit the same files (research pod, review board, best-of-N). Do not use if agents
+          would touch the same files; last write wins.
+        </div>
+      </div>
+      <div class="ladder-row">
+        <div class="ladder-tier">Tier 4 — Workflow</div>
+        <div class="ladder-body">
+          <strong>10+ uniform targets</strong> (files to migrate, endpoints to audit) or a
+          multi-module program where hand-spawning every agent is impractical. Hand the work
+          to a deterministic script that orchestrates many agents.
+        </div>
+      </div>
+    </div>
+
+    <div class="cost-note">
+      <strong>The ~15x cost reality.</strong> Anthropic's multi-agent research measured roughly
+      15x the tokens of a single chat for large systems. Multi-agent helps on breadth-first,
+      independent, parallelizable work. It hurts on tightly-coupled work with many dependencies.
+      The question is never "how many agents?" — it's "what is the smallest formation that
+      produces a correct, verified result?"
+    </div>
+  </div>
+</section>
+
+<!-- Councils -->
+<section id="councils">
+  <div class="wrap">
+    <div class="section-label">Councils — Application Layer</div>
+    <h2>Structured pressure-tests on top of the OS</h2>
+    <p class="section-intro">
+      Councils are one application built on Launchpad — they use the memory pillar for framing
+      and findings, and the orchestration pillar for parallel lenses. Pro tier wires council
+      presets into CLAUDE.md; Standard mentions them on request; Starter hides them unless asked.
+    </p>
+
+    <div class="council-grid">
+
+      <div class="council-card">
+        <h3>Decision Council</h3>
+        <div class="council-sub">Consequential, hard-to-reverse choices</div>
+        <p>
+          Claude is agreeable by default — ask if an idea is good and it argues yes; ask if
+          it's bad and it argues that too. The Decision Council forces structured disagreement
+          across five adversarial advisors and ends with the truth you're most likely resisting.
+        </p>
+        <p>
+          Convene before any consequential, hard-to-reverse commitment: launching something
+          public, hiring/firing, pivoting or killing a project, large or recurring spend,
+          irreversible architecture choice, signing a contract. Not for low-stakes or
+          reversible choices — deliberately heavy.
+        </p>
+        <p>
+          <strong>Procedure:</strong> Frame → Five testimonies (pure agreement forbidden) →
+          Anonymous peer review (advisors critique each other without knowing who said what) →
+          Chair's verdict: Proceed / Proceed with conditions / Rework first / Don't — plus
+          "The hardest truth" the user most needs to hear.
+        </p>
+        <div class="advisor-row">
+          <span class="advisor-chip">Contrarian</span>
+          <span class="advisor-chip">First-Principles Analyst</span>
+          <span class="advisor-chip">Optimist/Expansionist</span>
+          <span class="advisor-chip">Outsider</span>
+          <span class="advisor-chip">Executor</span>
+        </div>
+      </div>
+
+      <div class="council-card">
+        <h3>Feasibility Council</h3>
+        <div class="council-sub">Whole-project viability review</div>
+        <p>
+          Where the Decision Council pressure-tests a single irreversible choice with
+          adversarial roles, the Feasibility Council evaluates whether an entire initiative
+          can actually work — across the functional dimensions that decide its fate.
+        </p>
+        <p>
+          Convene when committing real resources to a project: greenlighting a new product,
+          evaluating a venture for go/no-go, or a health check on something in flight.
+          Not for a single reversible call or a project still at the sentence stage.
+        </p>
+        <p>
+          <strong>Procedure:</strong> Frame → Four lens assessments (Green/Amber/Red per
+          dimension) → Cross-examination (where do the plans contradict each other?) →
+          Chair's verdict gated by the weakest link — plus "The thing that has to be true"
+          across all four lenses.
+        </p>
+        <div class="advisor-row">
+          <span class="advisor-chip">Technology/Build</span>
+          <span class="advisor-chip">Finance/Economics</span>
+          <span class="advisor-chip">Go-to-Market</span>
+          <span class="advisor-chip">Marketing/Positioning</span>
+        </div>
+        <p style="margin-top:14px; font-size:12px; color:var(--muted)">
+          Feasibility is set by the worst dimension, not the average. Green on three lenses
+          but Red on distribution is a Red project.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Self-contained showcase for the <strong>Launchpad</strong> Claude Code skill.</p>
+    <p style="margin-top:4px">No external dependencies. All content sourced from the real skill files. Offline-safe.</p>
+  </div>
+</footer>
+
+</body>
+</html>
