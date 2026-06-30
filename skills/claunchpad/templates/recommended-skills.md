@@ -1,6 +1,6 @@
 # Recommended skills (manifest)
 
-The curated set Launchpad offers to install at bootstrap. **Editable** — change this list to
+The curated set Claunchpad offers to install at bootstrap. **Editable** — change this list to
 change what's offered; the bootstrap flow (`references/provisioning.md`) reads it, it has no
 hard-coded skill names. Each entry carries its own real install command(s); the three below use
 three different mechanisms, so do not assume a uniform installer.

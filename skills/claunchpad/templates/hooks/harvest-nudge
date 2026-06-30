@@ -4,14 +4,14 @@
 set -u
 
 ROOT="${CLAUDE_PROJECT_DIR:-.}"
-FLAG="$ROOT/.launchpad/.harvest-nudged"
+FLAG="$ROOT/.claunchpad/.harvest-nudged"
 
 # Already nudged this session -> allow the stop silently.
 if [ -f "$FLAG" ]; then
   exit 0
 fi
 
-mkdir -p "$ROOT/.launchpad" 2>/dev/null || true
+mkdir -p "$ROOT/.claunchpad" 2>/dev/null || true
 : > "$FLAG" 2>/dev/null || true
 
 cat <<'JSON'

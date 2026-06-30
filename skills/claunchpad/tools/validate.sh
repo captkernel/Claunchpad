@@ -1,8 +1,8 @@
 #!/bin/sh
-# Launchpad structural + behavioral test harness.
+# Claunchpad structural + behavioral test harness.
 # Usage: validate.sh [skill|refs|memory|hooks|all]
 set -u
-HERE="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"   # -> skills/launchpad
+HERE="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"   # -> skills/claunchpad
 GROUP="${1:-all}"
 FAILS=0
 
@@ -73,7 +73,7 @@ check_memory() {
   for k in "name:" "description:" "metadata:" "type:"; do
     assert_contains templates/memory-fact.md "$k" "memory-fact.md frontmatter has: $k"
   done
-  assert_contains templates/CLAUDE.md "LAUNCHPAD-MEMORY-POINTER" "CLAUDE.md has subagent memory-pointer block"
+  assert_contains templates/CLAUDE.md "CLAUNCHPAD-MEMORY-POINTER" "CLAUDE.md has subagent memory-pointer block"
   assert_absent templates/ERRORS.md
   assert_absent templates/LEARNINGS.md
 }

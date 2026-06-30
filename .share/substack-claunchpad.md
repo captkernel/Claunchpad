@@ -72,7 +72,7 @@ Claunchpad is a Claude Code skill that bootstraps a project "operating system": 
 ### The three structural ideas (the article's spine — features are downstream)
 1. **Memory as infrastructure, not a habit.** Hooks reload memory every session, including post-compaction. The user can't forget because remembering isn't a human task anymore. Pull-quote: *"The notes a hook takes are as good as the hook."*
 2. **Spend agents on purpose.** Restraint is the default; the "more agents = better" instinct is wrong (~15× token cost; hurts coupled work). The 4-tier ladder (Solo → Pair → parallel fan-out → Workflow). Pull-quote: *"Power you spend on purpose, never by reflex."*
-3. **Provision to the person.** Tiered deploy (Starter/Standard/Pro) read from user expertise + project shape; non-destructive `launchpad upgrade`. Beginners get 2 files; pros get the whole machine.
+3. **Provision to the person.** Tiered deploy (Starter/Standard/Pro) read from user expertise + project shape; non-destructive `claunchpad upgrade`. Beginners get 2 files; pros get the whole machine.
 
 ### The dogfooding beat (most credible detail — like the Skills Curator "scanner flagged itself" story)
 Built via subagent-driven development: fresh implementer per task → independent spec+quality review → automated test gate. A final whole-branch review caught two cross-file bugs the per-task reviews structurally could not see: (1) a "handoff hook" the docs advertised but no code/instruction actually wrote the buffer for; (2) a newly-authored reference file routing harvested learnings into two memory stores that the *same* change had just deleted. Both fixed pre-merge.
@@ -80,7 +80,7 @@ Built via subagent-driven development: fresh implementer per task → independen
 ### Hard facts
 | | |
 |---|---|
-| **Product** | Claunchpad (a "project OS" for Claude Code; internal skill name: `launchpad`) |
+| **Product** | Claunchpad (a "project OS" for Claude Code; internal skill name: `claunchpad`) |
 | **Repo** | https://github.com/captkernel/Claunchpad |
 | **License** | MIT |
 | **Author** | @captkernel (Karan Parmar) |

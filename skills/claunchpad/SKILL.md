@@ -1,5 +1,5 @@
 ---
-name: launchpad
+name: claunchpad
 description: >-
   Sets a project up so Claude works at its best: profiles the user and project,
   provisions tiered infrastructure (memory that survives /clear and compaction,
@@ -8,15 +8,15 @@ description: >-
   initializing a project, configuring a repo for Claude, planning or executing
   substantial multi-step or multi-file work, or before a consequential,
   hard-to-reverse decision. Trigger phrases include "set up this project",
-  "initialize launchpad", "run this as a team", "orchestrate this",
+  "initialize claunchpad", "run this as a team", "orchestrate this",
   "spin up agents", "review board", "debug task force", "council this",
   "feasibility council", "is this project viable", and
   "pressure-test this decision".
 ---
 
-# Launchpad — project operating system for Claude Code
+# Claunchpad — project operating system for Claude Code
 
-Launchpad is the cheapest structure that clears the quality bar — deployed once at
+Claunchpad is the cheapest structure that clears the quality bar — deployed once at
 project start so you never rebuild it from scratch. It provisions three pillars
 (Memory, Delegation, Orchestration) in the tier the project actually needs, wires
 hooks so memory loads automatically and harvesting is nudged but never forced, and
@@ -37,9 +37,9 @@ tier, and deploys exactly that tier's artifacts — nothing more.
 |---|---|
 | **Starter** — beginner / tiny / throwaway | `CLAUDE.md`, sectioned `MEMORY.md`, load-only `SessionStart` hook |
 | **Standard** — real project / comfortable user | Everything Starter deploys, plus `harvest-nudge` `Stop` hook and full delegation contract |
-| **Pro** — advanced / large / high-stakes / team | Everything Standard deploys, plus per-fact `memory/` directory, Claude-maintained `.launchpad/handoff.md` buffer (reloaded by `load-memory` on compact), and council presets |
+| **Pro** — advanced / large / high-stakes / team | Everything Standard deploys, plus per-fact `memory/` directory, Claude-maintained `.claunchpad/handoff.md` buffer (reloaded by `load-memory` on compact), and council presets |
 
-Tier is a recommendation the user can override. Run `launchpad upgrade` to add the
+Tier is a recommendation the user can override. Run `claunchpad upgrade` to add the
 next tier's artifacts non-destructively when a project outgrows its current one.
 
 After the tier is deployed, offer to install a curated set of high-value plugins/skills

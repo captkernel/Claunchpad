@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Launchpad — Project OS for Claude Code</title>
+  <title>Claunchpad — Project OS for Claude Code</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -119,7 +119,7 @@
 <!-- Nav -->
 <nav>
   <div class="wrap">
-    <span class="nav-brand"><span>Launchpad</span> — Claude Code Skill</span>
+    <span class="nav-brand"><span>Claunchpad</span> — Claude Code Skill</span>
     <ul>
       <li><a href="#provisioning">Tiers</a></li>
       <li><a href="#pillars">Pillars</a></li>
@@ -137,7 +137,7 @@
     <div class="hero-badge">Project OS for Claude Code</div>
     <h1>The cheapest structure<br>that <em>clears the quality bar</em></h1>
     <p>
-      Launchpad provisions three pillars — durable Memory, disciplined Delegation,
+      Claunchpad provisions three pillars — durable Memory, disciplined Delegation,
       and right-sized Orchestration — once at project start, so you never rebuild
       them from scratch. Power is spent on purpose; nothing is added that the work
       hasn't earned.
@@ -155,7 +155,7 @@
     <div class="section-label">Provisioning</div>
     <h2>Interview once, deploy the right tier</h2>
     <p class="section-intro">
-      Before writing a single file, Launchpad runs a short interview: it auto-detects
+      Before writing a single file, Claunchpad runs a short interview: it auto-detects
       expertise signals from the repo (existing <code style="font-size:12px;color:var(--accent)">.claude/</code>
       directory, git depth, CI config), asks one confirming question
       (<em>New / Comfortable / Advanced</em>), then probes project shape — size, nature,
@@ -196,7 +196,7 @@
         <ul class="tier-list">
           <li>Everything Standard deploys</li>
           <li>Per-fact memory/ directory from day 1</li>
-          <li>.launchpad/handoff.md buffer (reloaded by load-memory on compact)</li>
+          <li>.claunchpad/handoff.md buffer (reloaded by load-memory on compact)</li>
           <li>Full 13-structure org catalog</li>
           <li>Council presets wired into CLAUDE.md</li>
         </ul>
@@ -204,7 +204,7 @@
     </div>
 
     <div class="upgrade-note">
-      <strong>Growing out of a tier?</strong> Run <code>launchpad upgrade</code>. It
+      <strong>Growing out of a tier?</strong> Run <code>claunchpad upgrade</code>. It
       re-profiles the project, identifies which next-tier artifacts are missing, and adds
       them <strong>additively and non-destructively</strong> — existing memory, CLAUDE.md
       edits, and hooks are never clobbered. Execution always requires your explicit go-ahead.
@@ -337,7 +337,7 @@
         <ul>
           <li>Reads MEMORY.md if it exists; emits it as additionalContext</li>
           <li>Reads up to 8 most-recently-modified memory/*.md files (graduated projects)</li>
-          <li>On compact source: reloads .launchpad/handoff.md buffer (Pro tier)</li>
+          <li>On compact source: reloads .claunchpad/handoff.md buffer (Pro tier)</li>
           <li>Clears the per-session harvest-nudge flag so nudge fires again</li>
           <li>Exits silently if nothing to load — no noise on empty projects</li>
         </ul>
@@ -357,7 +357,7 @@
           session, then steps aside.
         </p>
         <ul>
-          <li>Checks for .launchpad/.harvest-nudged flag; if present, exits silently</li>
+          <li>Checks for .claunchpad/.harvest-nudged flag; if present, exits silently</li>
           <li>If absent: creates the flag, then blocks the stop with a reminder</li>
           <li>Reminder: "file any durable decision, resolved failure, or technique — or say there's nothing worth keeping"</li>
           <li><strong>Never writes to memory itself</strong> — always a deliberate human choice</li>
@@ -436,7 +436,7 @@
     <div class="section-label">Councils — Application Layer</div>
     <h2>Structured pressure-tests on top of the OS</h2>
     <p class="section-intro">
-      Councils are one application built on Launchpad — they use the memory pillar for framing
+      Councils are one application built on Claunchpad — they use the memory pillar for framing
       and findings, and the orchestration pillar for parallel lenses. Pro tier wires council
       presets into CLAUDE.md; Standard mentions them on request; Starter hides them unless asked.
     </p>
@@ -512,7 +512,7 @@
     <div class="section-label">Recommended Skills — Bootstrap Offer</div>
     <h2>Offer to install the ecosystem, not just your scaffold</h2>
     <p class="section-intro">
-      After deploying your tier, Launchpad offers a curated set of high-value Claude Code
+      After deploying your tier, Claunchpad offers a curated set of high-value Claude Code
       plugins/skills: <strong>[Y] install all · [c] customise · [s] skip</strong>. On Claude Code
       it runs each skill's own install command (they differ — there is no uniform installer); on
       claude.ai, where there is no plugin system, it prints a manual list instead. The set lives
@@ -564,7 +564,7 @@
 
     <p style="margin-top:14px; font-size:12px; color:var(--muted)">
       Install is never fully silent — each skill skips gracefully if its prerequisite is missing,
-      and Launchpad always tells you the one human step left: <strong>restart Claude Code</strong>
+      and Claunchpad always tells you the one human step left: <strong>restart Claude Code</strong>
       (or run <code>/reload-plugins</code>) to activate.
     </p>
   </div>
@@ -572,7 +572,7 @@
 
 <footer>
   <div class="wrap">
-    <p>Self-contained showcase for the <strong>Launchpad</strong> Claude Code skill — repo <strong>captkernel/Claunchpad</strong>.</p>
+    <p>Self-contained showcase for the <strong>Claunchpad</strong> Claude Code skill — repo <strong>captkernel/Claunchpad</strong>.</p>
     <p style="margin-top:4px">No external dependencies. All content sourced from the real skill files. Offline-safe.</p>
   </div>
 </footer>

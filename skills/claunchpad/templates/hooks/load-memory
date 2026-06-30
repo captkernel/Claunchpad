@@ -6,8 +6,8 @@ set -u
 ROOT="${CLAUDE_PROJECT_DIR:-.}"
 MEM="$ROOT/MEMORY.md"
 MEMDIR="$ROOT/memory"
-HANDOFF="$ROOT/.launchpad/handoff.md"
-NUDGE_FLAG="$ROOT/.launchpad/.harvest-nudged"
+HANDOFF="$ROOT/.claunchpad/handoff.md"
+NUDGE_FLAG="$ROOT/.claunchpad/.harvest-nudged"
 
 input="$(cat 2>/dev/null || true)"
 source="$(printf '%s' "$input" | sed -n 's/.*"source"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p')"
@@ -36,7 +36,7 @@ fi
 if [ "$source" = "compact" ] && [ -f "$HANDOFF" ]; then
   content="$content
 
-=== Session handoff buffer (.launchpad/handoff.md) ===
+=== Session handoff buffer (.claunchpad/handoff.md) ===
 $(cat "$HANDOFF")"
 fi
 

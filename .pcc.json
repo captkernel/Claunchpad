@@ -1,12 +1,13 @@
 {
     "displayName":  "Launchpad (working name)",
     "category":  "Toolkits (Public)",
-    "status":  "Building",
+    "status":  "In Progress",
     "priority":  "High",
-    "summary":  "One importable skill that sets a project up for Claude (CLAUDE.md + self-learning memory + voice) and runs an efficiency-gated agent-team orchestration playbook with a 13-structure org catalog and a 5-advisor decision council. Name not yet locked.",
+    "summary":  "One importable skill that sets a project up for Claude (CLAUDE.md + self-learning memory + voice) and runs an efficiency-gated agent-team orchestration playbook (13-structure org catalog) plus TWO councils: a 5-advisor decision council and a project-viability feasibility council. Feasibility council v1 shipped; evidence-grounded v2 redesign in progress (research done). Name not yet locked.",
     "nextSteps":  [
-                      "Lock final name (verify originality shortlist), find-replace working name 'launchpad'",
-                      "Run RED-GREEN-REFACTOR baseline test with a fresh subagent",
-                      "Publish: git remote + push; build claude.ai dist zip"
+                      "Build feasibility-council v2: re-cut lenses on the risk axis (desirability/market, viability/economics, build, timing/why-now, legal+operational, team) + add pre-mortem & independent-before-shared scoring (see memory: project-feasibility-council-redesign)",
+                      "Ask Karan: 4 tight vs 6 full lenses; keep Cagan consumer-vs-business distinction",
+                      "Lock final name (top pick Kestrava), find-replace working name 'launchpad'",
+                      "Rebuild stale claude.ai dist zip (missing feasibility-council.md); git remote + push"
                   ]
 }

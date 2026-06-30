@@ -104,7 +104,7 @@ most common delegation mistake.
 ### General-purpose subagents (most delegations)
 
 A general-purpose subagent inherits:
-- The project `CLAUDE.md` (including the `LAUNCHPAD-MEMORY-POINTER` block and working
+- The project `CLAUDE.md` (including the `CLAUNCHPAD-MEMORY-POINTER` block and working
   rules)
 - Your spawn prompt
 - A git-status snapshot
@@ -123,7 +123,7 @@ because they are context-blind, and the standing memory pointer never reaches th
 This means:
 - They do not know the project's stack, conventions, or working rules.
 - They do not know what already failed (they will happily repeat it).
-- They do not see the `LAUNCHPAD-MEMORY-POINTER` instruction to read memory files.
+- They do not see the `CLAUNCHPAD-MEMORY-POINTER` instruction to read memory files.
 
 **Rule:** if any project constraint, known error, or architectural decision must hold
 inside an Explore or Plan agent, restate it in the spawn prompt. Never assume it

@@ -38,7 +38,7 @@ Deletes/overwrites of files you didn't create, schema changes, migrations, deplo
 money, sending anything to external services, or anything else irreversible.
 
 ## Project memory (read at session start, update before session end)
-<!-- LAUNCHPAD-MEMORY-POINTER: this block is inherited by general-purpose subagents. Keep it. -->
+<!-- CLAUNCHPAD-MEMORY-POINTER: this block is inherited by general-purpose subagents. Keep it. -->
 This project keeps a durable, shared memory. **Read `MEMORY.md` first thing each session**
 (and the `memory/` directory if it exists); verify any named file/path/flag still exists
 before trusting it. **Append** to the right place the moment you make a non-obvious decision,
@@ -49,10 +49,10 @@ If you need more history, **read `MEMORY.md` (and `memory/`) yourself** before s
 not inherit the parent's conversation or memory, only this file. (Explore/Plan agents do not even
 get this file; they must be given everything in their prompt.)
 
-**Handoff buffer (Pro tier):** if `.launchpad/handoff.md` exists, keep it updated with current task state (what's in progress, next step) before long sessions or context compaction — `load-memory` reloads it on a `compact` source so context survives `/clear` and compaction.
+**Handoff buffer (Pro tier):** if `.claunchpad/handoff.md` exists, keep it updated with current task state (what's in progress, next step) before long sessions or context compaction — `load-memory` reloads it on a `compact` source so context survives `/clear` and compaction.
 
 ## Orchestration (work as a team only when it pays off)
-For substantial multi-step, multi-file, or high-stakes work, invoke the **launchpad** skill and
+For substantial multi-step, multi-file, or high-stakes work, invoke the **claunchpad** skill and
 use its efficiency-gated ladder: Solo → Pair → parallel fan-out → Workflow. Default to the
 smallest structure that clears the bar; escalate only on a real trigger. When you delegate,
 inject the critical memory facts into the subagent's prompt (it can't read this project's

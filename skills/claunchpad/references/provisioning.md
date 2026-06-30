@@ -1,9 +1,9 @@
 # Provisioning reference
 
-How Launchpad profiles a user and project, selects a tier, deploys the right
+How Claunchpad profiles a user and project, selects a tier, deploys the right
 infrastructure, and grows that infrastructure when the project outgrows its tier.
 Read this when you need to understand what gets written, why a tier was chosen, or
-how to run `launchpad upgrade` non-destructively.
+how to run `claunchpad upgrade` non-destructively.
 
 ## Contents
 
@@ -12,7 +12,7 @@ how to run `launchpad upgrade` non-destructively.
 - Deploy steps per tier — which files and hooks each writes
 - Tier is a recommendation, not a constraint
 - Recommended skills — offer to install high-value plugins/skills
-- Re-provisioning (`launchpad upgrade`)
+- Re-provisioning (`claunchpad upgrade`)
 - claude.ai / API path — skip writes, copy-paste, in-session
 
 ---
@@ -100,14 +100,14 @@ Everything Standard deploys, plus:
 | Artifact | Notes |
 |---|---|
 | `memory/` directory | Created from day one; `MEMORY.md` is the thin index, not the facts |
-| `.launchpad/handoff.md` | Claude-maintained session-handoff buffer (see below); reloaded by `load-memory` on `compact` |
-| Council presets | Launchpad council configurations wired into `CLAUDE.md` |
+| `.claunchpad/handoff.md` | Claude-maintained session-handoff buffer (see below); reloaded by `load-memory` on `compact` |
+| Council presets | Claunchpad council configurations wired into `CLAUDE.md` |
 
 Pro ships the graduated `memory/` shape immediately — no migration needed later.
 The `load-memory` hook reads both `MEMORY.md` and up to eight of the most-recently-
 modified `memory/*.md` files, so the hook works identically at all three tiers.
 
-**The `.launchpad/handoff.md` buffer** is a Claude-maintained file (not a separate hook script).
+**The `.claunchpad/handoff.md` buffer** is a Claude-maintained file (not a separate hook script).
 `CLAUDE.md` instructs Claude to keep it updated with current task state before long sessions or
 context compaction. `load-memory` reloads it on a `compact` source so context survives
 compaction. There is no separate "handoff hook" — only `load-memory` and `harvest-nudge` are
@@ -125,9 +125,9 @@ user just described.
 
 ---
 
-## Re-provisioning (`launchpad upgrade`)
+## Re-provisioning (`claunchpad upgrade`)
 
-Run `launchpad upgrade` when a project has outgrown its current tier.
+Run `claunchpad upgrade` when a project has outgrown its current tier.
 
 **What upgrade does:**
 
@@ -145,13 +145,13 @@ Run `launchpad upgrade` when a project has outgrown its current tier.
 **Standard → Pro** adds:
 - Migrates `MEMORY.md` → `memory/` per-fact directory (see `references/memory.md` for
   the full graduation procedure — no entries are dropped)
-- Creates `.launchpad/handoff.md` buffer
+- Creates `.claunchpad/handoff.md` buffer
 - Wires council presets
 
 **Proactive suggestion.** Claude may proactively suggest upgrade when it detects the
 graduation signal mid-session (the `MEMORY.md` index is too long to scan; the user is
 regularly running three or more parallel agents). Execution always requires the user's
-explicit go-ahead — `launchpad upgrade` never runs automatically.
+explicit go-ahead — `claunchpad upgrade` never runs automatically.
 
 ---
 

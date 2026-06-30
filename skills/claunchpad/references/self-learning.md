@@ -20,7 +20,7 @@ inject-and-harvest loop that routes knowledge through delegations.
 
 ## The hybrid memory model
 
-Launchpad keeps two compatible memory shapes; the right one is chosen at provisioning time.
+Claunchpad keeps two compatible memory shapes; the right one is chosen at provisioning time.
 
 **Starter (single-file log).** A single `MEMORY.md` with four sections:
 

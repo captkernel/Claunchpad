@@ -1,6 +1,6 @@
 # Memory pillar reference
 
-How Launchpad captures, stores, retrieves, and routes project memory across sessions,
+How Claunchpad captures, stores, retrieves, and routes project memory across sessions,
 subagents, and environments. This reference covers the full system; read it when you
 need to understand why a choice was made, how hooks behave, or how to grow the memory
 structure without destroying what exists.
@@ -19,7 +19,7 @@ structure without destroying what exists.
 
 ## Hybrid model
 
-Launchpad keeps two compatible memory shapes and selects one at provisioning time.
+Claunchpad keeps two compatible memory shapes and selects one at provisioning time.
 
 **Starter (single-file log).** A single `MEMORY.md` with four sections:
 
@@ -154,16 +154,16 @@ sessions that begin after `/clear` and after compaction.
 1. Reads the JSON input from stdin and extracts the `source` field (the event subtype:
    `startup`, `resume`, `clear`, `compact`, or empty).
 2. Resets the per-session harvest-nudge flag: on `startup`, `clear`, `resume`, or an
-   empty source, it removes `.launchpad/.harvest-nudged` so the harvest-nudge hook
+   empty source, it removes `.claunchpad/.harvest-nudged` so the harvest-nudge hook
    will fire again this session.
 3. Reads `MEMORY.md` if it exists and adds it to the context buffer under the heading
    `=== Project memory index (MEMORY.md) ===`.
 4. If a `memory/` directory exists, reads up to eight of the most recently modified
    `.md` files in that directory (sorted by modification time, newest first) and appends
    each under `=== memory/<filename> ===`.
-5. On a `compact` source, if `.launchpad/handoff.md` exists, appends it under
-   `=== Session handoff buffer (.launchpad/handoff.md) ===`. This reloads the
-   `.launchpad/handoff.md` buffer — a Claude-maintained file (Pro tier) that Claude
+5. On a `compact` source, if `.claunchpad/handoff.md` exists, appends it under
+   `=== Session handoff buffer (.claunchpad/handoff.md) ===`. This reloads the
+   `.claunchpad/handoff.md` buffer — a Claude-maintained file (Pro tier) that Claude
    keeps updated with current task state before long sessions or context compaction.
    No separate handoff hook exists; only `load-memory` and `harvest-nudge` are
    registered as hooks. Context survives compaction because `load-memory` reloads the
@@ -184,10 +184,10 @@ Registered as a `Stop` hook (Standard and Pro tiers). Runs at the end of every t
 
 **What it does:**
 
-1. Checks for `.launchpad/.harvest-nudged`. If the flag file exists, the hook exits
+1. Checks for `.claunchpad/.harvest-nudged`. If the flag file exists, the hook exits
    with code 0 — silently, allowing the stop to proceed.
-2. If the flag does not exist, it creates the directory `.launchpad/` if needed,
-   writes the flag file (`.launchpad/.harvest-nudged`), and emits a `block` decision:
+2. If the flag does not exist, it creates the directory `.claunchpad/` if needed,
+   writes the flag file (`.claunchpad/.harvest-nudged`), and emits a `block` decision:
    ```json
    {"decision":"block","reason":"Before finishing: if this turn produced a durable
    decision, a resolved failure, or a reusable technique, append it to MEMORY.md

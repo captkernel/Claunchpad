@@ -1,6 +1,6 @@
-# launchpad
+# claunchpad
 
-> **Working name, not final.** This project ships under the provisional name `launchpad`
+> **Working name, not final.** This project ships under the provisional name `claunchpad`
 > while the final, originality-checked name is locked. See `RENAME.md`.
 
 One importable skill that makes Claude operate at its best on any project. Drop it in, and
@@ -14,14 +14,14 @@ across agents, and an orchestration playbook grounded in how Claude actually wor
 
 ## What you get
 
-Launchpad provisions three pillars — Memory, Delegation, Orchestration — in the depth
+Claunchpad provisions three pillars — Memory, Delegation, Orchestration — in the depth
 the project actually needs. Tier is chosen via a short interview at first run:
 
 | Tier | Who it's for | What it deploys |
 |---|---|---|
 | **Starter** | Beginner / tiny / throwaway | `CLAUDE.md`, sectioned `MEMORY.md`, `SessionStart` load-memory hook |
 | **Standard** | Real project / comfortable user | Everything Starter, plus `harvest-nudge` `Stop` hook and full delegation contract |
-| **Pro** | Advanced / large / high-stakes / team | Everything Standard, plus per-fact `memory/` directory, `.launchpad/handoff.md` buffer, and council presets |
+| **Pro** | Advanced / large / high-stakes / team | Everything Standard, plus per-fact `memory/` directory, `.claunchpad/handoff.md` buffer, and council presets |
 
 **Memory** — hybrid model: Starter uses a single `MEMORY.md` (four sections: Decisions,
 Learnings, Errors, References). Pro uses a per-fact `memory/` directory with `MEMORY.md`
@@ -53,13 +53,13 @@ The skill folder is identical on every surface; only delivery differs.
 
 **Claude Code**, copy the skill folder into your skills directory:
 ```bash
-cp -r skills/launchpad ~/.claude/skills/          # available in all projects
+cp -r skills/claunchpad ~/.claude/skills/          # available in all projects
 # or, per-project:
-cp -r skills/launchpad <your-repo>/.claude/skills/
+cp -r skills/claunchpad <your-repo>/.claude/skills/
 ```
 Then it auto-triggers from its description, or invoke it explicitly.
 
-**claude.ai** (Pro/Max/Team/Enterprise), upload `skills/dist/launchpad.zip` via
+**claude.ai** (Pro/Max/Team/Enterprise), upload `skills/dist/claunchpad.zip` via
 **Settings → Capabilities → Skills**, or add it to a Project. (No filesystem there, so it
 applies the behavior in-session and hands you the templates to paste.)
 
