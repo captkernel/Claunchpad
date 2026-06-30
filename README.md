@@ -6,19 +6,52 @@
 
 **▶ [See the interactive showcase](https://htmlpreview.github.io/?https://github.com/captkernel/Claunchpad/blob/master/showcase.html)** &nbsp;·&nbsp; [Read the story](.share/substack-claunchpad.md)
 
-One importable skill that makes Claude operate at its best on any project. Drop it in, and
-Claude profiles the project, provisions the right tier of infrastructure, keeps a memory that
-survives `/clear` and context compaction, and runs work as an **efficiency-gated team of
-agents**, scaling from a solo pass up to a full org only when the task earns it.
+**Install one skill and Claude starts working like it has a senior engineer's habits — without
+you knowing how any of it works.** Claunchpad switches on persistent memory, self-organizing
+agent teams, knowledge-passing between those agents, the best free ecosystem skills, and the
+orchestration discipline that experts otherwise spend weeks assembling. You don't configure it.
+You don't learn it. You drop it in, answer one question, and the good defaults are simply on.
 
-It's the portable, generalized version of a setup that otherwise takes weeks of trial and
-error to assemble: the context discipline of a good `CLAUDE.md`, a self-learning memory shared
-across agents, and an orchestration playbook grounded in how Claude actually works.
+It's the portable, generalized version of a setup that normally takes weeks of trial and error:
+the context discipline of a great `CLAUDE.md`, a self-learning memory shared across agents, a
+right-sized team playbook, decision frameworks, and a one-tap install of the ecosystem's best
+tools — all grounded in how Claude actually works.
 
-## What you get
+## What one install turns on
 
-Claunchpad provisions three pillars — Memory, Delegation, Orchestration — in the depth
-the project actually needs. Tier is chosen via a short interview at first run:
+You get all of this automatically. **No expertise required.**
+
+- **🧠 Persistent memory** — Claude remembers your project across `/clear` and context
+  compaction: the decisions you made and why, the bugs you already fixed, the techniques that
+  work here. No note-taking discipline needed — a hook reloads it at the start of every
+  session, so Claude never starts from zero again.
+- **👥 Agent team structures** — work runs as a team that sizes itself: a solo pass for small
+  things, a builder-plus-reviewer pair for real changes, parallel agents for independent
+  research, a scripted assembly line for big migrations. You don't pick the structure;
+  Claunchpad escalates only when the task earns it and drops back the moment it doesn't.
+- **✉️ Knowledge-passing between agents** — agents don't work in the dark. The orchestrator
+  injects the memory that matters into each agent's brief and harvests their findings back into
+  the shared memory, so every agent builds on what the others learned instead of repeating it.
+- **🧩 The best skills, one tap** — at setup, Claunchpad offers to install the high-value
+  ecosystem skills (**Superpowers**, **Skills Curator**, **Agent Browser**) the right way for
+  your machine, so you start with the good tools already wired in.
+- **✅ Best-practice guardrails** — the things experienced users do by reflex, on by default:
+  spend agents only when they pay off (multi-agent runs cost ~15× the tokens), never call work
+  "done" without an independent review and verification, route cheap models to cheap roles, and
+  stop to pressure-test big, irreversible decisions.
+- **🎚️ Tuned to you** — a beginner gets a tiny, safe setup with nothing to break; an expert
+  gets the full machine. Claunchpad reads who you are and what you're building, deploys exactly
+  that, then grows with the project one non-destructive upgrade at a time.
+- **🧭 Decision frameworks** — built-in councils that pressure-test a consequential choice (5
+  adversarial advisors) or a whole project's viability (4 functional lenses) before you commit.
+- **📈 Gets smarter every session** — every fix, decision, and technique it learns is captured
+  and reloaded next time, so the project compounds instead of resetting.
+- **🌍 Works everywhere** — the same skill runs on Claude Code, claude.ai, and the API; where
+  there's no filesystem it applies the behavior in-session and hands you the files to keep.
+
+Under the hood, that's three pillars — **Memory, Delegation, Orchestration** — plus a hook
+layer and the councils, deployed in the depth your project actually needs. Tier is chosen via a
+short interview at first run:
 
 | Tier | Who it's for | What it deploys |
 |---|---|---|
