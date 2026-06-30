@@ -6,16 +6,15 @@
 
 **▶ [See the interactive showcase](https://htmlpreview.github.io/?https://github.com/captkernel/Claunchpad/blob/master/showcase.html)** &nbsp;·&nbsp; [Read the story](.share/substack-claunchpad.md)
 
-**Install one skill and Claude starts working like it has a senior engineer's habits — without
-you knowing how any of it works.** Claunchpad switches on persistent memory, self-organizing
-agent teams, knowledge-passing between those agents, the best free ecosystem skills, and the
-orchestration discipline that experts otherwise spend weeks assembling. You don't configure it.
-You don't learn it. You drop it in, answer one question, and the good defaults are simply on.
+**Drop in one skill and Claude starts working like someone who knows what they're doing —
+without you setting any of it up.** Claunchpad turns on persistent memory, agent teams that size
+themselves, the good ecosystem skills, and the habits that otherwise take weeks to work out on
+your own. Nothing to configure, nothing to learn. You add it, answer one question, and it runs.
 
-It's the portable, generalized version of a setup that normally takes weeks of trial and error:
-the context discipline of a great `CLAUDE.md`, a self-learning memory shared across agents, a
-right-sized team playbook, decision frameworks, and a one-tap install of the ecosystem's best
-tools — all grounded in how Claude actually works.
+It's the setup most people rebuild by hand on every project, packaged: a solid `CLAUDE.md`, a
+memory that's shared across agents and survives a reset, sensible rules for when to bring in
+help, decision frameworks, and a one-tap install of the best tools — built around how Claude
+actually behaves.
 
 ## What one install turns on
 
@@ -38,18 +37,18 @@ You get all of this automatically. **No expertise required.**
   is evaluated, security-scanned, and *rebuilt for your project* through its `--customize` —
   decomposed, with only the parts that fit your stack kept and rewritten in your voice.
   *Infuse, don't invoke.*
-- **✅ Best-practice guardrails** — the things experienced users do by reflex, on by default:
-  spend agents only when they pay off (multi-agent runs cost ~15× the tokens), never call work
-  "done" without an independent review and verification, route cheap models to cheap roles, and
-  stop to pressure-test big, irreversible decisions.
+- **✅ Best-practice guardrails** — the stuff experienced users do without thinking, on by
+  default: spend agents only when they pay off (multi-agent runs cost ~15× the tokens), never
+  call work "done" without an independent review and verification, put cheap models on cheap
+  jobs, and stop to pressure-test big, irreversible decisions.
 - **🎚️ Tuned to you** — a beginner gets a tiny, safe setup with nothing to break; an expert
   gets the full machine. Claunchpad reads who you are and what you're building, deploys exactly
   that, then grows with the project one non-destructive upgrade at a time.
 - **🧭 Decision frameworks** — built-in councils that pressure-test a consequential choice (5
   adversarial advisors) or a whole project's viability (4 functional lenses) before you commit.
-- **📈 Gets smarter every session** — a built-in self-learning protocol captures every fix,
-  decision, and technique as it happens and reloads it next time, so the project compounds
-  instead of resetting.
+- **📈 Gets smarter every session** — a built-in self-learning protocol catches every fix,
+  decision, and technique as it happens and reloads it next time, so the project builds on
+  itself instead of resetting.
 - **🌍 Works everywhere** — the same skill runs on Claude Code, claude.ai, and the API; where
   there's no filesystem it applies the behavior in-session and hands you the files to keep.
 
@@ -108,12 +107,12 @@ skills/code-execution beta headers).
 
 ## How it stays cheap
 
-Multi-agent work costs roughly 15× the tokens of a single pass and actively hurts on tightly
-coupled changes. So the playbook's first rule is restraint: most tasks never leave Solo or
-Pair. Bigger structures activate only on observable triggers (three or more independent
-subtasks, real context-pollution risk, a need for independent verification, high stakes), and
-the skill de-escalates the moment a cheaper structure would do. The org catalog is power you
-spend deliberately, not by default.
+Multi-agent work costs roughly 15× the tokens of a single pass, and on tightly coupled changes
+it makes things worse, not better. So the first rule is restraint: most tasks never leave Solo
+or Pair. Bigger structures kick in only on a clear trigger (three or more independent subtasks,
+a real risk of flooding the context, a change that needs independent verification, high
+stakes), and the skill steps back down as soon as a cheaper one would do. Reach for the bigger
+structures on purpose, not by default.
 
 ## Design & sources
 
