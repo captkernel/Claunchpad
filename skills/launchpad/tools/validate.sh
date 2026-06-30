@@ -108,12 +108,28 @@ check_hooks() {
   fi
 }
 
+check_recommended() {
+  assert_file templates/recommended-skills.md
+  assert_contains templates/recommended-skills.md "obra/superpowers-marketplace" "manifest names Superpowers source"
+  assert_contains templates/recommended-skills.md "captkernel/Skills_Curator" "manifest names Skills Curator source"
+  assert_contains templates/recommended-skills.md "vercel-labs/agent-browser" "manifest names Agent Browser source"
+  assert_contains templates/recommended-skills.md "install.sh" "manifest has POSIX install path"
+  assert_contains templates/recommended-skills.md "install.ps1" "manifest has Windows install path"
+  assert_contains templates/recommended-skills.md "npm install -g agent-browser" "manifest has agent-browser npm install"
+  assert_contains templates/recommended-skills.md "claude plugin marketplace add" "manifest has plugin marketplace install"
+  assert_contains references/provisioning.md "recommended-skills" "provisioning links the manifest"
+  assert_contains references/provisioning.md "customise" "provisioning documents the customise option"
+  assert_contains references/provisioning.md "restart" "provisioning documents restart-to-activate"
+  assert_contains SKILL.md "recommended-skills" "SKILL.md points to recommended skills"
+}
+
 case "$GROUP" in
   skill)  check_skill ;;
   refs)   check_refs ;;
   memory) check_memory ;;
   hooks)  check_hooks ;;
-  all)    check_skill; check_refs; check_memory; check_hooks ;;
+  recommended) check_recommended ;;
+  all)    check_skill; check_refs; check_memory; check_hooks; check_recommended ;;
   *) echo "unknown group: $GROUP"; exit 2 ;;
 esac
 

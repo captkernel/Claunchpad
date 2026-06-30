@@ -11,6 +11,7 @@ how to run `launchpad upgrade` non-destructively.
 - Tier table — Starter / Standard / Pro
 - Deploy steps per tier — which files and hooks each writes
 - Tier is a recommendation, not a constraint
+- Recommended skills — offer to install high-value plugins/skills
 - Re-provisioning (`launchpad upgrade`)
 - claude.ai / API path — skip writes, copy-paste, in-session
 
@@ -151,6 +152,43 @@ Run `launchpad upgrade` when a project has outgrown its current tier.
 graduation signal mid-session (the `MEMORY.md` index is too long to scan; the user is
 regularly running three or more parallel agents). Execution always requires the user's
 explicit go-ahead — `launchpad upgrade` never runs automatically.
+
+---
+
+## Recommended skills
+
+After the tier is deployed, offer to install a curated set of high-value Claude Code
+plugins/skills. The list lives in `templates/recommended-skills.md` (editable; read it — do
+not hard-code skill names). Each entry carries its own real install command(s) and prereqs;
+the current set uses three different install mechanisms, so run each skill's own command, not a
+uniform installer.
+
+**Step 1 — detect surface.** Claude Code (filesystem + a `claude` / `npm` CLI on PATH) vs
+claude.ai / the app (no plugin system).
+
+**Step 2 — Claude Code path.** Present the bundle (each skill's name + one-line *why*), then
+ask one question:
+
+> Install the recommended skills? **[Y] all · [c] customise · [s] skip**
+
+- **all** — install every entry. **customise** — list the entries and let the user pick a
+  subset. **skip** — do nothing, continue.
+- For each chosen skill, detect the OS (Windows vs POSIX) and run that skill's matching install
+  command from the manifest. Default **user scope** (`~/.claude/`) so the tools are available
+  across every project.
+- **Check prereqs first.** Before running a skill's command, confirm its required tool exists
+  (e.g. `claude`, `git`, `node`/`npm`). If a prereq is missing, **skip that one skill** and
+  print its `manual install` line — do not abort the rest.
+- Never overwrite existing config destructively; settings.json edits are additive. If a plugin
+  is already enabled, report "already present" and skip it.
+
+**Step 3 — activation.** Installing is **never fully silent**: after the commands run, tell the
+user the one human step left — accept the trust prompt and/or **restart Claude Code** — then
+summarize what was installed, what was skipped, and why.
+
+**Step 4 — claude.ai / app path.** There is no plugin system, so **do not attempt to install**.
+Instead print the **manual list** from the manifest: each skill's name, source, one-line *why*,
+and the exact command to run later in Claude Code. (See also the claude.ai / API path below.)
 
 ---
 
