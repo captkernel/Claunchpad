@@ -1,5 +1,7 @@
 # Claunchpad, Instagram Reel
 
+> **STATUS: INCOMPLETE / DRAFT, do not post yet.** Destined for a **different account (TBD)**. The handle (`@kayparmar`) and the "follow / save this" account bits are placeholders to finalize before publishing.
+
 **Format:** 9:16, 1080 x 1920, ~22 seconds. Assume muted playback, so every line is on-screen text too. Fast cuts. Use a trending low-key tech/build audio.
 
 **Design system (match the showcase):** background `#0f1117`, text `#e8edf6`, accent `#5b8dee`, the green to blue to purple gradient for emphasis, system-ui font, the launch-arrow mark. On-screen text is bold, large, centered, with a subtle fade-up on each cut.

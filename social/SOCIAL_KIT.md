@@ -1,5 +1,7 @@
 # Claunchpad, distribution kit
 
+> **STATUS: INCOMPLETE / DRAFT, do not post yet.** This will go out from a **different account (TBD)**, not the one referenced here. Before publishing, finalize: the handle (placeholder `@kayparmar` throughout), every "link in bio" / "follow @..." / first-comment-links reference, and which account owns the GitHub repo links. Treat all account-specific bits as placeholders. Copy is ready; account wiring is not.
+
 Copy-paste ready. Repo is public (MIT). Voice is founder-to-builders: direct, lowercase-leaning, honest about the rough edges, and it ends on a real question. No em dashes.
 
 **The links**
