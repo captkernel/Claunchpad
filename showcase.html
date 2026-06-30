@@ -128,13 +128,9 @@
       background:
         radial-gradient(55vw 55vw at 80% -8%, rgba(91,141,238,.18), transparent 60%),
         radial-gradient(48vw 48vw at 6% 6%, rgba(139,92,246,.14), transparent 60%),
-        radial-gradient(55vw 50vw at 50% 118%, rgba(34,197,94,.10), transparent 60%);
-      animation: bgdrift 16s ease-in-out infinite alternate;
+        radial-gradient(55vw 50vw at 50% 118%, rgba(34,197,94,.07), transparent 60%);
     }
-    @keyframes bgdrift { from { transform: translate3d(0,-12px,0); } to { transform: translate3d(0,22px,0); } }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
-    @keyframes shimmer { to { background-position: 200% center; } }
-    @keyframes floaty { from { transform: translateY(-5px); } to { transform: translateY(7px); } }
 
     .wrap { max-width: 1180px; padding: 0 28px; }
     code { font-family: var(--mono); font-size: .87em; background: rgba(91,141,238,.13); color: #8fb4ff; border-radius: 5px; padding: 1.5px 6px; }
@@ -145,7 +141,7 @@
 
     .hero { padding: clamp(56px,11vh,128px) 0 84px; animation: fadeUp .9s ease both; }
     .hero h1 { font-size: clamp(34px,6.6vw,66px); font-weight: 800; line-height: 1.07; letter-spacing: -.03em; }
-    .hero h1 em { background: var(--grad); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; animation: shimmer 7s linear infinite; }
+    .hero h1 em { color: var(--accent); }
     .hero p { max-width: 720px; font-size: clamp(16px,1.5vw,19px); }
     .rule-box { font-size: 15px; max-width: 600px; }
 
@@ -168,7 +164,6 @@
       content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--grad); opacity: 0; transition: opacity .26s;
     }
     #capabilities .council-card:hover::before, #councils .council-card:hover::before { opacity: .9; }
-    .nav-brand svg { animation: floaty 3.6s ease-in-out infinite alternate; }
 
     /* ===== DEMO TAB ===== */
     .cmp-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 22px; align-items: stretch; }
@@ -212,9 +207,41 @@
     .proof p { font-size: 15px; color: var(--muted); line-height: 1.8; }
     .proof p + p { margin-top: 14px; }
 
+    /* ===== DEMO TAB: wider, lower margins ===== */
+    #panel-demo .wrap { max-width: 1460px; padding: 0 20px; }
+
+    /* ===== animated playthrough ===== */
+    .player { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; }
+    .player-bar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+    .pbtn { background: var(--surface2); border: 1px solid var(--border); color: var(--text); font: 600 13px var(--font); padding: 9px 16px; border-radius: 9px; cursor: pointer; transition: border-color .2s, color .2s; }
+    .pbtn:hover { border-color: var(--accent); color: var(--accent); }
+    .timeline { display: flex; gap: 8px; margin-left: auto; flex-wrap: wrap; }
+    .tl-dot { width: 30px; height: 6px; border-radius: 4px; border: none; background: var(--border); cursor: pointer; padding: 0; transition: background .3s; }
+    .tl-dot.active { background: var(--accent); }
+    .tl-dot.done { background: rgba(91,141,238,.45); }
+    .stage-title { text-align: center; font-size: 16px; font-weight: 700; color: var(--accent); margin-bottom: 18px; min-height: 22px; }
+    .anim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    @media (max-width: 760px) { .anim-grid { grid-template-columns: 1fr; } }
+    .anim-col { background: #0a0c12; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    .anim-col.bad { border-top: 3px solid var(--bad); }
+    .anim-col.good { border-top: 3px solid var(--starter); }
+    .anim-head { display: flex; align-items: center; gap: 8px; padding: 12px 18px; border-bottom: 1px solid var(--border); font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+    .anim-head .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .anim-col.bad .anim-head { color: var(--bad); } .anim-col.bad .dot { background: var(--bad); }
+    .anim-col.good .anim-head { color: var(--starter); } .anim-col.good .dot { background: var(--starter); }
+    .anim-body { padding: 20px; font-family: var(--mono); font-size: 13px; line-height: 1.7; min-height: 184px; }
+    .ln { opacity: 0; animation: lnIn .4s ease forwards; white-space: pre-wrap; }
+    @keyframes lnIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .ln-u { color: var(--accent2); }
+    .ln-c { color: var(--text); }
+    .ln-sys { color: #6f7a8d; }
+    .ln-g { color: var(--starter); font-family: var(--font); font-weight: 600; margin-top: 8px; }
+    .ln-r { color: var(--bad); font-family: var(--font); font-weight: 600; margin-top: 8px; }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
       .reveal { opacity: 1; transform: none; }
+      .ln { opacity: 1; }
     }
   </style>
 </head>
@@ -837,75 +864,30 @@
     </div>
   </div>
 
-  <!-- With vs Without -->
+  <!-- Animated playthrough -->
   <section style="border-top:none">
     <div class="wrap">
-      <div class="section-label">A day building a feature</div>
-      <h2>With vs <span class="grad">without</span> Claunchpad</h2>
-      <p class="section-intro">One developer, one multi-session feature. The only difference is whether Claunchpad is installed.</p>
-      <div class="cmp-grid">
+      <div class="section-label">Watch it play out</div>
+      <h2>An example project, step by step</h2>
+      <p class="section-intro">The same JWT auth refactor across two days. Press play and watch the two paths diverge — left without Claunchpad, right with it.</p>
 
-        <div class="cmp-card bad">
-          <h3>Without Claunchpad</h3>
-          <div class="cmp-sub">You are the memory, the reviewer, and the setup.</div>
-          <ol class="cmp-steps">
-            <li>New session: Claude forgot yesterday. You re-explain the stack, the plan, and the gotcha that cost you two hours — again.</li>
-            <li>Big change: done in one solo pass with no review. A subtle bug ships.</li>
-            <li>You type <code>/clear</code> to free up context. Everything it learned is gone.</li>
-            <li>You want browser automation: you hunt for a skill, install it by hand, hope it fits.</li>
-            <li>Tomorrow: back to step 1. The project never compounds.</li>
-          </ol>
+      <div class="player">
+        <div class="player-bar">
+          <button class="pbtn" id="playBtn" onclick="anim.toggle()">❚❚ Pause</button>
+          <button class="pbtn" onclick="anim.replay()">↻ Replay</button>
+          <div class="timeline" id="timeline"></div>
         </div>
-
-        <div class="vs">VS</div>
-
-        <div class="cmp-card good">
-          <h3>With Claunchpad</h3>
-          <div class="cmp-sub">The project remembers, reviews, and equips itself.</div>
-          <ol class="cmp-steps">
-            <li>New session: the <code>load-memory</code> hook reloads yesterday's decisions, fixes, and gotchas automatically — Claude picks up mid-stride.</li>
-            <li>Big change: it runs as a Pair — build, independent review, verify. The bug is caught before merge.</li>
-            <li>You type <code>/clear</code>. Memory lives on disk; the next session reloads it. Nothing lost.</li>
-            <li>Browser automation was offered and installed at setup. It's already there.</li>
-            <li>Tomorrow: it starts smarter than today. The project compounds.</li>
-          </ol>
+        <div class="stage-title" id="stageTitle"></div>
+        <div class="anim-grid">
+          <div class="anim-col bad">
+            <div class="anim-head"><span class="dot"></span> Without Claunchpad</div>
+            <div class="anim-body" id="bodyBad"></div>
+          </div>
+          <div class="anim-col good">
+            <div class="anim-head"><span class="dot"></span> With Claunchpad</div>
+            <div class="anim-body" id="bodyGood"></div>
+          </div>
         </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- /clear transcript -->
-  <section>
-    <div class="wrap">
-      <div class="section-label">The /clear test</div>
-      <h2>What "persistent memory" actually looks like</h2>
-      <p class="section-intro">The same prompt, the morning after — once without memory, once with.</p>
-      <div class="term-wrap">
-
-        <div class="term">
-          <div class="term-head bad"><span class="dot"></span> Without — starts from zero</div>
-          <pre><span class="u">you ▸</span> continue the auth refactor from yesterday
-
-<span class="c">claude ▸</span> I don't have any context on a prior auth
-        refactor. Can you walk me through the setup,
-        the approach you picked, and where you left off?
-
-<span class="sys">( you re-explain for ten minutes )</span></pre>
-        </div>
-
-        <div class="term">
-          <div class="term-head good"><span class="dot"></span> With — picks up mid-stride</div>
-          <pre><span class="sys">↳ load-memory reloaded: 6 decisions, 3 fixes, 2 gotchas</span>
-
-<span class="u">you ▸</span> continue the auth refactor from yesterday
-
-<span class="c">claude ▸</span> Picking up the JWT refactor — we chose
-        refresh-token rotation, hit the clock-skew bug
-        (fixed with 30s leeway), and the next step was
-        the logout endpoint. Starting there.</pre>
-        </div>
-
       </div>
     </div>
   </section>
@@ -953,7 +935,7 @@
 
   function arm(scope){
     (scope || document).querySelectorAll(
-      '.tier-grid>*,.pillar-grid>*,.hook-grid>*,.council-grid>*,.contract-grid>*,.ladder,.route-table,.cmp-card,.vs,.term-wrap>*,.qs-grid>*,.proof'
+      '.tier-grid>*,.pillar-grid>*,.hook-grid>*,.council-grid>*,.contract-grid>*,.ladder,.route-table,.qs-grid>*,.proof'
     ).forEach(function(el, i){
       if(!el.classList.contains('reveal')){ el.classList.add('reveal'); el.style.transitionDelay = ((i % 3) * 80) + 'ms'; }
       io.observe(el);
@@ -963,12 +945,81 @@
   function showTab(name){
     document.querySelectorAll('.tab-panel').forEach(function(p){ p.hidden = (p.id !== 'panel-' + name); });
     document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.toggle('active', b.dataset.tab === name); });
+    // the anchor nav is only relevant to the Overview page
+    document.querySelector('nav').style.display = (name === 'overview') ? '' : 'none';
     window.scrollTo({ top: 0, behavior: 'auto' });
     var panel = document.getElementById('panel-' + name);
     if(panel){ arm(panel); requestAnimationFrame(function(){ panel.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); }); }); }
+    if(name === 'demo') anim.replay(); else anim.leave();
   }
-
   arm();
+
+  /* ===== animated example-project playthrough ===== */
+  var STAGES = [
+    { t: "Day 1 · 9:00 — Starting the auth refactor",
+      bad:  [["u","you ▸ refactor auth to JWT with refresh tokens"],["c","claude ▸ Let's use refresh-token rotation. Wiring it up…"]],
+      good: [["u","you ▸ refactor auth to JWT with refresh tokens"],["c","claude ▸ Let's use refresh-token rotation. Wiring it up…"],["g","✓ decision saved to memory: refresh-token rotation"]] },
+    { t: "Day 1 · 14:00 — A nasty intermittent bug",
+      bad:  [["c","claude ▸ tests fail intermittently…"],["u","you ▸ it's clock skew — add 30s leeway"],["c","claude ▸ Fixed."]],
+      good: [["c","claude ▸ tests fail intermittently…"],["u","you ▸ it's clock skew — add 30s leeway"],["c","claude ▸ Fixed."],["g","✓ fix saved to memory: clock-skew → 30s leeway"]] },
+    { t: "Day 1 · 18:00 — /clear to free up context",
+      bad:  [["sys","$ /clear"],["r","✗ everything Claude learned today is gone"]],
+      good: [["sys","$ /clear"],["g","✓ memory persists on disk — nothing lost"]] },
+    { t: "Day 2 · 9:00 — Pick the work back up",
+      bad:  [["u","you ▸ continue the auth refactor"],["c","claude ▸ I have no context on a prior refactor —"],["c","         can you walk me through it again?"],["r","✗ you re-explain for ten minutes"]],
+      good: [["sys","↳ load-memory reloaded: 6 decisions · 3 fixes"],["u","you ▸ continue the auth refactor"],["c","claude ▸ Picking up the JWT refactor — refresh-token"],["c","         rotation, clock-skew fixed; next is logout."],["g","✓ starts exactly where you left off"]] },
+    { t: "Day 2 · 11:00 — A risky change",
+      bad:  [["u","you ▸ swap the session store"],["c","claude ▸ done (one solo pass, no review)"],["r","✗ a subtle bug ships to main"]],
+      good: [["u","you ▸ swap the session store"],["c","claude ▸ building → independent review → verify…"],["g","✓ the Pair caught the bug before merge"]] },
+    { t: "Day 2 · 15:00 — Need a browser to test the flow",
+      bad:  [["u","you ▸ automate the login flow in a browser"],["c","claude ▸ no browser tool is installed"],["r","✗ you hunt for a skill, install it by hand"]],
+      good: [["u","you ▸ automate the login flow in a browser"],["c","claude ▸ Agent Browser is already here — running it"],["g","✓ installed at setup; nothing to find"]] },
+    { t: "The result, two days in",
+      bad:  [["r","✗ started over, shipped a bug, lost an hour"],["r","✗ tomorrow: back to square one"]],
+      good: [["g","✓ compounded, caught the bug, already equipped"],["g","✓ tomorrow: starts smarter than today"]] }
+  ];
+
+  var anim = (function(){
+    var i = 0, timer = null, playing = true;
+    var tl = document.getElementById('timeline');
+    STAGES.forEach(function(s, idx){
+      var d = document.createElement('button');
+      d.className = 'tl-dot'; d.setAttribute('aria-label', 'stage ' + (idx + 1));
+      d.onclick = function(){ go(idx, true); };
+      tl.appendChild(d);
+    });
+    function col(el, lines){
+      el.innerHTML = '';
+      lines.forEach(function(ln, k){
+        var div = document.createElement('div');
+        div.className = 'ln ln-' + ln[0];
+        div.textContent = ln[1];
+        div.style.animationDelay = (k * 200) + 'ms';
+        el.appendChild(div);
+      });
+    }
+    function render(){
+      var s = STAGES[i];
+      document.getElementById('stageTitle').textContent = s.t;
+      col(document.getElementById('bodyBad'), s.bad);
+      col(document.getElementById('bodyGood'), s.good);
+      Array.prototype.forEach.call(tl.children, function(d, idx){
+        d.className = 'tl-dot' + (idx === i ? ' active' : (idx < i ? ' done' : ''));
+      });
+    }
+    function schedule(){
+      clearTimeout(timer);
+      if(!playing) return;
+      timer = setTimeout(function(){ go((i + 1) % STAGES.length, false); }, i === STAGES.length - 1 ? 4600 : 3600);
+    }
+    function setBtn(){ var b = document.getElementById('playBtn'); if(b) b.textContent = playing ? '❚❚ Pause' : '▶ Play'; }
+    function go(n, manual){ i = n; render(); if(manual){ playing = true; setBtn(); } schedule(); }
+    return {
+      toggle: function(){ playing = !playing; setBtn(); if(playing) schedule(); else clearTimeout(timer); },
+      replay: function(){ playing = true; setBtn(); go(0, false); },
+      leave:  function(){ clearTimeout(timer); }
+    };
+  })();
 </script>
 
 </body>
