@@ -8,7 +8,7 @@ description: >-
   initializing a project, configuring a repo for Claude, planning or executing
   substantial multi-step or multi-file work, or before a consequential,
   hard-to-reverse decision. Trigger phrases include "set up this project",
-  "initialize claunchpad", "run this as a team", "orchestrate this",
+  "initialize Claunchpad", "run this as a team", "orchestrate this",
   "spin up agents", "review board", "debug task force", "council this",
   "feasibility council", "is this project viable", and
   "pressure-test this decision".

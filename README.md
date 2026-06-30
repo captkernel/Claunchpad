@@ -1,7 +1,10 @@
-# claunchpad
+<p align="center">
+  <img src="assets/logo.svg" alt="Claunchpad" width="440">
+</p>
 
-> **Working name, not final.** This project ships under the provisional name `claunchpad`
-> while the final, originality-checked name is locked. See `RENAME.md`.
+# Claunchpad
+
+**▶ [See the interactive showcase](https://htmlpreview.github.io/?https://github.com/captkernel/Claunchpad/blob/master/showcase.html)** &nbsp;·&nbsp; [Read the story](.share/substack-claunchpad.md)
 
 One importable skill that makes Claude operate at its best on any project. Drop it in, and
 Claude profiles the project, provisions the right tier of infrastructure, keeps a memory that
