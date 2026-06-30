@@ -54,7 +54,7 @@ That's the same loop Claunchpad sets up for you. A tool that cuts corners in its
 
 Claunchpad is the thing that gives it something to hold onto. It's open source under MIT, built in the open by captKernel, and it sets your next project up in about the time it takes to read this far.
 
-▶ **See it at a glance** (interactive, single page): {{SHOWCASE_URL}}
+▶ **See it at a glance** (interactive, single page): https://htmlpreview.github.io/?https://github.com/captkernel/Claunchpad/blob/master/showcase.html
 ▶ **Get it on GitHub:** https://github.com/captkernel/Claunchpad
 
 —Nishant
