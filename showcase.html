@@ -264,6 +264,22 @@
   </div>
 </nav>
 
+<style>
+  .tabbar { border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 35; background: rgba(13,15,21,.78); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .tabbar .wrap { display: flex; gap: 8px; justify-content: center; }
+  .tab-btn { background: none; border: none; color: var(--muted); font: 700 14.5px var(--font); padding: 16px 24px; cursor: pointer; border-bottom: 2px solid transparent; transition: color .2s, border-color .2s; }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-panel[hidden] { display: none; }
+</style>
+
+<div class="tabbar"><div class="wrap">
+  <button class="tab-btn active" data-tab="overview" onclick="showTab('overview')">Overview</button>
+  <button class="tab-btn" data-tab="demo" onclick="showTab('demo')">▶ See It In Action</button>
+</div></div>
+
+<div class="tab-panel" id="panel-overview">
+
 <!-- Hero -->
 <div class="wrap">
   <div class="hero">
@@ -850,6 +866,119 @@
   </div>
 </section>
 
+</div><!-- /panel-overview -->
+
+<div class="tab-panel" id="panel-demo" hidden>
+
+  <div class="wrap">
+    <div class="hero" style="padding:clamp(48px,8vh,92px) 0 36px">
+      <div class="hero-badge">See it in action</div>
+      <h1>Same project.<br><em>Two very different days.</em></h1>
+      <p>What actually changes when Claunchpad is running underneath you — shown on the work you do every day, not in the abstract.</p>
+    </div>
+  </div>
+
+  <!-- With vs Without -->
+  <section style="border-top:none">
+    <div class="wrap">
+      <div class="section-label">A day building a feature</div>
+      <h2>With vs without Claunchpad</h2>
+      <p class="section-intro">One developer, one multi-session feature. The only difference is whether Claunchpad is installed.</p>
+      <div class="cmp-grid">
+
+        <div class="cmp-card bad">
+          <h3>Without Claunchpad</h3>
+          <div class="cmp-sub">You are the memory, the reviewer, and the setup.</div>
+          <ol class="cmp-steps">
+            <li>New session: Claude forgot yesterday. You re-explain the stack, the plan, and the gotcha that cost you two hours — again.</li>
+            <li>Big change: done in one solo pass with no review. A subtle bug ships.</li>
+            <li>You type <code>/clear</code> to free up context. Everything it learned is gone.</li>
+            <li>You want browser automation: you hunt for a skill, install it by hand, hope it fits.</li>
+            <li>Tomorrow: back to step 1. The project never compounds.</li>
+          </ol>
+        </div>
+
+        <div class="vs">VS</div>
+
+        <div class="cmp-card good">
+          <h3>With Claunchpad</h3>
+          <div class="cmp-sub">The project remembers, reviews, and equips itself.</div>
+          <ol class="cmp-steps">
+            <li>New session: the <code>load-memory</code> hook reloads yesterday's decisions, fixes, and gotchas automatically — Claude picks up mid-stride.</li>
+            <li>Big change: it runs as a Pair — build, independent review, verify. The bug is caught before merge.</li>
+            <li>You type <code>/clear</code>. Memory lives on disk; the next session reloads it. Nothing lost.</li>
+            <li>Browser automation was offered and installed at setup. It's already there.</li>
+            <li>Tomorrow: it starts smarter than today. The project compounds.</li>
+          </ol>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- /clear transcript -->
+  <section>
+    <div class="wrap">
+      <div class="section-label">The /clear test</div>
+      <h2>What "persistent memory" actually looks like</h2>
+      <p class="section-intro">The same prompt, the morning after — once without memory, once with.</p>
+      <div class="term-wrap">
+
+        <div class="term">
+          <div class="term-head bad"><span class="dot"></span> Without — starts from zero</div>
+          <pre><span class="u">you ▸</span> continue the auth refactor from yesterday
+
+<span class="c">claude ▸</span> I don't have any context on a prior auth
+        refactor. Can you walk me through the setup,
+        the approach you picked, and where you left off?
+
+<span class="sys">( you re-explain for ten minutes )</span></pre>
+        </div>
+
+        <div class="term">
+          <div class="term-head good"><span class="dot"></span> With — picks up mid-stride</div>
+          <pre><span class="sys">↳ load-memory reloaded: 6 decisions, 3 fixes, 2 gotchas</span>
+
+<span class="u">you ▸</span> continue the auth refactor from yesterday
+
+<span class="c">claude ▸</span> Picking up the JWT refactor — we chose
+        refresh-token rotation, hit the clock-skew bug
+        (fixed with 30s leeway), and the next step was
+        the logout endpoint. Starting there.</pre>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Quickstart -->
+  <section>
+    <div class="wrap">
+      <div class="section-label">30-second quickstart</div>
+      <h2>Three steps to your first run</h2>
+      <div class="qs-grid">
+        <div class="qs-step"><div class="qs-num">1</div><h3>Drop in the skill</h3><p><code>cp -r skills/claunchpad ~/.claude/skills/</code> — or copy it into a single repo's <code>.claude/skills/</code>.</p></div>
+        <div class="qs-step"><div class="qs-num">2</div><h3>Open your project</h3><p>Start Claude Code and say <em>"set up this project"</em> — or just start working; it auto-triggers.</p></div>
+        <div class="qs-step"><div class="qs-num">3</div><h3>Answer one question</h3><p>Tell it your experience level. Memory, hooks, and the recommended-skills offer switch on. That's it.</p></div>
+      </div>
+      <div class="hook-contract" style="margin-top:20px">On claude.ai, upload <code>skills/dist/claunchpad.zip</code> via Settings → Capabilities → Skills.</div>
+    </div>
+  </section>
+
+  <!-- Dogfooding -->
+  <section>
+    <div class="wrap">
+      <div class="section-label">Why trust it</div>
+      <h2>Built the way it preaches</h2>
+      <p class="section-intro">Claunchpad was built using its own discipline — so the rigor it asks of you is rigor it survived first.</p>
+      <div class="proof">
+        <p>Every piece was implemented by a fresh agent, reviewed by a second one for correctness and for building <em>only</em> what was asked, and verified against an automated test suite before it counted as done. At the end, a single broad review read the whole thing at once — and immediately earned its keep, catching two bugs every narrow per-task review had structurally missed: <strong>a feature the docs proudly described but no code actually performed</strong>, and <strong>a brand-new file quietly pointing at two files the same change had just deleted</strong>. Both were fixed before anything shipped.</p>
+        <p>A tool that cuts corners in its own construction has no business asking you to trust its discipline. This one doesn't cut them.</p>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /panel-demo -->
 
 <footer>
   <div class="wrap">
@@ -862,9 +991,27 @@
   var io = new IntersectionObserver(function(es){
     es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: .12, rootMargin: '0px 0px -7% 0px' });
-  document.querySelectorAll('.tier-grid>*,.pillar-grid>*,.hook-grid>*,.council-grid>*,.contract-grid>*,.ladder,.route-table').forEach(function(el, i){
-    el.classList.add('reveal'); el.style.transitionDelay = ((i % 3) * 80) + 'ms'; io.observe(el);
-  });
+
+  function arm(scope){
+    (scope || document).querySelectorAll(
+      '.tier-grid>*,.pillar-grid>*,.hook-grid>*,.council-grid>*,.contract-grid>*,.ladder,.route-table,.cmp-card,.vs,.term-wrap>*,.qs-grid>*,.proof'
+    ).forEach(function(el, i){
+      if(!el.classList.contains('reveal')){ el.classList.add('reveal'); el.style.transitionDelay = ((i % 3) * 80) + 'ms'; }
+      io.observe(el);
+    });
+  }
+
+  function showTab(name){
+    document.querySelectorAll('.tab-panel').forEach(function(p){ p.hidden = (p.id !== 'panel-' + name); });
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.toggle('active', b.dataset.tab === name); });
+    // the anchor nav is only relevant to the Overview page
+    document.querySelector('nav').style.display = (name === 'overview') ? '' : 'none';
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    var panel = document.getElementById('panel-' + name);
+    if(panel){ arm(panel); requestAnimationFrame(function(){ panel.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); }); }); }
+  }
+
+  arm();
 </script>
 
 </body>
