@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claunchpad · Instagram Carousel</title>
+<style>
+  :root{
+    --bg:#0f1117; --surface:#181c26; --border:#252a38; --accent:#5b8dee; --accent2:#7aa6ff;
+    --text:#e8edf6; --muted:#8892a4; --starter:#22c55e; --pro:#8b5cf6; --bad:#ef4444;
+    --grad:linear-gradient(100deg,#22c55e,#5b8dee 55%,#8b5cf6);
+    --font:system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+    --mono:"SFMono-Regular",Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#06070b;color:var(--text);font-family:var(--font);padding:32px 16px}
+  .page{max-width:1000px;margin:0 auto}
+  .page h1{font-size:20px;font-weight:800;letter-spacing:-.02em}
+  .page p.meta{color:var(--muted);font-size:13px;margin:6px 0 24px}
+  .grid{display:flex;flex-wrap:wrap;gap:22px;justify-content:center}
+
+  /* each slide authored at true 1080x1350; shown scaled in a .thumb */
+  .thumb{width:432px;height:540px;overflow:hidden;border-radius:14px;border:1px solid var(--border);flex:none}
+  .thumb .slide{transform:scale(.4);transform-origin:top left}
+
+  .slide{
+    width:1080px;height:1350px;background:var(--bg);position:relative;overflow:hidden;
+    padding:96px;display:flex;flex-direction:column;justify-content:center;
+  }
+  /* ambient launch glow */
+  .slide::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(60% 50% at 82% 8%,rgba(91,141,238,.16),transparent 60%),
+               radial-gradient(55% 45% at 6% 96%,rgba(34,197,94,.10),transparent 60%)}
+  .slide.glow::before{background:radial-gradient(70% 55% at 50% 30%,rgba(91,141,238,.22),transparent 60%),
+               radial-gradient(60% 45% at 80% 95%,rgba(139,92,246,.16),transparent 60%)}
+  .slide.cta::before{background:radial-gradient(80% 60% at 50% 45%,rgba(91,141,238,.26),transparent 62%),
+               radial-gradient(60% 40% at 20% 10%,rgba(34,197,94,.14),transparent 60%)}
+
+  .top{position:absolute;top:72px;left:96px;right:96px;display:flex;justify-content:space-between;align-items:center;z-index:2}
+  .num{font-family:var(--mono);font-size:26px;color:var(--muted);letter-spacing:.04em}
+  .brand{display:flex;align-items:center;gap:14px;font-size:26px;font-weight:700;color:var(--text)}
+  .brand svg{display:block}
+  .foot{position:absolute;bottom:72px;left:96px;right:96px;display:flex;justify-content:space-between;align-items:center;z-index:2}
+  .swipe{font-size:26px;color:var(--accent2);font-weight:600;letter-spacing:.02em}
+  .swipe .arr{font-size:30px}
+  .tagchip{font-family:var(--mono);font-size:24px;color:var(--muted)}
+
+  .content{position:relative;z-index:2}
+  .eyebrow{font-size:26px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:26px}
+  .rule{width:84px;height:4px;background:var(--grad);border-radius:3px;margin-bottom:40px}
+  .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+  .ac{color:var(--accent)}
+
+  .poster{font-size:104px;line-height:1.04;font-weight:850;letter-spacing:-.03em}
+  .poster.md{font-size:78px;line-height:1.08}
+  .body{font-size:54px;line-height:1.3;font-weight:600;color:#cdd6e6}
+  .body.sm{font-size:44px;line-height:1.4}
+  .body strong{color:var(--text)}
+  .mono{font-family:var(--mono);color:var(--accent2)}
+
+  .rows{display:flex;flex-direction:column;gap:34px;margin-top:8px}
+  .row{display:flex;flex-direction:column;gap:10px}
+  .row .lbl{font-size:28px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .row.bad .lbl{color:var(--bad)} .row.good .lbl{color:var(--starter)}
+  .row .q{font-size:50px;line-height:1.22;font-weight:700;color:#cdd6e6}
+  .row.good .q{color:var(--text)}
+
+  .ladder{display:flex;flex-direction:column;gap:18px;margin-top:8px}
+  .step{display:flex;align-items:center;gap:24px;font-size:46px;font-weight:700}
+  .step .k{font-family:var(--mono);font-size:30px;color:var(--accent);min-width:60px}
+  .step .arrow-row{color:var(--muted)}
+
+  .list{display:flex;flex-direction:column;gap:30px;margin-top:8px}
+  .li{display:flex;gap:22px;font-size:46px;line-height:1.28;font-weight:600;color:#cdd6e6}
+  .li .dot{flex:none;width:18px;height:18px;border-radius:50%;background:var(--grad);margin-top:18px}
+
+  .cta-title{font-size:120px;font-weight:850;letter-spacing:-.03em;line-height:1}
+  .cta-sub{font-size:46px;color:var(--muted);font-weight:600;margin-top:30px}
+  .cta-url{font-family:var(--mono);font-size:42px;color:var(--accent2);margin-top:54px}
+  .pill{display:inline-block;font-size:30px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--grad);padding:14px 30px;border-radius:40px;margin-top:8px}
+
+  @media print{ body{background:#fff;padding:0} .page>*:not(.grid){display:none} .thumb{width:auto;height:auto;border:0;border-radius:0} .thumb .slide{transform:none} .slide{page-break-after:always} }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>Claunchpad · Instagram Carousel</h1>
+  <p class="meta">10 slides · 1080 × 1350 (4:5) · Claunchpad design system · caption + tags in SOCIAL_KIT.md · export: screenshot each slide at full size, or print-to-PDF (one slide per page).</p>
+  <div class="grid">
+
+    <!-- 01 HOOK -->
+    <div class="thumb"><div class="slide glow">
+      <div class="top"><span class="num">01 / 10</span><span class="brand">
+        <svg width="30" height="38" viewBox="0 0 64 80"><defs><linearGradient id="g1" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#22c55e"/><stop offset=".5" stop-color="#5b8dee"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs><path d="M32 4 L58 40 L41 40 L41 62 L23 62 L23 40 L6 40 Z" fill="url(#g1)"/><rect x="12" y="70" width="40" height="6" rx="3" fill="#5b8dee"/></svg>@kayparmar</span></div>
+      <div class="content"><div class="poster">your AI forgets<br>everything the<br>moment you type<br><span class="grad">/clear</span></div></div>
+      <div class="foot"><span class="tagchip">Claunchpad</span><span class="swipe">swipe <span class="arr">→</span></span></div>
+    </div></div>
+
+    <!-- 02 PROBLEM -->
+    <div class="thumb"><div class="slide">
+      <div class="top"><span class="num">02 / 10</span><span class="brand">@kayparmar</span></div>
+      <div class="content"><div class="eyebrow">the part nobody warns you about</div><div class="rule"></div>
+        <div class="body">every session starts at zero. you re-explain yesterday's decisions, the stack, the one bug that cost you two hours. <strong>the bottleneck was never the model. it's that nothing it learned ever stuck.</strong></div></div>
+      <div class="foot"><span class="tagchip"></span><span class="swipe">swipe <span class="arr">→</span></span></div>
+    </div></div>
+
+    <!-- 03 TURN -->
+    <div class="thumb"><div class="slide">
+      <div class="top"><span class="num">03 / 10</span><span class="brand">@kayparmar</span></div>
+      <div class="content"><div class="eyebrow">so i built Claunchpad</div><div class="rule"></div>
+        <div class="rows">
+          <div class="row bad"><span class="lbl">without it</span><span class="q">you are the memory, the reviewer, and the setup.</span></div>
+          <div class="row good"><span class="lbl">with it</span><span class="q">the project remembers, reviews, and equips itself.</span></div>
+        </div></div>
+      <div class="foot"><span class="tagchip"></span><span class="swipe">swipe <span class="arr">→</span></span></div>
+    </div></div>
+
+    <!-- 04 WHAT IT IS -->
+    <div class="thumb"><div class="slide glow">
+      <div class="top"><span class="num">04 / 10</span><span class="brand">@kayparmar</span></div>
+      <div class="content"><div class="poster md">one skill.<br>a <span class="grad">project OS</span><br>for Claude Code.</div>
+        <div class="body sm" style="margin-top:44px">drop it in, answer one question, and Claude works like someone who's done this a lot.</div></div>
+      <div class="foot"><span class="tagchip"></span><span class="swipe">swipe <span class="arr">→</span></span></div>
+    </div></div>
+
+    <!-- 05 MEMORY -->
+    <div class="thumb"><div class="slide">
+      <div class="top"><span class="num">05 / 10</span><span class="brand">@kayparmar</span></div>
+      <div class="content"><div class="eyebrow">1 · persistent memory</div><div class="rule"></div>
+        <div class="body">it remembers your decisions, the bugs you already fixed, and what works here. a hook reloads it at the <strong>start of every session</strong>, including after <span class="mono">/clear</span> and compaction. you stop re-explaining yesterday.</div></div>
+      <div class="foot"><span class="tagchip"></span><span class="swipe">swipe <span class="arr">→</span></span></div>
+    </div></div>
+
+    <!-- 06 AGENT TEAMS -->
+    <div class="thumb"><div class="slide">
+      <div class="top"><span class="num">06 / 10</span><span class="brand">@kayparmar</span></div>
+      <div class="content"><div class="eyebrow">2 · agent teams that size themselves</div><div class="rule"></div>
+        <div class="ladder">
+          <div class="step"><span class="k">solo</span><span>small fixes</span></div>
+          <div class="step"><span class="k">pair</span><span>build · review · verify</span></div>
+          <div class="step"><span class="k">fan-out</span><span>independent research</span></div>
+          <div class="step"><span class="k">workflow</span><span>big migrations</span></div>
+        </div>
+        <div class="body sm" style="margin-top:40px">you don't pick the structure. it spends agents on purpose, never by reflex.</div></div>
+      <div class="foot"><span class="tagchip"></span><span class="swipe">swipe <span class="arr">→</span></span></div>
+    </div></div>
+
+    <!-- 07 SKILLS -->
+    <div class="thumb"><div class="slide">
+      <div class="top"><span class="num">07 / 10</span><span class="brand">@kayparmar</span></div>
+      <div class="content"><div class="eyebrow">3 · the best skills, rebuilt for you</div><div class="rule"></div>
+        <div class="body">it offers to install the skills worth having, then runs each one through <strong>Skills Curator</strong>: keep what fits your stack, rewrite the rest in your voice, drop the noise.</div>
+        <div class="poster md grad" style="margin-top:46px">infuse,<br>don't invoke.</div></div>
+      <div class="foot"><span class="tagchip"></span><span class="swipe">swipe <span class="arr">→</span></span></div>
+    </div></div>
+
+    <!-- 08 TIERS -->
+    <div class="thumb"><div class="slide">
+      <div class="top"><span class="num">08 / 10</span><span class="brand">@kayparmar</span></div>
+      <div class="content"><div class="eyebrow">it meets you where you are</div><div class="rule"></div>
+        <div class="list">
+          <div class="li"><span class="dot"></span><span><strong style="color:var(--starter)">beginner:</strong> a tiny, safe setup with nothing to break.</span></div>
+          <div class="li"><span class="dot"></span><span><strong style="color:var(--pro)">expert:</strong> the full machine, every default a deliberate tradeoff.</span></div>
+        </div>
+        <div class="body sm" style="margin-top:42px">same skill. the right depth. no expertise required.</div></div>
+      <div class="foot"><span class="tagchip"></span><span class="swipe">swipe <span class="arr">→</span></span></div>
+    </div></div>
+
+    <!-- 09 PROOF -->
+    <div class="thumb"><div class="slide">
+      <div class="top"><span class="num">09 / 10</span><span class="brand">@kayparmar</span></div>
+      <div class="content"><div class="eyebrow">why trust it</div><div class="rule"></div>
+        <div class="body">Claunchpad was built using its own discipline: a fresh agent per task, an independent reviewer, an automated test gate. a final review caught two real bugs the per-task reviews missed. <strong>a tool that cuts corners building itself has no business asking you to trust its discipline.</strong></div></div>
+      <div class="foot"><span class="tagchip">open source · MIT</span><span class="swipe">swipe <span class="arr">→</span></span></div>
+    </div></div>
+
+    <!-- 10 CTA -->
+    <div class="thumb"><div class="slide cta">
+      <div class="top"><span class="num">10 / 10</span><span class="brand">
+        <svg width="30" height="38" viewBox="0 0 64 80"><path d="M32 4 L58 40 L41 40 L41 62 L23 62 L23 40 L6 40 Z" fill="url(#g1)"/><rect x="12" y="70" width="40" height="6" rx="3" fill="#5b8dee"/></svg>@kayparmar</span></div>
+      <div class="content"><span class="pill">free · open source</span>
+        <div class="cta-title grad" style="margin-top:34px">Claunchpad</div>
+        <div class="cta-sub">the strong start every Claude project deserves.</div>
+        <div class="cta-url">github.com/captkernel/Claunchpad</div></div>
+      <div class="foot"><span class="tagchip">follow @kayparmar</span><span class="swipe">save this →</span></div>
+    </div></div>
+
+  </div>
+</div>
+</body>
+</html>
