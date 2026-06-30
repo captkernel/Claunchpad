@@ -44,8 +44,9 @@ You get all of this automatically. **No expertise required.**
   that, then grows with the project one non-destructive upgrade at a time.
 - **🧭 Decision frameworks** — built-in councils that pressure-test a consequential choice (5
   adversarial advisors) or a whole project's viability (4 functional lenses) before you commit.
-- **📈 Gets smarter every session** — every fix, decision, and technique it learns is captured
-  and reloaded next time, so the project compounds instead of resetting.
+- **📈 Gets smarter every session** — a built-in self-learning protocol captures every fix,
+  decision, and technique as it happens and reloads it next time, so the project compounds
+  instead of resetting.
 - **🌍 Works everywhere** — the same skill runs on Claude Code, claude.ai, and the API; where
   there's no filesystem it applies the behavior in-session and hands you the files to keep.
 
