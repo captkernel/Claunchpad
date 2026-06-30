@@ -126,6 +126,7 @@
       <li><a href="#hooks">Hooks</a></li>
       <li><a href="#orchestration">Orchestration</a></li>
       <li><a href="#councils">Councils</a></li>
+      <li><a href="#skills">Skills</a></li>
     </ul>
   </div>
 </nav>
@@ -506,9 +507,72 @@
   </div>
 </section>
 
+<section id="skills">
+  <div class="wrap">
+    <div class="section-label">Recommended Skills — Bootstrap Offer</div>
+    <h2>Offer to install the ecosystem, not just your scaffold</h2>
+    <p class="section-intro">
+      After deploying your tier, Launchpad offers a curated set of high-value Claude Code
+      plugins/skills: <strong>[Y] install all · [c] customise · [s] skip</strong>. On Claude Code
+      it runs each skill's own install command (they differ — there is no uniform installer); on
+      claude.ai, where there is no plugin system, it prints a manual list instead. The set lives
+      in an editable manifest, so it is easy to change.
+    </p>
+
+    <div class="council-grid">
+
+      <div class="council-card">
+        <h3>Superpowers</h3>
+        <div class="council-sub">Skill-engineering backbone</div>
+        <p>
+          Brainstorming, writing-plans, TDD, systematic-debugging, subagent-driven-development —
+          the disciplined workflow engine (the same one used to build this project).
+        </p>
+        <div class="advisor-row">
+          <span class="advisor-chip">obra/superpowers-marketplace</span>
+          <span class="advisor-chip">claude plugin install</span>
+        </div>
+      </div>
+
+      <div class="council-card">
+        <h3>Skills Curator</h3>
+        <div class="council-sub">Evaluate before you install</div>
+        <p>
+          Scores a candidate skill before you add it and persists every decision — "decide once,
+          re-decide never." The natural gatekeeper for everything else you install.
+        </p>
+        <div class="advisor-row">
+          <span class="advisor-chip">captkernel/Skills_Curator</span>
+          <span class="advisor-chip">clone + install.sh / .ps1</span>
+        </div>
+      </div>
+
+      <div class="council-card">
+        <h3>Agent Browser</h3>
+        <div class="council-sub">Browser automation for agents</div>
+        <p>
+          Lets agents drive a real browser — tab scan/switch, JS eval, screenshots, uploads.
+          Heaviest of the three: needs Node and downloads a Chrome build on first run.
+        </p>
+        <div class="advisor-row">
+          <span class="advisor-chip">vercel-labs/agent-browser</span>
+          <span class="advisor-chip">npm i -g + agent-browser install</span>
+        </div>
+      </div>
+
+    </div>
+
+    <p style="margin-top:14px; font-size:12px; color:var(--muted)">
+      Install is never fully silent — each skill skips gracefully if its prerequisite is missing,
+      and Launchpad always tells you the one human step left: <strong>restart Claude Code</strong>
+      (or run <code>/reload-plugins</code>) to activate.
+    </p>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
-    <p>Self-contained showcase for the <strong>Launchpad</strong> Claude Code skill.</p>
+    <p>Self-contained showcase for the <strong>Launchpad</strong> Claude Code skill — repo <strong>captkernel/Claunchpad</strong>.</p>
     <p style="margin-top:4px">No external dependencies. All content sourced from the real skill files. Offline-safe.</p>
   </div>
 </footer>

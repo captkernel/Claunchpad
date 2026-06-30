@@ -182,9 +182,16 @@ ask one question:
 - Never overwrite existing config destructively; settings.json edits are additive. If a plugin
   is already enabled, report "already present" and skip it.
 
-**Step 3 — activation.** Installing is **never fully silent**: after the commands run, tell the
-user the one human step left — accept the trust prompt and/or **restart Claude Code** — then
-summarize what was installed, what was skipped, and why.
+**Step 3 — activation (always tell the user to restart).** Installing is **never fully silent**:
+a newly added plugin/skill does not take effect until Claude Code reloads. After the commands
+run, summarize what was installed / skipped / why, then give the user an explicit, unmissable
+restart instruction — do not leave it implied:
+
+> ✅ Installed: <list>. **To activate, restart Claude Code now** — quit and reopen it (or run
+> `/reload-plugins` if the new plugins are already cached). Accept the trust prompt if asked.
+
+State it plainly every time; the skills will appear missing until the user restarts, so the
+restart line is the most important part of the message, not a footnote.
 
 **Step 4 — claude.ai / app path.** There is no plugin system, so **do not attempt to install**.
 Instead print the **manual list** from the manifest: each skill's name, source, one-line *why*,
