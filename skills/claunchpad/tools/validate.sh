@@ -122,6 +122,9 @@ check_recommended() {
   assert_contains references/provisioning.md "customise" "provisioning documents the customise option"
   assert_contains references/provisioning.md "skip" "provisioning documents the skip option"
   assert_contains references/provisioning.md "restart" "provisioning documents restart-to-activate"
+  assert_contains references/provisioning.md "curation layer" "provisioning documents Skills Curator deep integration"
+  assert_contains references/provisioning.md "customize" "provisioning documents the --customize flow"
+  assert_contains templates/recommended-skills.md "curation layer" "manifest frames Skills Curator as the curation layer"
   assert_contains SKILL.md "recommended-skills" "SKILL.md points to recommended skills"
 }
 

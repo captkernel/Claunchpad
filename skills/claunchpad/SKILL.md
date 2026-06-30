@@ -44,8 +44,10 @@ next tier's artifacts non-destructively when a project outgrows its current one.
 
 After the tier is deployed, offer to install a curated set of high-value plugins/skills
 (Superpowers, Skills Curator, Agent Browser) — bundle / customise / skip on Claude Code, a
-manual list on the app. The editable set lives in `templates/recommended-skills.md`; the flow
-is in `references/provisioning.md`.
+manual list on the app. **Skills Curator is the deep-integrated curation layer**: install it
+first, then use its `--customize` to evaluate, security-scan, and adapt every other skill to
+*this* project (infuse, don't invoke) rather than bolting it on as-is. The editable set lives in
+`templates/recommended-skills.md`; the flow is in `references/provisioning.md`.
 
 On claude.ai or the API (no filesystem): skip file writes, apply behaviors in-session,
 offer templates as copy-paste blocks.

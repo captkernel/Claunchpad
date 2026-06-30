@@ -264,22 +264,6 @@
   </div>
 </nav>
 
-<style>
-  .tabbar { border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 35; background: rgba(13,15,21,.78); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
-  .tabbar .wrap { display: flex; gap: 8px; justify-content: center; }
-  .tab-btn { background: none; border: none; color: var(--muted); font: 700 14.5px var(--font); padding: 16px 24px; cursor: pointer; border-bottom: 2px solid transparent; transition: color .2s, border-color .2s; }
-  .tab-btn:hover { color: var(--text); }
-  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
-  .tab-panel[hidden] { display: none; }
-</style>
-
-<div class="tabbar"><div class="wrap">
-  <button class="tab-btn active" data-tab="overview" onclick="showTab('overview')">Overview</button>
-  <button class="tab-btn" data-tab="demo" onclick="showTab('demo')">▶ See It In Action</button>
-</div></div>
-
-<div class="tab-panel" id="panel-overview">
-
 <!-- Hero -->
 <div class="wrap">
   <div class="hero">
@@ -801,6 +785,19 @@
       in an editable manifest, so it is easy to change.
     </p>
 
+    <div style="display:flex;gap:18px;align-items:flex-start;background:linear-gradient(180deg,rgba(91,141,238,.10),var(--surface));border:1px solid rgba(91,141,238,.32);border-left:4px solid var(--accent);border-radius:var(--radius);padding:22px 24px;margin-bottom:30px">
+      <span style="flex:none;background:var(--accent);color:#fff;font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:7px 13px;border-radius:20px;white-space:nowrap">⚡ Built&nbsp;in</span>
+      <p style="font-size:15px;color:var(--muted);margin:0;line-height:1.72">
+        <strong style="color:var(--text)">Skills Curator is deeply integrated with Claunchpad.</strong>
+        Claunchpad doesn't just install skills — it routes them through Skills Curator (captKernel's
+        own gatekeeper) to evaluate, security-scan, and
+        <em style="color:var(--accent2);font-style:normal;font-weight:600">rebuild each skill for your project</em> —
+        breaking it into its parts and keeping only the pieces that fit your stack, rewritten in your
+        project's voice. You absorb the capability, not the original author's accent.
+        <strong style="color:var(--text)">Infuse, don't invoke.</strong>
+      </p>
+    </div>
+
     <div class="council-grid">
 
       <div class="council-card">
@@ -816,16 +813,17 @@
         </div>
       </div>
 
-      <div class="council-card">
-        <h3>Skills Curator</h3>
-        <div class="council-sub">Evaluate before you install</div>
+      <div class="council-card" style="border:1px solid rgba(91,141,238,.4)">
+        <h3>Skills Curator <span style="font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--accent);border:1px solid rgba(91,141,238,.4);border-radius:20px;padding:2px 8px;vertical-align:middle">CURATION LAYER</span></h3>
+        <div class="council-sub">Installs first · curates the rest</div>
         <p>
-          Scores a candidate skill before you add it and persists every decision — "decide once,
-          re-decide never." The natural gatekeeper for everything else you install.
+          Evaluates, security-scans, and <strong style="color:var(--text)">rebuilds every other skill
+          for your project</strong> — decompose it, keep the high-fit parts, rewrite the rest in your
+          stack, drop the noise. Persists every decision: decide once, re-decide never.
         </p>
         <div class="advisor-row">
           <span class="advisor-chip">captkernel/Skills_Curator</span>
-          <span class="advisor-chip">clone + install.sh / .ps1</span>
+          <span class="advisor-chip">--customize · infuse, don't invoke</span>
         </div>
       </div>
 
@@ -852,74 +850,6 @@
   </div>
 </section>
 
-</div><!-- /panel-overview -->
-
-<div class="tab-panel" id="panel-demo" hidden>
-
-  <div class="wrap">
-    <div class="hero" style="padding:clamp(48px,8vh,92px) 0 36px">
-      <div class="hero-badge">See it in action</div>
-      <h1>Same project.<br><em>Two very different days.</em></h1>
-      <p>What actually changes when Claunchpad is running underneath you — shown on the work you do every day, not in the abstract.</p>
-    </div>
-  </div>
-
-  <!-- Animated playthrough -->
-  <section style="border-top:none">
-    <div class="wrap">
-      <div class="section-label">Watch it play out</div>
-      <h2>An example project, step by step</h2>
-      <p class="section-intro">The same JWT auth refactor across two days. Press play and watch the two paths diverge — left without Claunchpad, right with it.</p>
-
-      <div class="player">
-        <div class="player-bar">
-          <button class="pbtn" id="playBtn" onclick="anim.toggle()">❚❚ Pause</button>
-          <button class="pbtn" onclick="anim.replay()">↻ Replay</button>
-          <div class="timeline" id="timeline"></div>
-        </div>
-        <div class="stage-title" id="stageTitle"></div>
-        <div class="anim-grid">
-          <div class="anim-col bad">
-            <div class="anim-head"><span class="dot"></span> Without Claunchpad</div>
-            <div class="anim-body" id="bodyBad"></div>
-          </div>
-          <div class="anim-col good">
-            <div class="anim-head"><span class="dot"></span> With Claunchpad</div>
-            <div class="anim-body" id="bodyGood"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Quickstart -->
-  <section>
-    <div class="wrap">
-      <div class="section-label">30-second quickstart</div>
-      <h2>Three steps to your first run</h2>
-      <div class="qs-grid">
-        <div class="qs-step"><div class="qs-num">1</div><h3>Drop in the skill</h3><p><code>cp -r skills/claunchpad ~/.claude/skills/</code> — or copy it into a single repo's <code>.claude/skills/</code>.</p></div>
-        <div class="qs-step"><div class="qs-num">2</div><h3>Open your project</h3><p>Start Claude Code and say <em>"set up this project"</em> — or just start working; it auto-triggers.</p></div>
-        <div class="qs-step"><div class="qs-num">3</div><h3>Answer one question</h3><p>Tell it your experience level. Memory, hooks, and the recommended-skills offer switch on. That's it.</p></div>
-      </div>
-      <div class="hook-contract" style="margin-top:20px">On claude.ai, upload <code>skills/dist/claunchpad.zip</code> via Settings → Capabilities → Skills.</div>
-    </div>
-  </section>
-
-  <!-- Dogfooding -->
-  <section>
-    <div class="wrap">
-      <div class="section-label">Why trust it</div>
-      <h2>Built the way it preaches</h2>
-      <p class="section-intro">Claunchpad was built using its own discipline — so the rigor it asks of you is rigor it survived first.</p>
-      <div class="proof">
-        <p>Every piece was implemented by a fresh agent, reviewed by a second one for correctness and for building <em>only</em> what was asked, and verified against an automated test suite before it counted as done. At the end, a single broad review read the whole thing at once — and immediately earned its keep, catching two bugs every narrow per-task review had structurally missed: <strong>a feature the docs proudly described but no code actually performed</strong>, and <strong>a brand-new file quietly pointing at two files the same change had just deleted</strong>. Both were fixed before anything shipped.</p>
-        <p>A tool that cuts corners in its own construction has no business asking you to trust its discipline. This one doesn't cut them.</p>
-      </div>
-    </div>
-  </section>
-
-</div><!-- /panel-demo -->
 
 <footer>
   <div class="wrap">
@@ -932,94 +862,9 @@
   var io = new IntersectionObserver(function(es){
     es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: .12, rootMargin: '0px 0px -7% 0px' });
-
-  function arm(scope){
-    (scope || document).querySelectorAll(
-      '.tier-grid>*,.pillar-grid>*,.hook-grid>*,.council-grid>*,.contract-grid>*,.ladder,.route-table,.qs-grid>*,.proof'
-    ).forEach(function(el, i){
-      if(!el.classList.contains('reveal')){ el.classList.add('reveal'); el.style.transitionDelay = ((i % 3) * 80) + 'ms'; }
-      io.observe(el);
-    });
-  }
-
-  function showTab(name){
-    document.querySelectorAll('.tab-panel').forEach(function(p){ p.hidden = (p.id !== 'panel-' + name); });
-    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.toggle('active', b.dataset.tab === name); });
-    // the anchor nav is only relevant to the Overview page
-    document.querySelector('nav').style.display = (name === 'overview') ? '' : 'none';
-    window.scrollTo({ top: 0, behavior: 'auto' });
-    var panel = document.getElementById('panel-' + name);
-    if(panel){ arm(panel); requestAnimationFrame(function(){ panel.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); }); }); }
-    if(name === 'demo') anim.replay(); else anim.leave();
-  }
-  arm();
-
-  /* ===== animated example-project playthrough ===== */
-  var STAGES = [
-    { t: "Day 1 · 9:00 — Starting the auth refactor",
-      bad:  [["u","you ▸ refactor auth to JWT with refresh tokens"],["c","claude ▸ Let's use refresh-token rotation. Wiring it up…"]],
-      good: [["u","you ▸ refactor auth to JWT with refresh tokens"],["c","claude ▸ Let's use refresh-token rotation. Wiring it up…"],["g","✓ decision saved to memory: refresh-token rotation"]] },
-    { t: "Day 1 · 14:00 — A nasty intermittent bug",
-      bad:  [["c","claude ▸ tests fail intermittently…"],["u","you ▸ it's clock skew — add 30s leeway"],["c","claude ▸ Fixed."]],
-      good: [["c","claude ▸ tests fail intermittently…"],["u","you ▸ it's clock skew — add 30s leeway"],["c","claude ▸ Fixed."],["g","✓ fix saved to memory: clock-skew → 30s leeway"]] },
-    { t: "Day 1 · 18:00 — /clear to free up context",
-      bad:  [["sys","$ /clear"],["r","✗ everything Claude learned today is gone"]],
-      good: [["sys","$ /clear"],["g","✓ memory persists on disk — nothing lost"]] },
-    { t: "Day 2 · 9:00 — Pick the work back up",
-      bad:  [["u","you ▸ continue the auth refactor"],["c","claude ▸ I have no context on a prior refactor —"],["c","         can you walk me through it again?"],["r","✗ you re-explain for ten minutes"]],
-      good: [["sys","↳ load-memory reloaded: 6 decisions · 3 fixes"],["u","you ▸ continue the auth refactor"],["c","claude ▸ Picking up the JWT refactor — refresh-token"],["c","         rotation, clock-skew fixed; next is logout."],["g","✓ starts exactly where you left off"]] },
-    { t: "Day 2 · 11:00 — A risky change",
-      bad:  [["u","you ▸ swap the session store"],["c","claude ▸ done (one solo pass, no review)"],["r","✗ a subtle bug ships to main"]],
-      good: [["u","you ▸ swap the session store"],["c","claude ▸ building → independent review → verify…"],["g","✓ the Pair caught the bug before merge"]] },
-    { t: "Day 2 · 15:00 — Need a browser to test the flow",
-      bad:  [["u","you ▸ automate the login flow in a browser"],["c","claude ▸ no browser tool is installed"],["r","✗ you hunt for a skill, install it by hand"]],
-      good: [["u","you ▸ automate the login flow in a browser"],["c","claude ▸ Agent Browser is already here — running it"],["g","✓ installed at setup; nothing to find"]] },
-    { t: "The result, two days in",
-      bad:  [["r","✗ started over, shipped a bug, lost an hour"],["r","✗ tomorrow: back to square one"]],
-      good: [["g","✓ compounded, caught the bug, already equipped"],["g","✓ tomorrow: starts smarter than today"]] }
-  ];
-
-  var anim = (function(){
-    var i = 0, timer = null, playing = true;
-    var tl = document.getElementById('timeline');
-    STAGES.forEach(function(s, idx){
-      var d = document.createElement('button');
-      d.className = 'tl-dot'; d.setAttribute('aria-label', 'stage ' + (idx + 1));
-      d.onclick = function(){ go(idx, true); };
-      tl.appendChild(d);
-    });
-    function col(el, lines){
-      el.innerHTML = '';
-      lines.forEach(function(ln, k){
-        var div = document.createElement('div');
-        div.className = 'ln ln-' + ln[0];
-        div.textContent = ln[1];
-        div.style.animationDelay = (k * 200) + 'ms';
-        el.appendChild(div);
-      });
-    }
-    function render(){
-      var s = STAGES[i];
-      document.getElementById('stageTitle').textContent = s.t;
-      col(document.getElementById('bodyBad'), s.bad);
-      col(document.getElementById('bodyGood'), s.good);
-      Array.prototype.forEach.call(tl.children, function(d, idx){
-        d.className = 'tl-dot' + (idx === i ? ' active' : (idx < i ? ' done' : ''));
-      });
-    }
-    function schedule(){
-      clearTimeout(timer);
-      if(!playing) return;
-      timer = setTimeout(function(){ go((i + 1) % STAGES.length, false); }, i === STAGES.length - 1 ? 4600 : 3600);
-    }
-    function setBtn(){ var b = document.getElementById('playBtn'); if(b) b.textContent = playing ? '❚❚ Pause' : '▶ Play'; }
-    function go(n, manual){ i = n; render(); if(manual){ playing = true; setBtn(); } schedule(); }
-    return {
-      toggle: function(){ playing = !playing; setBtn(); if(playing) schedule(); else clearTimeout(timer); },
-      replay: function(){ playing = true; setBtn(); go(0, false); },
-      leave:  function(){ clearTimeout(timer); }
-    };
-  })();
+  document.querySelectorAll('.tier-grid>*,.pillar-grid>*,.hook-grid>*,.council-grid>*,.contract-grid>*,.ladder,.route-table').forEach(function(el, i){
+    el.classList.add('reveal'); el.style.transitionDelay = ((i % 3) * 80) + 'ms'; io.observe(el);
+  });
 </script>
 
 </body>

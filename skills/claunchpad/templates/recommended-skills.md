@@ -30,8 +30,16 @@ Install is **never fully silent** on Claude Code — there is always a trust pro
 
 ## skills-curator
 - **id:** `skills-curator`
-- **why:** Evaluates a candidate skill before you install it and persists every decision
-  ("decide once, re-decide never"). The natural gatekeeper for everything else you add.
+- **role:** **Claunchpad's curation layer — install this FIRST.** Not just one of the recommended
+  skills; it is *how* Claunchpad manages skills. It evaluates and security-scans a candidate
+  before install (`--check`, `/skill-evaluate`), recommends by project fit not popularity
+  (`/skill-recommend`, `--symptoms`), and — the deep integration — **`--customize`s** any skill to
+  *this* project: decompose its sections, keep the high-fit parts verbatim, rewrite
+  stack-mismatched examples in your stack, drop the rest, and write a project-owned fork at
+  `~/.claude/skills/<name>-for-<project>/`. *Infuse, don't invoke.* Every decision is persisted
+  ("decide once, re-decide never").
+- **why:** so the other skills below — and anything you add later — are vetted, fit-checked, and
+  absorbed in your project's voice instead of bolted on with the original author's accent.
 - **source:** `captkernel/Skills_Curator` (plugin `skills-curator`; install-script canonical)
 - **type:** install-script
 - **install (posix / Git Bash):**

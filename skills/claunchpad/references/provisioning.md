@@ -163,6 +163,30 @@ not hard-code skill names). Each entry carries its own real install command(s) a
 the current set uses three different install mechanisms, so run each skill's own command, not a
 uniform installer.
 
+### Skills Curator is the curation layer (deep integration)
+
+Skills Curator (`captkernel/Skills_Curator`) is not merely one of the recommended skills — it is
+**how Claunchpad manages skills**. When the user accepts the offer, install Skills Curator
+**first**, then route everything else through it:
+
+- **Evaluate before adding.** Run Skills Curator's `--check` (pre-install security scan) and
+  `/skill-evaluate` on a skill before it is installed — Claunchpad never adds an unvetted skill.
+- **Customise, don't bolt on — *infuse, don't invoke*.** Instead of installing a third-party
+  skill as-is, use `--customize <owner/repo>`: it decomposes the skill into its sections, scores
+  each against *this* project's stack and goals, keeps the high-fit parts verbatim, rewrites
+  stack-mismatched examples in your stack, drops the irrelevant parts, and writes a project-owned
+  fork at `~/.claude/skills/<name>-for-<project>/`. The project absorbs the capability in its own
+  voice instead of inheriting the original author's accent.
+- **Recommend by fit, not popularity.** `/skill-recommend` surfaces skills that match the
+  project's fingerprint; `--symptoms "<plain-language complaint>"` maps a problem to a skill.
+- **Decide once, re-decide never.** Every adopt/reject verdict is persisted, so the same skill is
+  never re-evaluated from scratch months later.
+
+So the flow for the *other* recommended skills — and any skill the user adds later — is: Skills
+Curator evaluates it, security-scans it, and `--customize`s it to this project, *then* it is
+added. This is the default whenever Skills Curator is present; fall back to a plain install only
+if the user declined it.
+
 **Step 1 — detect surface.** Claude Code (filesystem + a `claude` / `npm` CLI on PATH) vs
 claude.ai / the app (no plugin system).
 
@@ -176,6 +200,8 @@ ask one question:
 - For each chosen skill, detect the OS (Windows vs POSIX) and run that skill's matching install
   command from the manifest. Default **user scope** (`~/.claude/`) so the tools are available
   across every project.
+- **Install Skills Curator first** (if chosen), then prefer its `--customize` path for the other
+  skills (see the curation-layer section above) over a plain as-is install.
 - **Check prereqs first.** Before running a skill's command, confirm its required tool exists
   (e.g. `claude`, `git`, `node`/`npm`). If a prereq is missing, **skip that one skill** and
   print its `manual install` line — do not abort the rest.

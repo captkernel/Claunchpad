@@ -34,7 +34,10 @@ You get all of this automatically. **No expertise required.**
   the shared memory, so every agent builds on what the others learned instead of repeating it.
 - **🧩 The best skills, one tap** — at setup, Claunchpad offers to install the high-value
   ecosystem skills (**Superpowers**, **Skills Curator**, **Agent Browser**) the right way for
-  your machine, so you start with the good tools already wired in.
+  your machine. **Skills Curator is deeply integrated as the curation layer**: every other skill
+  is evaluated, security-scanned, and *rebuilt for your project* through its `--customize` —
+  decomposed, with only the parts that fit your stack kept and rewritten in your voice.
+  *Infuse, don't invoke.*
 - **✅ Best-practice guardrails** — the things experienced users do by reflex, on by default:
   spend agents only when they pay off (multi-agent runs cost ~15× the tokens), never call work
   "done" without an independent review and verification, route cheap models to cheap roles, and
