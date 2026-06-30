@@ -26,7 +26,7 @@ Install is **never fully silent** on Claude Code — there is always a trust pro
   and `enabledPlugins."superpowers@superpowers-marketplace" = true`.
 - **activate:** accept the trust prompt / restart Claude Code.
 - **prereqs:** the `claude` CLI on PATH.
-- **manual install (app):** "Run `/plugin marketplace add obra/superpowers-marketplace` then `/plugin install superpowers@superpowers-marketplace` in Claude Code."
+- **manual install (app):** "In Claude Code, run `claude plugin marketplace add obra/superpowers-marketplace` then `claude plugin install superpowers@superpowers-marketplace` (or the interactive `/plugin` equivalents)."
 
 ## skills-curator
 - **id:** `skills-curator`

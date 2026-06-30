@@ -116,9 +116,11 @@ check_recommended() {
   assert_contains templates/recommended-skills.md "install.sh" "manifest has POSIX install path"
   assert_contains templates/recommended-skills.md "install.ps1" "manifest has Windows install path"
   assert_contains templates/recommended-skills.md "npm install -g agent-browser" "manifest has agent-browser npm install"
+  assert_contains templates/recommended-skills.md "agent-browser install" "manifest has agent-browser Chrome-download step"
   assert_contains templates/recommended-skills.md "claude plugin marketplace add" "manifest has plugin marketplace install"
   assert_contains references/provisioning.md "recommended-skills" "provisioning links the manifest"
   assert_contains references/provisioning.md "customise" "provisioning documents the customise option"
+  assert_contains references/provisioning.md "skip" "provisioning documents the skip option"
   assert_contains references/provisioning.md "restart" "provisioning documents restart-to-activate"
   assert_contains SKILL.md "recommended-skills" "SKILL.md points to recommended skills"
 }
