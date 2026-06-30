@@ -801,17 +801,21 @@
       in an editable manifest, so it is easy to change.
     </p>
 
-    <div style="display:flex;gap:18px;align-items:flex-start;background:linear-gradient(180deg,rgba(91,141,238,.10),var(--surface));border:1px solid rgba(91,141,238,.32);border-left:4px solid var(--accent);border-radius:var(--radius);padding:22px 24px;margin-bottom:30px">
-      <span style="flex:none;background:var(--accent);color:#fff;font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:7px 13px;border-radius:20px;white-space:nowrap">⚡ Built&nbsp;in</span>
-      <p style="font-size:15px;color:var(--muted);margin:0;line-height:1.72">
-        <strong style="color:var(--text)">Skills Curator is deeply integrated with Claunchpad.</strong>
-        Claunchpad doesn't just install skills — it routes them through Skills Curator (captKernel's
-        own gatekeeper) to evaluate, security-scan, and
-        <em style="color:var(--accent2);font-style:normal;font-weight:600">rebuild each skill for your project</em> —
-        breaking it into its parts and keeping only the pieces that fit your stack, rewritten in your
-        project's voice. You absorb the capability, not the original author's accent.
-        <strong style="color:var(--text)">Infuse, don't invoke.</strong>
-      </p>
+    <div style="position:relative;background:var(--grad);padding:1.5px;border-radius:20px;margin-bottom:32px;box-shadow:0 24px 64px -28px rgba(91,141,238,.55)">
+      <div style="background:radial-gradient(120% 140% at 0% 0%, rgba(91,141,238,.14), transparent 55%), var(--surface);border-radius:18.5px;padding:28px 30px">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;flex-wrap:wrap">
+          <span style="background:var(--grad);color:#fff;font-size:11px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;padding:8px 15px;border-radius:30px;white-space:nowrap;box-shadow:0 6px 18px -5px rgba(91,141,238,.7)">⚡ Deeply integrated</span>
+          <span style="font-size:19px;font-weight:800;color:var(--text);letter-spacing:-.015em">Skills Curator <span style="color:var(--muted);font-weight:600">×</span> Claunchpad</span>
+        </div>
+        <p style="font-size:15px;color:var(--muted);margin:0;line-height:1.75">
+          Claunchpad doesn't just install skills — it routes them through Skills Curator (captKernel's
+          own gatekeeper) to evaluate, security-scan, and
+          <em style="color:var(--accent2);font-style:normal;font-weight:700">rebuild each skill for your project</em>:
+          break it into its parts, keep only what fits your stack, rewrite the rest in your project's
+          voice, drop the noise. You absorb the capability, not the original author's accent.
+          <strong style="color:var(--text)">Infuse, don't invoke.</strong>
+        </p>
+      </div>
     </div>
 
     <div class="council-grid">
@@ -916,6 +920,32 @@
     </div>
   </section>
 
+  <!-- Bootstrap interview -->
+  <section>
+    <div class="wrap">
+      <div class="section-label">First run · the one question</div>
+      <h2>Setup is a 30-second conversation</h2>
+      <p class="section-intro">Claunchpad reads the project, asks one thing, and deploys exactly the tier that fits — no config files for you to write.</p>
+      <div class="term" style="max-width:780px">
+        <div class="term-head"><span class="dot" style="background:var(--accent)"></span> claude code · brand-new project</div>
+        <pre><span class="c">claude ▸</span> No CLAUDE.md here — want me to set this up with
+        Claunchpad? First: how familiar are you with Claude Code?
+        <span class="u">[1] New   [2] Comfortable   [3] Advanced</span>
+
+<span class="u">you ▸</span> 2
+
+<span class="c">claude ▸</span> Scanning… Node + TypeScript, vitest, real git
+        history, no .claude/ yet → a real working project.
+        <span style="color:var(--starter)">Standard tier.</span> Deploying:
+          • CLAUDE.md, MEMORY.md (Decisions/Learnings/Errors/Refs)
+          • load-memory + harvest-nudge hooks
+          • the 7-point delegation contract
+        Install the recommended skills too?
+        <span class="u">[Y] all · [c] customise · [s] skip</span></pre>
+      </div>
+    </div>
+  </section>
+
   <!-- /clear transcript -->
   <section>
     <div class="wrap">
@@ -947,6 +977,102 @@
         the logout endpoint. Starting there.</pre>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- Memory depiction -->
+  <section>
+    <div class="wrap">
+      <div class="section-label">The memory store</div>
+      <h2>Memory you can read, version, and trust</h2>
+      <p class="section-intro">Starter keeps one tidy <code>MEMORY.md</code>; as it grows, Claunchpad graduates it into a per-fact <code>memory/</code> library with frontmatter and links — both reloaded automatically every session.</p>
+      <div class="term-wrap">
+        <div class="term">
+          <div class="term-head"><span class="dot" style="background:var(--starter)"></span> MEMORY.md · starter</div>
+          <pre><span class="sys">## Decisions</span>
+- 2026-06-30 JWT: refresh-token rotation
+  (stateless, revocable)
+<span class="sys">## Errors</span>
+- 2026-06-30 flaky tests → clock skew;
+  fix: 30s leeway
+<span class="sys">## Learnings</span>
+- API rate-limits at 50/s — batch in 40s
+<span class="sys">## References</span>
+- staging deploy: `make deploy-staging`</pre>
+        </div>
+        <div class="term">
+          <div class="term-head"><span class="dot" style="background:var(--pro)"></span> memory/jwt-rotation.md · graduated</div>
+          <pre><span class="sys">---</span>
+name: jwt-refresh-rotation
+description: why we chose refresh-token rotation
+metadata:
+  type: decision
+  date: 2026-06-30
+<span class="sys">---</span>
+Chose refresh-token rotation over sliding
+sessions — revocable without server state.
+See also <span style="color:var(--accent2)">[[clock-skew-leeway]]</span>.</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Orchestration -->
+  <section>
+    <div class="wrap">
+      <div class="section-label">Agent teams, right-sized</div>
+      <h2>It picks the smallest team that does the job</h2>
+      <p class="section-intro">You don't choose the structure — Claunchpad escalates only when the task earns it, and drops back the moment it doesn't.</p>
+      <div class="ladder">
+        <div class="ladder-row"><div class="ladder-tier">Solo</div><div class="ladder-body">"rename a variable" → <strong>one pass.</strong> No ceremony.</div></div>
+        <div class="ladder-row"><div class="ladder-tier">Pair</div><div class="ladder-body">"add a feature + tests" → <strong>build → independent review → verify.</strong> The default for real changes.</div></div>
+        <div class="ladder-row"><div class="ladder-tier">Fan-out</div><div class="ladder-body">"audit 12 endpoints for auth bugs" → <strong>4 parallel agents</strong>, findings merged.</div></div>
+        <div class="ladder-row"><div class="ladder-tier">Workflow</div><div class="ladder-body">"migrate 40 files to the new API" → <strong>a scripted assembly line.</strong></div></div>
+      </div>
+      <div class="cost-note" style="margin-top:16px"><strong>Why restraint:</strong> a wide multi-agent run costs ~15× the tokens and hurts on tightly-coupled work. The first rule is to spend agents on purpose.</div>
+    </div>
+  </section>
+
+  <!-- Skills Curator customize -->
+  <section>
+    <div class="wrap">
+      <div class="section-label">Skills Curator · deeply integrated</div>
+      <h2>It rebuilds each skill <em>for your project</em></h2>
+      <p class="section-intro">Instead of bolting a third-party skill on as-is, Claunchpad runs it through Skills Curator's <code>--customize</code>: keep what fits your stack, rewrite the rest in your voice, drop the noise. <strong>Infuse, don't invoke.</strong></p>
+      <div class="term" style="max-width:840px">
+        <div class="term-head"><span class="dot" style="background:var(--accent)"></span> skills-curator --customize obra/superpowers:tdd</div>
+        <pre><span class="sys">↳ fingerprinting project… Python · pytest · data-pipeline</span>
+
+01  <span style="color:var(--starter)">keep</span>      ## Red-Green-Refactor        score 7  (testing)
+02  <span style="color:#eab308">trim</span>      ## Common Rationalizations    score 2
+03  <span style="color:var(--bad)">drop</span>      ## When to Use (Vue demo)     score 0
+04  <span style="color:var(--accent2)">rewrite</span>   frontmatter → tdd-for-&lt;project&gt;
+
+<span class="c">→ wrote ~/.claude/skills/tdd-for-yourproject/SKILL.md</span>
+  <span class="sys">you absorb the capability, not the author's accent.</span></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Council -->
+  <section>
+    <div class="wrap">
+      <div class="section-label">Decision support · councils</div>
+      <h2>Pressure-test the big calls before you commit</h2>
+      <p class="section-intro">For a consequential choice or a whole-project go/no-go, Claunchpad convenes a council — independent lenses, then a Chair who names the binding constraint and the hardest truth.</p>
+      <div class="term" style="max-width:860px">
+        <div class="term-head"><span class="dot" style="background:var(--pro)"></span> Feasibility Council · "paid skills marketplace, 8 weeks"</div>
+        <pre>Tech / Build     <span style="color:#eab308">AMBER</span>   trust &amp; safety isn't in the 8 weeks
+Finance          <span style="color:var(--bad)">RED</span>     10% of cheap skills won't cover review cost
+Go-to-Market     <span style="color:#eab308">AMBER</span>   launch spike ≠ a repeatable channel
+Marketing        <span style="color:#eab308">AMBER</span>   buyers expect skills for free
+
+<span class="c">CHAIR ▸</span> Not yet — validate first.
+        Binding constraint: <span style="color:var(--text)">buyer willingness to pay.</span>
+        <span class="sys">The thing that has to be true: people will pay for
+        what they could copy for free — and you have no
+        evidence of that yet.</span></pre>
       </div>
     </div>
   </section>
