@@ -8,7 +8,7 @@
   <a href="https://github.com/captkernel/Claunchpad/raw/master/docs/video/claunchpad-reel.mp4">
     <img src="docs/video/claunchpad-poster.jpg" alt="Claunchpad — 37 second launch reel" width="300">
   </a>
-  <br><em>37 seconds: where the learning curve disappears. (<a href="https://github.com/captkernel/Claunchpad/raw/master/docs/video/claunchpad-reel.mp4">watch</a>)</em>
+  <br><em>37 seconds: where the learning curve disappears. — <a href="https://github.com/captkernel/Claunchpad/raw/master/docs/video/claunchpad-reel.mp4">9:16 reels</a> · <a href="https://github.com/captkernel/Claunchpad/raw/master/docs/video/claunchpad-reel-4x5.mp4">4:5 feed</a></em>
 </p>
 
 **▶ [See the interactive showcase](https://htmlpreview.github.io/?https://github.com/captkernel/Claunchpad/blob/master/showcase.html)** &nbsp;·&nbsp; [Read the story](.share/substack-claunchpad.md)
