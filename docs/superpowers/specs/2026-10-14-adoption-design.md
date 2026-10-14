@@ -31,7 +31,7 @@ then submit"; VoltAgent: "real community usage", which closed PR #548 in May 202
 
    | Repo | Plugin name | Version |
    |---|---|---|
-   | Skills_Curator | `skills-curator` (exists) | keep 4.6.0, verify matches CHANGELOG |
+   | Skills_Curator | `skills-curator` (exists) | 4.6.1 (content change, see below) |
    | Claunchpad | `claunchpad` | 1.0.0 |
    | claude-thinking-tools | `thinking-tools` | 1.0.0 |
    | claude-writing-tools | `writing-tools` | 1.0.0 |
@@ -39,7 +39,11 @@ then submit"; VoltAgent: "real community usage", which closed PR #548 in May 202
 
    Each repo's README/CONTRIBUTING notes: bump `version` on every release or users never get updates.
 3. **Self-marketplace per repo**: `.claude-plugin/marketplace.json` with one entry `{"name": "<plugin>", "source": "./"}`, so each README can offer `/plugin marketplace add captkernel/<repo>`.
-4. **Gate:** `claude plugin validate --strict` passes for all 5 repos and the hub; then a scratch install test (fresh dir, add hub marketplace, install all 5, confirm each skill is listed/loadable). Failures are fixed before Stage 2.
+4. **Bug fixes found while validating (2026-10-14), in scope because they block installs:**
+   - 12 toolkit skills (all but `council`) and their `commands/*.md` have unparseable YAML frontmatter (unquoted `Triggers: "..."` in `description`), so Claude Code loads them with empty metadata and they never auto-trigger. Quote the descriptions; rebuild `skills/dist` zips.
+   - `plugin.json` `skills` adds to the default `skills/` scan, so Skills Curator's plugin also loads the claude.ai edition. Move it to `editions/`; move root `CLAUDE.md` to `.claude/CLAUDE.md` (root one fails `--strict`). Release as 4.6.1.
+   - Toolkit plugins set `"commands": []` so the duplicate `commands/` copies don't load beside the skills.
+5. **Gate:** `claude plugin validate --strict` passes for all 5 repos and the hub; then a scratch install test (fresh dir, add hub marketplace, install all 5, confirm each skill is listed/loadable). Failures are fixed before Stage 2.
 
 ## Stage 2 — Findable
 
