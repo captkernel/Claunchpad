@@ -2,3 +2,13 @@ node_modules/
 .DS_Store
 *.log
 .remember/
+
+# Render / promo production output — lives in ../_media/
+*-output-*/
+ratio-*/
+.playwright-mcp/
+*-preview.html
+/*.png
+
+# Local dashboard status file
+.pcc.json

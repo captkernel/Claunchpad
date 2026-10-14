@@ -1,6 +1,7 @@
 # Design — `<NAME-TBD>`: an importable skill that makes Claude operate at its best on any project
 
 > Spec date: 2026-06-24 · Status: approved design, pre-implementation
+> **Shipped as Claunchpad.** This is the original pre-implementation spec, kept as a historical record; `<NAME-TBD>` below refers to the name chosen later.
 > Working name: **`<NAME-TBD>`** (project folder + skill share the name; final name chosen
 > before ship — must be lowercase-hyphen, ≤64 chars, and must NOT contain "claude" or
 > "anthropic", which are reserved skill-name words).

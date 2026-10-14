@@ -17,5 +17,3 @@ The files written into a target project come from `skills/claunchpad/templates/`
 **Claude Code:** copy `claunchpad/` into `~/.claude/skills/` (global) or a repo's
 `.claude/skills/`. **claude.ai:** upload `dist/claunchpad.zip` (Settings → Capabilities →
 Skills, or a Project).
-
-> Name is provisional, see `../RENAME.md` before publishing.
