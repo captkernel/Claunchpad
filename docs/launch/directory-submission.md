@@ -119,3 +119,12 @@ Run on 2026-10-15 at HEAD of `master` before adding this file.
 | Secrets in tracked files | None found (filename scan for secret/.env/.key/.pem) |
 | Pinned npx/uvx executed by the plugin | The plugin runs no npx or uvx. Docs only: `npm install -g agent-browser` in the README and `templates/recommended-skills.md` is unpinned, and runs only after the user accepts the bootstrap offer. Consider pinning it (`agent-browser@<version>`) to be safe with the scanner |
 | Security scan disclosure | README section "What it runs, reads and sends" covers writes, hooks, network and optional installs |
+
+## Registries
+
+Checked 2026-10-15. Topics `agent-skills`, `claude-code-plugin`, `claude-skills`, `claude-code` are set on this repo.
+
+- skills.sh publisher page `https://skills.sh/captkernel`: loads; lists `skills_curator` (2 skills) and `claude-thinking-tools` (1 skill). Claunchpad is not listed.
+- `https://skills.sh/captkernel/Claunchpad` and `https://skills.sh/captkernel/claunchpad`: both HTTP 404. Status: not listed.
+- `https://skills.sh/?q=claunchpad`: client-rendered shell, no results visible to a fetch, so inconclusive; the 404 pages and publisher page are the evidence.
+- Command a user would run: `npx skills add captkernel/Claunchpad`. Not run here, to avoid installing into real agent directories. skills.sh appears to index from install telemetry, so a page may appear after the first installs.
