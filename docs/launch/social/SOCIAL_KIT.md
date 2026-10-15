@@ -1,6 +1,6 @@
 # Claunchpad, distribution kit
 
-Copy-paste ready, posted from the captKernel accounts (handle `@captkernel`). Repo is public (MIT). Voice is founder-to-builders: direct, lowercase-leaning, honest about the rough edges, and it ends on a real question. No em dashes. The install line goes first everywhere except Reddit: Reddit posts open with the problem and put the Install and Repo lines at the end of the body, because self-promotion filters on newer accounts tend to remove posts that lead with an install command. When and where to post: [`../CHECKLIST.md`](../CHECKLIST.md) (Launch 2).
+Copy-paste ready, posted from the captKernel accounts (handle `@captkernel`). Repo is public (MIT). Voice is founder-to-builders: direct, lowercase-leaning, honest about the rough edges, and it ends on a real question. No em dashes. The install line is prominent in every post. Reddit, LinkedIn and Show HN posts open with the problem and put the Install and Repo lines at the end of the body (on Reddit because self-promotion filters on newer accounts tend to remove posts that lead with an install command). When and where to post: [`../CHECKLIST.md`](../CHECKLIST.md) (Launch 2).
 
 **The links**
 ```
