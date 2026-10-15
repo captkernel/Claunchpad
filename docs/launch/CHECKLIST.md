@@ -94,4 +94,4 @@ If the new Reddit or HN accounts are still filtered on launch day, post from the
   ```
   Baseline before launch (checked 15 Oct 2026): Skills_Curator 3 stars, about 20 installs on skills.sh; Claunchpad 0 stars.
 - [ ] Answer every comment within 24 hours, on every platform. Fix what people report and say so in the thread.
-- [ ] Then the awesome-list listings (Task 13, `docs/launch/awesome-lists.md` in both repos): awesome-claude-code after Launch 1, Claunchpad's only after the Skills Curator recommendation is resolved; VoltAgent held until there is visible usage.
+- [ ] Then the awesome-list listings. The entries and the submission order are in `docs/launch/awesome-lists.md` in each repo: awesome-claude-code after Launch 1, Skills Curator first and Claunchpad once that one is accepted or declined; VoltAgent held until there is visible usage.
