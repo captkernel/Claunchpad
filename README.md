@@ -11,7 +11,7 @@
   <br><em>37 seconds: where the learning curve disappears. — <a href="https://github.com/captkernel/Claunchpad/raw/master/docs/video/claunchpad-reel.mp4">9:16 reels</a> · <a href="https://github.com/captkernel/Claunchpad/raw/master/docs/video/claunchpad-reel-4x5.mp4">4:5 feed</a></em>
 </p>
 
-**▶ [See the interactive showcase](https://htmlpreview.github.io/?https://github.com/captkernel/Claunchpad/blob/master/showcase.html)** &nbsp;·&nbsp; [Read the story](.share/substack-claunchpad.md)
+**▶ [See the interactive showcase](https://htmlpreview.github.io/?https://github.com/captkernel/Claunchpad/blob/master/showcase.html)**
 
 **Drop in one skill and Claude starts working like someone who knows what they're doing,
 without you setting any of it up.** Claunchpad turns on persistent memory, agent teams that size
@@ -22,6 +22,61 @@ It's the setup most people rebuild by hand on every project, packaged: a solid `
 memory that's shared across agents and survives a reset, sensible rules for when to bring in
 help, decision frameworks, and a one-tap install of the best tools, built around how Claude
 actually behaves.
+
+## Install
+
+The skill folder is identical on every surface; only delivery differs.
+
+**Claude Code (plugin, recommended):**
+```
+/plugin marketplace add captkernel/plugins
+/plugin install claunchpad@captkernel
+```
+Then it auto-triggers from its description, or invoke it explicitly.
+
+**Claude Code (manual copy):** copy the skill folder into your skills directory:
+```bash
+cp -r skills/claunchpad ~/.claude/skills/          # available in all projects
+# or, per-project:
+cp -r skills/claunchpad <your-repo>/.claude/skills/
+```
+
+**claude.ai** (Pro/Max/Team/Enterprise), upload `skills/dist/claunchpad.zip` via
+**Settings → Capabilities → Skills**, or add it to a Project. (No filesystem there, so it
+applies the behavior in-session and hands you the templates to paste.)
+
+**Claude API**, upload via the skills endpoint and reference it by id (requires the current
+skills/code-execution beta headers).
+
+## What it runs, reads and sends
+
+**Files it writes into your project** (from `skills/claunchpad/templates/`, after the first-run
+interview, and never overwriting existing config destructively):
+- `CLAUDE.md` and `MEMORY.md` (all tiers); per-fact files under `memory/` and a
+  `.claunchpad/handoff.md` buffer (Pro, or when a Standard project graduates).
+- `.claude/settings.json` from the starter or standard template. It only registers hooks, and
+  edits to an existing file are additive.
+- `.claude/hooks/load-memory` (all tiers) and `.claude/hooks/harvest-nudge` (Standard and up).
+  `harvest-nudge` also creates a small flag file, `.claunchpad/.harvest-nudged`.
+
+**What the hooks do.** Both are short local POSIX shell scripts you can read in full.
+`load-memory` reads `MEMORY.md`, up to eight recent `memory/*.md` files and (after compaction)
+`.claunchpad/handoff.md` from your project, and hands them to Claude as session context.
+`harvest-nudge` blocks once per session to remind Claude to file new learnings. Neither hook
+makes a network call, and neither writes to your memory.
+
+**Network, only if you say yes.** Claunchpad itself sends nothing anywhere. At bootstrap it
+offers to install three third-party tools (`templates/recommended-skills.md`). Nothing runs
+unless you accept (`[Y] all · [c] customise · [s] skip`), and you can pick a subset:
+- **Superpowers**: `claude plugin marketplace add obra/superpowers-marketplace`, then
+  `claude plugin install superpowers@superpowers-marketplace`.
+- **Skills Curator**: `git clone https://github.com/captkernel/Skills_Curator`, then run its
+  `install.sh` (or `install.ps1` on Windows).
+- **Agent Browser**: `npm install -g agent-browser`, then `agent-browser install`, which
+  downloads a Chrome for Testing build. Skipped if Node is missing.
+
+Each of those fetches code from the network, and a restart of Claude Code is needed before they
+activate. Decline the offer and no third-party code is installed.
 
 ## What one install turns on
 
@@ -93,25 +148,6 @@ Sonnet / Opus) as the single biggest cost lever in a multi-agent run.
 **Councils**, one application built on the OS: a 5-advisor Decision Council for
 consequential choices, and a 4-lens Feasibility Council for project-viability reviews.
 
-## Install
-
-The skill folder is identical on every surface; only delivery differs.
-
-**Claude Code**, copy the skill folder into your skills directory:
-```bash
-cp -r skills/claunchpad ~/.claude/skills/          # available in all projects
-# or, per-project:
-cp -r skills/claunchpad <your-repo>/.claude/skills/
-```
-Then it auto-triggers from its description, or invoke it explicitly.
-
-**claude.ai** (Pro/Max/Team/Enterprise), upload `skills/dist/claunchpad.zip` via
-**Settings → Capabilities → Skills**, or add it to a Project. (No filesystem there, so it
-applies the behavior in-session and hands you the templates to paste.)
-
-**Claude API**, upload via the skills endpoint and reference it by id (requires the current
-skills/code-execution beta headers).
-
 ## How it stays cheap
 
 Multi-agent work costs roughly 15× the tokens of a single pass, and on tightly coupled changes
@@ -129,3 +165,5 @@ docs, Anthropic's multi-agent and context-engineering writing) live in `docs/des
 ## License
 
 MIT, see `LICENSE`.
+
+Maintainers: bump "version" in .claude-plugin/plugin.json on every release, or plugin users never receive the update.
