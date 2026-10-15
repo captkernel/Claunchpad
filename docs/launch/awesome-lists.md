@@ -43,9 +43,10 @@ README line (add at the end of the subcategory):
 - **[captkernel/claunchpad](https://github.com/captkernel/Claunchpad)** - One-skill project setup: CLAUDE.md, memory, agent teams
 ```
 
-(8 words in the description.)
+(7 words in the description.)
 
 - Subcategory: Community Skills > Context Engineering (README checked 2026-10-15; the subcategories are now Vector Databases, Marketing, Productivity and Collaboration, Development and Testing, Context Engineering, Specialized Domains, n8n Automation). Alternative: Productivity and Collaboration.
+- Order: the Skills Curator PR goes first. Submit the Claunchpad PR only after the Skills Curator PR is merged, or after a gap of at least two weeks.
 - PR title: `Add skill: captkernel/claunchpad`
 - Hold condition: about 25 stars or visible installs. The maintainers decline brand-new skills and say they focus on community-adopted ones. The decision to submit is the owner's.
-- History: the earlier Skills Curator PR (#548) was closed on 2026-05-08 for lack of usage. Expect the same outcome without visible usage.
+- History: the earlier Skills Curator PR (#548) was closed on 2026-05-08 for lack of usage. Do not resubmit before there is visible usage (see hold condition).
