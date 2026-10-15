@@ -1,0 +1,6 @@
+{
+  "name": "claunchpad",
+  "owner": { "name": "captKernel", "url": "https://github.com/captkernel" },
+  "description": "Self-hosted marketplace for Claunchpad. All captKernel plugins: /plugin marketplace add captkernel/plugins",
+  "plugins": [{ "name": "claunchpad", "source": "./" }]
+}

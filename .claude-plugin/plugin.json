@@ -1,0 +1,11 @@
+{
+  "name": "claunchpad",
+  "displayName": "Claunchpad",
+  "version": "1.0.0",
+  "description": "Drop in one skill and Claude sets your project up properly: a solid CLAUDE.md, persistent memory that survives /clear, self-sizing agent teams, decision councils and curated ecosystem skills.",
+  "author": { "name": "captKernel", "url": "https://github.com/captkernel" },
+  "homepage": "https://github.com/captkernel/Claunchpad",
+  "repository": "https://github.com/captkernel/Claunchpad",
+  "license": "MIT",
+  "keywords": ["project-setup", "claude-md", "memory", "agent-teams", "orchestration"]
+}
