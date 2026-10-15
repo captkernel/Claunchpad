@@ -1,12 +1,10 @@
 # Claunchpad, Instagram Reel
 
-> **STATUS: INCOMPLETE / DRAFT, do not post yet.** Destined for a **different account (TBD)**. The handle (`@kayparmar`) and the "follow / save this" account bits are placeholders to finalize before publishing.
-
 **Format:** 9:16, 1080 x 1920, ~22 seconds. Assume muted playback, so every line is on-screen text too. Fast cuts. Use a trending low-key tech/build audio.
 
 **Design system (match the showcase):** background `#0f1117`, text `#e8edf6`, accent `#5b8dee`, the green to blue to purple gradient for emphasis, system-ui font, the launch-arrow mark. On-screen text is bold, large, centered, with a subtle fade-up on each cut.
 
-**B-roll you already have:** the showcase page (`showcase.html`), especially the "See It In Action" tab (the with/without comparison and the `/clear` terminal panels). Screen-record it scrolling. That is most of your footage.
+**B-roll you already have:** the showcase page (`showcase.html` at the repo root, i.e. `../../../showcase.html` from here), especially the "See It In Action" tab (the with/without comparison and the `/clear` terminal panels). Screen-record it scrolling. That is most of your footage.
 
 ---
 
@@ -47,13 +45,13 @@
 - Visual: CTA slide, gradient wordmark **Claunchpad**, the pill **free . open source**.
 - On-screen text: **Free on GitHub.** then `github.com/captkernel/Claunchpad`
 - VO: "It's free and open source. Search Claunchpad on GitHub. Follow for more."
-- Sticker: "Save this" arrow + handle **@kayparmar**.
+- Sticker: "Save this" arrow + handle **@captkernel**.
 
 ---
 
 ## Caption
 
-Use the Instagram carousel caption from `SOCIAL_KIT.md` (section 5). Same hook, same hashtags.
+Use the Instagram carousel caption from `SOCIAL_KIT.md` (section 6). Same hook, same hashtags.
 
 ## Production notes
 

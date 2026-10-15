@@ -1,15 +1,16 @@
 # Claunchpad, distribution kit
 
-> **STATUS: INCOMPLETE / DRAFT, do not post yet.** This will go out from a **different account (TBD)**, not the one referenced here. Before publishing, finalize: the handle (placeholder `@kayparmar` throughout), every "link in bio" / "follow @..." / first-comment-links reference, and which account owns the GitHub repo links. Treat all account-specific bits as placeholders. Copy is ready; account wiring is not.
-
-Copy-paste ready. Repo is public (MIT). Voice is founder-to-builders: direct, lowercase-leaning, honest about the rough edges, and it ends on a real question. No em dashes.
+Copy-paste ready, posted from the captKernel accounts (handle `@captkernel`). Repo is public (MIT). Voice is founder-to-builders: direct, lowercase-leaning, honest about the rough edges, and it ends on a real question. No em dashes. When and where to post: [`../CHECKLIST.md`](../CHECKLIST.md) (Launch 2).
 
 **The links**
 ```
+Install:  /plugin marketplace add captkernel/plugins
+          /plugin install claunchpad@captkernel
 Repo:     https://github.com/captkernel/Claunchpad
 Showcase: https://htmlpreview.github.io/?https://github.com/captkernel/Claunchpad/blob/master/showcase.html
-Install:  cp -r skills/claunchpad ~/.claude/skills/      (claude.ai: upload skills/dist/claunchpad.zip)
-Long read: the Substack draft lives at .share/substack-claunchpad.md
+Reel:     https://github.com/captkernel/Claunchpad/raw/master/docs/video/claunchpad-reel.mp4
+          (4:5 feed cut: https://github.com/captkernel/Claunchpad/raw/master/docs/video/claunchpad-reel-4x5.mp4)
+Other:    manual copy (cp -r skills/claunchpad ~/.claude/skills/) or claude.ai (upload skills/dist/claunchpad.zip)
 ```
 
 **Headline facts:** a Claude Code skill that sets up a whole project "operating system" in one drop-in. Persistent memory that survives `/clear` and compaction (via a SessionStart hook). Agent teams that size themselves (solo, pair, fan-out, workflow). A one-tap install of the best ecosystem skills, with Skills Curator deeply integrated to rebuild each one for your project. Three tiers (Starter/Standard/Pro) chosen by a one-question interview. Built with its own discipline (a final review caught two real bugs the per-task reviews missed). Open source, MIT.
@@ -24,6 +25,7 @@ Long read: the Substack draft lives at .share/substack-claunchpad.md
 **Assets in this folder:**
 - `carousel.html` (10 slides, 1080x1350, Claunchpad design system). Export by screenshotting each slide at full size, or print-to-PDF (one slide per page).
 - `reel-script.md` (Instagram Reel, ~22s, shot list + on-screen text + voiceover).
+- The finished 37s launch reel is already rendered: `../../video/claunchpad-reel.mp4` (9:16) and `../../video/claunchpad-reel-4x5.mp4` (4:5). Use it as-is if you don't want to cut the ~22s version.
 
 ---
 
@@ -53,6 +55,7 @@ If you build with Claude Code: what's the first thing you wish it remembered bet
 
 First comment (drop the links here, not in the post body, for reach):
 ```
+Install in Claude Code: /plugin marketplace add captkernel/plugins, then /plugin install claunchpad@captkernel
 Repo: https://github.com/captkernel/Claunchpad
 Interactive walkthrough: https://htmlpreview.github.io/?https://github.com/captkernel/Claunchpad/blob/master/showcase.html
 ```
@@ -68,6 +71,7 @@ Interactive walkthrough: https://htmlpreview.github.io/?https://github.com/captk
 
 **Body:**
 ```markdown
+**Install:** `/plugin marketplace add captkernel/plugins` then `/plugin install claunchpad@captkernel`
 **Repo:** https://github.com/captkernel/Claunchpad
 **Walkthrough (one page):** https://htmlpreview.github.io/?https://github.com/captkernel/Claunchpad/blob/master/showcase.html
 
@@ -90,11 +94,45 @@ It's MIT, works on Claude Code (filesystem + hooks + subagents) and degrades to 
 Genuinely curious about one thing: when should the harness proactively reload/suggest things vs stay quiet? Figuring out the line between "helpful" and "noisy" is the actual hard part. How do you handle memory across sessions today?
 ```
 
-**Time to post:** mid-morning US weekday. Reply to every comment.
+**Time to post:** mid-morning US weekday, the day after r/ClaudeCode. Reply to every comment.
 
 ---
 
-## 3. X / Twitter thread (optional)
+## 3. Reddit, r/ClaudeCode
+
+Different angle from the r/ClaudeAI post: this one is about what I learned making memory load reliably, not a feature tour. Don't cross-post the r/ClaudeAI text here.
+
+**Title:**
+```
+What I learned trying to make Claude Code memory survive /clear: put the load in a hook, not in CLAUDE.md
+```
+
+**Body:**
+```markdown
+**Install:** `/plugin marketplace add captkernel/plugins` then `/plugin install claunchpad@captkernel`
+**Repo:** https://github.com/captkernel/Claunchpad (disclosure: I built it, MIT)
+
+My first attempts at cross-session memory were instructions in CLAUDE.md: "read MEMORY.md before you start." It worked until it didn't. After /clear or a compaction, whether the memory got read depended on whether the model remembered to do it, which is the exact thing that was failing in the first place.
+
+What fixed it was moving the load out of the prompt and into the harness:
+
+- **A SessionStart hook does the reading.** `load-memory` is a short POSIX sh script. It reads `MEMORY.md`, up to eight recent `memory/*.md` files, and (after compaction) a `.claunchpad/handoff.md` buffer, and hands them to Claude as session context via `additionalContext`. It runs on every session start, including after /clear and compaction, so loading memory stops being something the model can forget.
+- **Writing stays with the model, with one nudge.** A second hook, `harvest-nudge` (Stop), blocks once per session to remind Claude to file any new decision, learning or error before stopping. It never writes to memory itself. I didn't want a hook silently editing what the project "knows".
+- **Start with one file, graduate later.** Small projects get a single `MEMORY.md` with four sections (Decisions, Learnings, Errors, References). When it gets too big to scan, it moves to a per-fact `memory/` directory with `MEMORY.md` as a thin index, non-destructively.
+- **No network, nothing hidden.** Neither hook makes a network call. Both are short enough to read in full before you trust them, and the settings change only registers the hooks, additively.
+
+Claunchpad packages that plus the rest of the setup I kept rebuilding by hand (a CLAUDE.md, rules for when to bring in subagents, a couple of decision councils). A one-question interview picks Starter, Standard or Pro, so a beginner gets two files and the load-only hook.
+
+Rough edges: the hooks are POSIX sh, and on claude.ai there are no hooks at all, so it falls back to applying the behavior in-session and handing you files to paste. The nudge is also a judgment call; once per session felt right, more felt like nagging.
+
+If you've built your own memory setup for Claude Code: did you load it from a hook, from CLAUDE.md, or something else, and what broke first?
+```
+
+**Time to post:** the day before r/ClaudeAI (see the checklist). Reply to every comment.
+
+---
+
+## 4. X / Twitter thread
 
 **1 (hook), attach slide 1 of the carousel:**
 ```
@@ -138,6 +176,9 @@ infuse, don't invoke
 ```
 **6 (close):**
 ```
+/plugin marketplace add captkernel/plugins
+/plugin install claunchpad@captkernel
+
 github.com/captkernel/Claunchpad
 
 built it using its own discipline. a final review caught two bugs every per-task review missed. open source, MIT
@@ -148,15 +189,15 @@ Tag `@AnthropicAI` on tweet 1.
 
 ---
 
-## 4. Hacker News, Show HN (optional)
+## 5. Hacker News, Show HN
 
 **Title:**
 ```
-Show HN: Claunchpad, a one-skill "project OS" for Claude Code (memory, agent teams, MIT)
+Show HN: Claunchpad, one skill that gives Claude Code memory and agent teams
 ```
 **URL:** `https://github.com/captkernel/Claunchpad`
 
-**Text:**
+**First comment** (post it right after submitting; with a URL set, HN shows no body text):
 ```
 Every new Claude Code session started from zero for me: it had forgotten the prior session's decisions, the bugs I'd already fixed, the gotchas in the codebase. The bottleneck was never the model. It was that nothing it learned persisted, and I had no consistent rule for when to fan out to multiple agents vs stay solo.
 
@@ -164,14 +205,14 @@ Claunchpad is one skill you drop in that sets that scaffolding up. A SessionStar
 
 It deploys in tiers via a one-question interview, so a beginner gets two files and a load-only hook while an advanced user gets the full machine. It was built using its own process (fresh agent per task, independent review, automated test gate), and a final whole-branch review caught two cross-file bugs the per-task reviews missed.
 
-MIT. Works fully on Claude Code; degrades to in-session behavior on claude.ai.
+Install: /plugin marketplace add captkernel/plugins, then /plugin install claunchpad@captkernel. MIT. Works fully on Claude Code; degrades to in-session behavior on claude.ai.
 
 Built it because I kept re-explaining context to my own assistant. Curious whether others have found a memory pattern that actually holds across sessions.
 ```
 
 ---
 
-## 5. Instagram carousel caption
+## 6. Instagram carousel caption
 
 ```
 Your AI forgets everything the moment you type /clear.
@@ -196,12 +237,8 @@ Save this for your next project. What's the first thing you wish Claude remember
 
 ---
 
-## 6. Posting order
+## 7. Posting order
 
-1. Reddit r/ClaudeAI first (longest tail, most relevant audience). Reply to everything.
-2. LinkedIn next day (links in first comment, not the post).
-3. X thread, tag @AnthropicAI on tweet 1.
-4. Instagram carousel + reel together.
-5. Show HN only if you want the HN crowd; it lives or dies in the first 90 minutes, so post when you can babysit it.
+The order, timing and accounts live in [`../CHECKLIST.md`](../CHECKLIST.md) (Launch 2, one week after Skills Curator): X, then LinkedIn, then r/ClaudeCode, r/ClaudeAI the next day, Show HN Tue to Thu 8 to 10am US ET, Instagram the same day as HN. Tag @AnthropicAI on tweet 1, put LinkedIn links in the first comment, and stay around for the first 90 minutes of the HN post.
 
 Stagger by a few hours, don't fire everything in one window. Lead with honesty about the rough edges, that's what reads as real.
