@@ -54,16 +54,18 @@ skills/code-execution beta headers).
 interview, and never overwriting existing config destructively):
 - `CLAUDE.md` and `MEMORY.md` (all tiers); per-fact files under `memory/` and a
   `.claunchpad/handoff.md` buffer (Pro, or when a Standard project graduates).
-- `.claude/settings.json` from the starter or standard template. It only registers hooks, and
-  edits to an existing file are additive.
-- `.claude/hooks/load-memory` (all tiers) and `.claude/hooks/harvest-nudge` (Standard and up).
-  `harvest-nudge` also creates a small flag file, `.claunchpad/.harvest-nudged`.
+- `.claude/settings.json` from the starter, standard or pro template. It only registers hooks,
+  and edits to an existing file are additive.
+- `.claude/hooks/load-memory` (all tiers), `.claude/hooks/harvest-nudge` (Standard and up) and
+  `.claude/hooks/recall` (Pro). The hooks keep small flag files in `.claunchpad/`
+  (`.harvest-nudged`, `.recalled`).
 
-**What the hooks do.** Both are short local POSIX shell scripts you can read in full.
-`load-memory` reads `MEMORY.md`, up to eight recent `memory/*.md` files and (after compaction)
-`.claunchpad/handoff.md` from your project, and hands them to Claude as session context.
-`harvest-nudge` blocks once per session to remind Claude to file new learnings. Neither hook
-makes a network call, and neither writes to your memory.
+**What the hooks do.** All three are short local POSIX shell scripts you can read in full.
+`load-memory` reads `.claunchpad/handoff.md`, pinned and recent `memory/*.md` files and the
+`MEMORY.md` index from your project, within a size budget, and hands them to Claude as session
+context with a short memory-health report. `recall` adds the facts that match each prompt.
+`harvest-nudge` blocks once per session to remind Claude to file new learnings. No hook makes a
+network call, and none writes to your memory.
 
 **Network, only if you say yes.** Claunchpad itself sends nothing anywhere. At bootstrap it
 offers to install three third-party tools (`templates/recommended-skills.md`). Nothing runs
@@ -122,16 +124,21 @@ short interview at first run:
 |---|---|---|
 | **Starter** | Beginner / tiny / throwaway | `CLAUDE.md`, sectioned `MEMORY.md`, `SessionStart` load-memory hook |
 | **Standard** | Real project / comfortable user | Everything Starter, plus `harvest-nudge` `Stop` hook and full delegation contract |
-| **Pro** | Advanced / large / high-stakes / team | Everything Standard, plus per-fact `memory/` directory, `.claunchpad/handoff.md` buffer, and council presets |
+| **Pro** | Advanced / large / high-stakes / team | Everything Standard, plus per-fact `memory/` directory, `.claunchpad/handoff.md` working memory, `recall` hook, and council presets |
 
 **Memory**, hybrid model: Starter uses a single `MEMORY.md` (four sections: Decisions,
 Learnings, Errors, References). Pro uses a per-fact `memory/` directory with `MEMORY.md`
 as a thin index. Both shapes are read by the `load-memory` hook on every session start,
 including after `/clear` and compaction. Standard projects can graduate to the per-fact
-shape non-destructively when the file grows too large to scan.
+shape non-destructively when the file grows too large to scan. Memory is tiered (working
+handoff, pinned core facts, index, recent and prompt-relevant facts, and a cold archive that
+never auto-loads), loaded within a size budget, and kept true over time: replaced facts are
+superseded rather than deleted, stale ones are flagged for re-checking, and a periodic
+consolidation pass merges, archives and promotes.
 
-**Hooks**, two POSIX sh hooks automate the memory lifecycle:
+**Hooks**, three POSIX sh hooks automate the memory lifecycle:
 - `load-memory` (SessionStart, all tiers), injects memory into context via `additionalContext`.
+- `recall` (UserPromptSubmit, Pro), adds the memory facts that match each prompt.
 - `harvest-nudge` (Stop, Standard+), blocks once per session to remind Claude to file any
   new decision/learning/error before stopping. Never writes to memory itself.
 

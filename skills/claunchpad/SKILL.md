@@ -37,7 +37,7 @@ tier, and deploys exactly that tier's artifacts — nothing more.
 |---|---|
 | **Starter** — beginner / tiny / throwaway | `CLAUDE.md`, sectioned `MEMORY.md`, load-only `SessionStart` hook |
 | **Standard** — real project / comfortable user | Everything Starter deploys, plus `harvest-nudge` `Stop` hook and full delegation contract |
-| **Pro** — advanced / large / high-stakes / team | Everything Standard deploys, plus per-fact `memory/` directory, Claude-maintained `.claunchpad/handoff.md` buffer (reloaded by `load-memory` on compact), and council presets |
+| **Pro** — advanced / large / high-stakes / team | Everything Standard deploys, plus per-fact `memory/` directory, Claude-maintained `.claunchpad/handoff.md` working memory, `recall` `UserPromptSubmit` hook, and council presets |
 
 Tier is a recommendation the user can override. Run `claunchpad upgrade` to add the
 next tier's artifacts non-destructively when a project outgrows its current one.
@@ -57,8 +57,10 @@ offer templates as copy-paste blocks.
 ## The three pillars
 
 **Memory** (`references/memory.md`) — durable project knowledge across sessions,
-compaction, and subagents; hybrid single-file log (Starter) or per-fact `memory/`
-directory (Standard→Pro), with `MEMORY.md` as the thin index.
+compaction, and subagents, in five tiers: working (handoff), core (pinned), index, recent and
+relevant facts, archive. Hybrid single-file log (Starter) or per-fact `memory/` directory
+(Standard→Pro), with `MEMORY.md` as the thin index. Facts are superseded rather than deleted,
+re-verified when stale, and consolidated periodically.
 
 **Delegation** (`references/delegation.md`) — the 7-point contract (objective, scope,
 context, output format, tool guidance, stop criteria, return-learnings slot) plus
@@ -75,11 +77,14 @@ trigger; de-escalate the moment a cheaper structure would finish correctly.
 
 ## Hooks
 
-Two hooks automate the memory lifecycle (full wiring detail: `references/memory.md`):
+Three hooks automate the memory lifecycle (full wiring detail: `references/memory.md`):
 
-- **`load-memory` (SessionStart, all tiers)** — reads `MEMORY.md` and recent `memory/`
-  facts, emits them via `additionalContext`. Memory loads every session, including after
-  `/clear` and compaction, without depending on Claude remembering to read it.
+- **`load-memory` (SessionStart, all tiers)** — injects the handoff, pinned facts, the
+  `MEMORY.md` index and recent facts within a size budget, plus memory-health notes (index
+  drift, stale facts, likely secrets, consolidation due), via `additionalContext`. Memory loads
+  every session, including after `/clear` and compaction.
+- **`recall` (UserPromptSubmit, Pro)** — surfaces up to three facts matching the prompt that
+  aren't already in context. Silent when nothing matches.
 - **`harvest-nudge` (Stop, Standard+)** — blocks once per session to remind Claude to
   file any new decision/learning/error before stopping. Never writes to memory itself.
 

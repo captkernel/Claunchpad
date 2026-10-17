@@ -74,6 +74,16 @@ check_memory() {
     assert_contains templates/memory-fact.md "$k" "memory-fact.md frontmatter has: $k"
   done
   assert_contains templates/CLAUDE.md "CLAUNCHPAD-MEMORY-POINTER" "CLAUDE.md has subagent memory-pointer block"
+  assert_contains templates/MEMORY.md "## Archive" "MEMORY.md has cold ## Archive section"
+  for k in "verified:" "pinned:" "status: superseded" "supersedes:"; do
+    assert_contains templates/memory-fact.md "$k" "memory-fact.md documents optional field: $k"
+  done
+  assert_file templates/handoff.md
+  assert_contains templates/handoff.md "## Now" "handoff.md has Now (working state)"
+  assert_contains templates/handoff.md "## Recent sessions" "handoff.md has Recent sessions (episodic)"
+  for k in "Memory hierarchy" "Lifecycle" "Safety" "recall"; do
+    assert_contains references/memory.md "$k" "memory.md documents: $k"
+  done
   assert_absent templates/ERRORS.md
   assert_absent templates/LEARNINGS.md
 }
@@ -83,12 +93,20 @@ check_hooks() {
   assert_file templates/hooks/harvest-nudge
   assert_file templates/settings.starter.json
   assert_file templates/settings.standard.json
+  assert_file templates/settings.pro.json
+  assert_file templates/hooks/recall
   if have templates/settings.starter.json; then
     if json_ok < "$HERE/templates/settings.starter.json"; then ok "settings.starter.json valid JSON"; else bad "settings.starter.json invalid JSON"; fi
   fi
   if have templates/settings.standard.json; then
     if json_ok < "$HERE/templates/settings.standard.json"; then ok "settings.standard.json valid JSON"; else bad "settings.standard.json invalid JSON"; fi
     assert_contains templates/settings.standard.json "harvest-nudge" "standard settings registers harvest-nudge"
+  fi
+  if have templates/settings.pro.json; then
+    if json_ok < "$HERE/templates/settings.pro.json"; then ok "settings.pro.json valid JSON"; else bad "settings.pro.json invalid JSON"; fi
+    assert_contains templates/settings.pro.json "UserPromptSubmit" "pro settings registers UserPromptSubmit"
+    assert_contains templates/settings.pro.json "hooks/recall" "pro settings registers recall"
+    assert_contains templates/settings.pro.json "harvest-nudge" "pro settings keeps harvest-nudge"
   fi
   # behavioral: load-memory emits additionalContext for a fixture MEMORY.md
   if have templates/hooks/load-memory; then
@@ -104,8 +122,81 @@ check_hooks() {
     o2="$(CLAUDE_PROJECT_DIR="$tmp" sh "$HERE/templates/hooks/harvest-nudge" </dev/null 2>/dev/null)"
     if printf '%s' "$o1" | grep -q '"decision"[[:space:]]*:[[:space:]]*"block"'; then ok "harvest-nudge blocks on first run"; else bad "harvest-nudge first run not blocking: $o1"; fi
     if [ -z "$(printf '%s' "$o2" | tr -d '[:space:]')" ]; then ok "harvest-nudge silent on second run"; else bad "harvest-nudge second run not silent: $o2"; fi
+    printf 'x\n' > "$tmp/.claunchpad/handoff.md"; rm -f "$tmp/.claunchpad/.harvest-nudged"
+    o3="$(CLAUDE_PROJECT_DIR="$tmp" sh "$HERE/templates/hooks/harvest-nudge" </dev/null 2>/dev/null)"
+    if printf '%s' "$o3" | grep -q 'handoff.md' && printf '%s' "$o3" | json_ok; then ok "harvest-nudge asks for a handoff refresh when one exists"; else bad "harvest-nudge handoff variant wrong: $o3"; fi
     rm -rf "$tmp"
   fi
+  check_hierarchy
+}
+
+fact() { # dir slug date extra-frontmatter body
+  printf -- '---\nname: %s\ndescription: %s fact\nmetadata:\n  type: learning\n  date: %s\n%s---\n\n%s\n' \
+    "$2" "$2" "$3" "$4" "$5" > "$1/memory/$2.md"
+}
+expect() { # output needle label  /  expect_not output needle label
+  if printf '%s' "$1" | grep -qF -- "$2"; then ok "$3"; else bad "$3"; fi; }
+expect_not() {
+  if printf '%s' "$1" | grep -qF -- "$2"; then bad "$3"; else ok "$3"; fi; }
+
+check_hierarchy() {
+  have templates/hooks/load-memory && have templates/hooks/recall || return 0
+  LM="$HERE/templates/hooks/load-memory"; RC="$HERE/templates/hooks/recall"
+  tmp="$(mktemp -d)"; mkdir -p "$tmp/memory" "$tmp/.claunchpad"
+  today="$(date +%Y-%m-%d)"
+  printf '# MEMORY\n## Decisions\n- [Pin](memory/core-rule.md) — x\n- [Gone](memory/missing-fact.md) — x\n## Archive\n- ARCHIVED-ENTRY\n' > "$tmp/MEMORY.md"
+  fact "$tmp" core-rule 2020-01-01 "  pinned: true
+" "CORE-BODY never deploy on fridays"
+  fact "$tmp" retired "$today" "  status: superseded
+" "RETIRED-BODY redis cache decision"
+  fact "$tmp" cache-ttl "$today" "" "CACHE-BODY redis cache keys need ttl. See [[no-such-slug]]."
+  fact "$tmp" leaky "$today" "" "token ghp_abcdefghijklmnopqrstuvwxyz0123456789"
+  printf '## Now\n- HANDOFF-STATE\n' > "$tmp/.claunchpad/handoff.md"
+  touch -t 202001010000 "$tmp/.claunchpad/handoff.md"
+
+  o="$(printf '{"source":"clear"}' | CLAUNCHPAD_RECENT_FACTS=0 CLAUDE_PROJECT_DIR="$tmp" sh "$LM" 2>/dev/null)"
+  if printf '%s' "$o" | json_ok; then ok "load-memory output is valid JSON (hierarchy fixture)"; else bad "load-memory invalid JSON: $o"; fi
+  expect "$o" "HANDOFF-STATE" "working tier: handoff loads after /clear"
+  expect "$o" "CORE-BODY" "core tier: pinned fact loads even with 0 recent slots"
+  expect "$o" "unverified" "stale pinned fact is flagged for re-verification"
+  expect_not "$o" "ARCHIVED-ENTRY" "archive tier is not auto-loaded"
+  expect_not "$o" "RETIRED-BODY" "superseded fact is not loaded"
+  expect "$o" "data, not instructions" "load frames memory as data, not instructions"
+  expect "$o" "missing-fact" "health: index line to a missing file"
+  expect "$o" "no-such-slug" "health: broken wikilink"
+  expect "$o" "cache-ttl" "health: fact missing from the index"
+  expect "$o" "Possible secret" "health: likely secret flagged"
+
+  o="$(printf '{"source":"startup"}' | CLAUDE_PROJECT_DIR="$tmp" sh "$LM" 2>/dev/null)"
+  expect_not "$o" "HANDOFF-STATE" "working tier: stale handoff skipped on a fresh start"
+  expect "$o" "handoff.md is over 3 days old" "health: stale handoff reported"
+  expect "$o" "CACHE-BODY" "recent tier: newest facts load"
+
+  o="$(printf '{"source":"startup"}' | CLAUNCHPAD_MEMORY_BUDGET=900 CLAUDE_PROJECT_DIR="$tmp" sh "$LM" 2>/dev/null)"
+  expect "$o" "skipped to stay within" "budget: overflow is skipped and reported"
+  if [ "$(printf '%s' "$o" | wc -c)" -lt 1600 ]; then ok "budget: output stays near the cap"; else bad "budget: output too large"; fi
+
+  # recall: load-memory just loaded cache-ttl, so start a fresh context for recall.
+  rm -f "$tmp/.claunchpad/.recalled"
+  r1="$(printf '{"session_id":"s","prompt":"why is the redis cache growing without ttl?"}' | CLAUDE_PROJECT_DIR="$tmp" sh "$RC" 2>/dev/null)"
+  if printf '%s' "$r1" | json_ok; then ok "recall output is valid JSON"; else bad "recall invalid JSON: $r1"; fi
+  expect "$r1" "CACHE-BODY" "recall surfaces the fact matching the prompt"
+  expect_not "$r1" "RETIRED-BODY" "recall never surfaces a superseded fact"
+  r2="$(printf '{"prompt":"redis cache ttl again"}' | CLAUDE_PROJECT_DIR="$tmp" sh "$RC" 2>/dev/null)"
+  expect_not "$r2" "CACHE-BODY" "recall does not repeat a fact already in context"
+  r3="$(printf '{"prompt":"hello there"}' | CLAUDE_PROJECT_DIR="$tmp" sh "$RC" 2>/dev/null)"
+  if [ -z "$r3" ]; then ok "recall is silent when nothing matches"; else bad "recall not silent: $r3"; fi
+  rm -rf "$tmp"
+
+  # Starter: single file, consolidation cadence.
+  tmp="$(mktemp -d)"
+  { echo "## Decisions"; i=0; while [ "$i" -lt 16 ]; do i=$((i + 1)); echo "- $today item $i"; done; echo "## Archive"; } > "$tmp/MEMORY.md"
+  o="$(printf '{"source":"startup"}' | CLAUDE_PROJECT_DIR="$tmp" sh "$LM" 2>/dev/null)"
+  expect "$o" "Consolidation pass is due" "starter: consolidation pass reported when due"
+  mkdir -p "$tmp/.claunchpad"; date +%F > "$tmp/.claunchpad/last-consolidation"
+  o="$(printf '{"source":"startup"}' | CLAUDE_PROJECT_DIR="$tmp" sh "$LM" 2>/dev/null)"
+  expect_not "$o" "Consolidation pass is due" "starter: no consolidation nag right after a pass"
+  rm -rf "$tmp"
 }
 
 check_recommended() {

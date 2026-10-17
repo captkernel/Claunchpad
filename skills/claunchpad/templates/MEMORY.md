@@ -3,6 +3,8 @@
 <!-- READ this at session start. APPEND the moment you make a non-obvious decision, resolve a
 real failure, or find a durable technique. One fact per bullet, newest first, absolute dates
 (YYYY-MM-DD). Log the fact AND the why. Don't record what code or git history already shows.
+Before adding, check for an existing entry and update it instead. Never store secrets.
+WRONG OR REPLACED: don't delete it; move it to ## Archive with "(superseded YYYY-MM-DD: why)".
 GRADUATE: when this file gets hard to scan (~a screenful per section, or ~400 lines total),
 migrate to a `memory/` directory of one-fact files — see references/memory.md. -->
 
@@ -17,3 +19,7 @@ migrate to a `memory/` directory of one-fact files — see references/memory.md.
 
 ## References
 <!-- external resources, commands, ports, gotchas. e.g. "2026-06-28 staging deploy: `make deploy-staging`." -->
+
+## Archive
+<!-- Cold storage: never auto-loaded, so keep it LAST. Superseded entries and old detail folded
+out during a consolidation pass live here, so history survives without costing context. -->

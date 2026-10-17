@@ -57,7 +57,7 @@ A cheap Explore-agent inspect followed by a short confirmation. Explore agents s
 |---|---|---|---|---|---|
 | **Starter** (beginner / tiny / throwaway) | single `MEMORY.md` (sectioned log) | `SessionStart` load only | Solo + a one-paragraph Pair note | Solo ↔ Pair | hidden (mention only if asked) |
 | **Standard** (real project / comfortable) | `MEMORY.md`, structured to graduate | load + harvest-nudge | full 7-point contract + model routing | 4-tier ladder | mentioned; loaded on request |
-| **Pro** (advanced / large / high-stakes / team) | per-fact `memory/` dir from day 1 | load + harvest-nudge | full contract + Explore/Plan context rules | 4-tier ladder + full 13-structure appendix | presets wired in |
+| **Pro** (advanced / large / high-stakes / team) | per-fact `memory/` dir from day 1 + handoff buffer | load + recall + harvest-nudge | full contract + Explore/Plan context rules | 4-tier ladder + full 13-structure appendix | presets wired in |
 
 ---
 
@@ -100,18 +100,23 @@ Everything Standard deploys, plus:
 | Artifact | Notes |
 |---|---|
 | `memory/` directory | Created from day one; `MEMORY.md` is the thin index, not the facts |
-| `.claunchpad/handoff.md` | Claude-maintained session-handoff buffer (see below); reloaded by `load-memory` on `compact` |
+| `.claunchpad/handoff.md` | `templates/handoff.md`: Claude-maintained working memory (see below) |
+| `.claude/hooks/recall` | `templates/hooks/recall` |
+| `.claude/settings.json` | `templates/settings.pro.json` |
 | Council presets | Claunchpad council configurations wired into `CLAUDE.md` |
 
 Pro ships the graduated `memory/` shape immediately — no migration needed later.
-The `load-memory` hook reads both `MEMORY.md` and up to eight of the most-recently-
-modified `memory/*.md` files, so the hook works identically at all three tiers.
+The `load-memory` hook reads both `MEMORY.md` and the `memory/` directory (pinned facts, then
+up to eight of the most recently modified), so the hook works identically at all three tiers.
+`settings.pro.json` adds a `UserPromptSubmit` hook that runs `recall`, which surfaces older facts
+matching each prompt (see `references/memory.md`). Like `load-memory`, it only reads memory.
 
 **The `.claunchpad/handoff.md` buffer** is a Claude-maintained file (not a separate hook script).
-`CLAUDE.md` instructs Claude to keep it updated with current task state before long sessions or
-context compaction. `load-memory` reloads it on a `compact` source so context survives
-compaction. There is no separate "handoff hook" — only `load-memory` and `harvest-nudge` are
-registered as hooks.
+`CLAUDE.md` instructs Claude to keep its Now section current before long sessions or context
+compaction and to add one line per session to Recent sessions. `load-memory` reloads it after
+`compact`, `clear`, and `resume`, and on a fresh start when it changed in the last 3 days, so
+context survives compaction. There is no separate "handoff hook"; `harvest-nudge` reminds Claude
+to refresh it.
 
 ---
 
@@ -145,7 +150,9 @@ Run `claunchpad upgrade` when a project has outgrown its current tier.
 **Standard → Pro** adds:
 - Migrates `MEMORY.md` → `memory/` per-fact directory (see `references/memory.md` for
   the full graduation procedure — no entries are dropped)
-- Creates `.claunchpad/handoff.md` buffer
+- Creates `.claunchpad/handoff.md` from `templates/handoff.md`
+- Adds `.claude/hooks/recall` and registers its `UserPromptSubmit` hook (preserves the
+  existing `SessionStart` and `Stop` config)
 - Wires council presets
 
 **Proactive suggestion.** Claude may proactively suggest upgrade when it detects the
